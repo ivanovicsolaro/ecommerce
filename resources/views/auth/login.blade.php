@@ -10,19 +10,19 @@
                 <!-- home slick -->
                 <div id="home-slick">
                     
-                    <div class="container" style="padding: 5% 0% 25% 0%">
-                        <div class="row" style="text-align:center;
-                        margin:0 auto;">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="container" style="width:100%; padding: 5% 0% 25% 0%">
+                        <div class="row" style="text-align:center; margin:0 auto;">
+                            <div class="col-md-12">
+                        
+                                <strong class="text-uppercase"><h3>{{ __('Ingreso de Clientes') }}</h3></strong>
+                                   
                     
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                                             @csrf
                     
                                             <div class="form-group row">
-                                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                                <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
                     
                                                 <div class="col-md-6">
                                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -63,18 +63,18 @@
                     
                                             <div class="form-group row mb-0">
                                                 <div class="col-md-8 offset-md-4">
-                                                    <button type="submit" class="btn btn-primary">
+                                                    <button type="submit" class="primary-btn">
                                                         {{ __('Login') }}
                                                     </button>
                     
                                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                        {{ __('Forgot Your Password?') }}
+                                                        {{ __('Olvidé mi contraseña?') }}
                                                     </a>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

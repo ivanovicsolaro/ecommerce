@@ -1728,3 +1728,12 @@ textarea.input {
     width: 100%;
   }
 }
+
+.invalid-feedback{
+  padding: 12px;
+  
+ }
+.invalid-feedback strong{
+
+  color: red;
+}
