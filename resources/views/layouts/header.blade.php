@@ -38,6 +38,7 @@
 </head>
 
 <body>
+	@if (Auth::check())
 	<!-- HEADER -->
 	<header>
 		<!-- top Header -->
@@ -50,14 +51,18 @@
 					<ul class="header-top-links">
 						<li><a href="#">Store</a></li>
 						<li><a href="#">Newsletter</a></li>
-						<li><a href="#">FAQ</a></li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">ENG <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Roles <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="#">English (ENG)</a></li>
-								<li><a href="#">Russian (Ru)</a></li>
-								<li><a href="#">French (FR)</a></li>
-								<li><a href="#">Spanish (Es)</a></li>
+								<li><a href="#">Listar Roles</a></li>
+								<li><a href="#">Nuevo Rol</a></li>
+							</ul>
+						</li>
+						<li class="dropdown default-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
+							<ul class="custom-menu">
+								<li><a href="#">Carga individual</a></li>
+								<li><a href="#">Carga Masiva</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
@@ -72,6 +77,8 @@
 			</div>
 		</div>
 		<!-- /top Header -->
+
+		@endif
 
 		<!-- header -->
 		<div id="header">
@@ -107,21 +114,32 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">@if (Auth::check())
+								<strong class="text-uppercase">
+									@if (Auth::user())
 										{{Auth::user()->name}}
-									  @else
-										Registrarme
-									  @endif<i class="fa fa-caret-down"></i></strong>
+									@else
+										Visitante
+									@endif
+									<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="{{ url('login') }}" class="text-uppercase">Login</a>
+							<a href="{{ url('login') }}" class="text-uppercase">
+									@if (Auth::user())
+										
+									@else
+										Login
+									@endif
+									</a>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
-								<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> Comparar</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Finalizar Compra</a></li>
-								<li><a href="#"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
-								<li><a href=""><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
-								<li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
+									@if (Auth::check())
+										<li><a href="#"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
+										<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>
+										<li><a href="{{ Auth::logout() }}"><i class="fa fa-unlock-alt"></i> Salir</a></li>
+									  @else
+									  	<li><a href="#"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
+										<li><a href="{{ route('register')}}"><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
+									  @endif		
 							</ul>
 						</li>
 						<!-- /Account -->
