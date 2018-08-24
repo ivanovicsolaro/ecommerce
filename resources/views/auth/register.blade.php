@@ -11,9 +11,8 @@
                 <div id="home-slick">
                     <div class="container" style="padding: 5% 0% 25% 0%">
                         <div class="row justify-content-center" style="text-align:center; margin:0 auto;">
-                            <div class="col-md-8">
-                                <div class="card">
-                                    <div class="card-header">{{ __('Register') }}</div>
+                            <div class="col-md-12">
+                            <strong class="text-uppercase"><h3>{{ __('Registro de Cliente   ') }}</h3></strong>
 
                                     <div class="card-body">
                                         <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
@@ -99,9 +98,9 @@
                                             </div>
 
                                             <div class="form-group row mb-0">
-                                                <div class="col-md-6 offset-md-4">
-                                                    <button type="submit" class="btn btn-primary left">
-                                                        {{ __('Register') }}
+                                                <div class="col-md-10">
+                                                    <button type="submit" class="primary-btn" style="float: right">
+                                                        {{ __('Registrar') }}
                                                     </button>
                                                 </div>
                                             </div>
