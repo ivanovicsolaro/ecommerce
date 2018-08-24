@@ -107,16 +107,21 @@
 								<div class="header-btns-icon">
 									<i class="fa fa-user-o"></i>
 								</div>
-								<strong class="text-uppercase">Mi cuenta <i class="fa fa-caret-down"></i></strong>
+								<strong class="text-uppercase">@if (Auth::check())
+										{{Auth::user()->name}}
+									  @else
+										Registrarme
+									  @endif<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="#" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Unirme</a>
+							<a href="{{ url('login') }}" class="text-uppercase">Login</a>
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
 								<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>
 								<li><a href="#"><i class="fa fa-exchange"></i> Comparar</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Finalizar Compra</a></li>
 								<li><a href="#"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
-								<li><a href="#"><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
+								<li><a href=""><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
+								<li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
 							</ul>
 						</li>
 						<!-- /Account -->
