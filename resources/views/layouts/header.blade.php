@@ -27,6 +27,9 @@
 
 	<!-- Custom stlylesheet -->
 	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	@section('css')
+
+@show
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,7 +41,7 @@
 </head>
 
 <body>
-	@if (Auth::check())
+	@if(\Auth::check())
 	<!-- HEADER -->
 	<header>
 		<!-- top Header -->
@@ -115,7 +118,7 @@
 									<i class="fa fa-user-o"></i>
 								</div>
 								<strong class="text-uppercase">
-									@if (\Auth::check())
+									@if(\Auth::check())
 										{{\Auth::user()->name}}
 									@else
 										Visitante
@@ -125,10 +128,10 @@
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-exchange"></i> Comparar</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Finalizar Compra</a></li>
-									@if (Auth::check())
-										<li><a href="#"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
+									@if(\Auth::check())
+										<li><a href="{{url('/home')}}"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
 										<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>
-										<li><a href="{{ Auth::logout() }}"><i class="fa fa-unlock-alt"></i> Salir</a></li>
+										<li><a href="{{route('logout')}}"><i class="fa fa-unlock-alt"></i> Salir</a></li>
 									  @else
 									  	<li><a href="{{ url('login') }}" ><i class="fa fa-unlock-alt"></i> Loguin</a></li>
 										<li><a href="{{ route('register')}}"><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
