@@ -10,7 +10,7 @@
                 <!-- home slick -->
                 <div id="home-slick">
                     
-                    <div class="container" style="width:100%; padding: 5% 0% 25% 0%">
+                    <div class="container" style="width:100%; padding: 10% 0% 18% 0%">
                         <div class="row" style="text-align:center; margin:0 auto;">
                             <div class="col-md-12">
                         

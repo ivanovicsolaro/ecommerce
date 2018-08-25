@@ -9,7 +9,7 @@
             <div class="home-wrap">
                 <!-- home slick -->
                 <div id="home-slick">
-                    <div class="container" style="padding: 5% 0% 25% 0%">
+                    <div class="container" style="padding: 5% 0% 2% 0%">
                         <div class="row justify-content-center" style="text-align:center; margin:0 auto;">
                             <div class="col-md-12">
                             <strong class="text-uppercase"><h3>{{ __('Registro de Cliente   ') }}</h3></strong>

@@ -319,7 +319,10 @@ textarea.input {
 #top-header {
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #DADADA;
+  border-bottom: 3px solid #333;
+  background-color: #777;
+  color: #fff;
+  font-weight: bolder;
 }
 
 .header-top-links>li {

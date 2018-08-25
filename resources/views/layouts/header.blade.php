@@ -115,20 +115,13 @@
 									<i class="fa fa-user-o"></i>
 								</div>
 								<strong class="text-uppercase">
-									@if (Auth::user())
-										{{Auth::user()->name}}
+									@if (\Auth::check())
+										{{\Auth::user()->name}}
 									@else
 										Visitante
 									@endif
 									<i class="fa fa-caret-down"></i></strong>
 							</div>
-							<a href="{{ url('login') }}" class="text-uppercase">
-									@if (Auth::user())
-										
-									@else
-										Login
-									@endif
-									</a>
 							<ul class="custom-menu">
 								<li><a href="#"><i class="fa fa-exchange"></i> Comparar</a></li>
 								<li><a href="#"><i class="fa fa-check"></i> Finalizar Compra</a></li>
@@ -137,7 +130,7 @@
 										<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>
 										<li><a href="{{ Auth::logout() }}"><i class="fa fa-unlock-alt"></i> Salir</a></li>
 									  @else
-									  	<li><a href="#"><i class="fa fa-unlock-alt"></i> Loguin</a></li>
+									  	<li><a href="{{ url('login') }}" ><i class="fa fa-unlock-alt"></i> Loguin</a></li>
 										<li><a href="{{ route('register')}}"><i class="fa fa-user-plus"></i> Crear Cuenta</a></li>
 									  @endif		
 							</ul>

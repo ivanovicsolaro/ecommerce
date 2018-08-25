@@ -16,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         $this->app->concord->registerModel(\Konekt\User\Contracts\User::class, \App\User::class);
+        
     }
 
     /**
