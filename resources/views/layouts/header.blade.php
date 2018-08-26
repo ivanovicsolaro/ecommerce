@@ -40,6 +40,7 @@
 
 </head>
 
+
 <body>
 	@if(\Auth::check())
 	<!-- HEADER -->
@@ -48,24 +49,26 @@
 		<div id="top-header">
 			<div class="container">
 				<div class="pull-left">
-					<span>Bienvenidos al E-SHOP</span>
+				<strong class="text-uppercase" style="color: #fff !important">Bienvenido {{Auth::user()->name}}!</strong>
 				</div>
 				<div class="pull-right">
 					<ul class="header-top-links">
 						<li><a href="#">Store</a></li>
 						<li><a href="#">Newsletter</a></li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Roles <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user-secret" aria-hidden="true"></i> Roles <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="#">Listar Roles</a></li>
-								<li><a href="#">Nuevo Rol</a></li>
+								<li><a href="#">  <i class="fa fa-list" aria-hidden="true"></i>  Listar Roles</a></li>
+								<li><a href="#">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  Nuevo Rol</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="#">Carga individual</a></li>
-								<li><a href="#">Carga Masiva</a></li>
+								<li><a href="#">  <i class="fa fa-cube" aria-hidden="true"></i>  Nuevo Producto</a></li>
+								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
+								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>
+								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">

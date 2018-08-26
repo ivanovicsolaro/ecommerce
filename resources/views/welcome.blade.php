@@ -1,5 +1,8 @@
-   @extends('layouts.app')
-   @section('contenido')
+
+  @include('layouts.header')
+ 
+ @include('layouts.menuFront')
+
     <!-- HOME -->
     <div id="home">
         <!-- container -->
@@ -862,4 +865,4 @@
     </div>
     <!-- /section -->
 
-    @endsection
+  @include('layouts.footer')

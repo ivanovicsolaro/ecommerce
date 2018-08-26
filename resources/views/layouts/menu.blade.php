@@ -1,10 +1,10 @@
-	<!-- NAVIGATION -->
-	<div id="navigation">
+<!-- NAVIGATION -->
+<div id="navigation">
 		<!-- container -->
 		<div class="container">
 			<div id="responsive-nav">
 				<!-- category nav -->
-				<div class="category-nav">
+				<div class="category-nav show-on-click">
 					<span class="category-header">Categories <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
@@ -15,10 +15,10 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Templados</a></li>
-											<li><a href="#">Fundas</a></li>
-											<li><a href="#">Accesorios</a></li>
-											<li><a href="#">Repuestos</a></li>
+											<li><a href="#">Women’s Clothing</a></li>
+											<li><a href="#">Men’s Clothing</a></li>
+											<li><a href="#">Phones & Accessories</a></li>
+											<li><a href="#">Jewelry & Watches</a></li>
 											<li><a href="#">Bags & Shoes</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
@@ -203,7 +203,7 @@
 				<div class="menu-nav">
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
-						<li><a href="{{url('/')}}">Home</a></li>
+						<li><a href="#">Home</a></li>
 						<li><a href="#">Shop</a></li>
 						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">

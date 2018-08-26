@@ -319,8 +319,8 @@ textarea.input {
 #top-header {
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 3px solid #333;
-  background-color: #777;
+  border-bottom: 3px solid #999;
+  background-color: #f8694a;
   color: #fff;
   font-weight: bolder;
 }
