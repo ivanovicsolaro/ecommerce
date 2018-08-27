@@ -5,7 +5,7 @@
 			<div id="responsive-nav">
 				<!-- category nav -->
 				<div class="category-nav">
-					<span class="category-header">Categories <i class="fa fa-list"></i></span>
+					<span class="category-header">Categorias <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women’s Clothing <i class="fa fa-angle-right"></i></a>

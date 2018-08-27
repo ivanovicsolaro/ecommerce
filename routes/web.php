@@ -23,3 +23,5 @@ Route::get('logout', function(){
  });
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('perfil', ['uses' => 'MiCuentaController@getPerfil', 'as' => 'perfil']);
