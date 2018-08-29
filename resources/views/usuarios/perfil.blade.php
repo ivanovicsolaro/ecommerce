@@ -24,7 +24,7 @@
     @endif
     
     <!--=================== About Content Section ===================-->
-    <section class="account paira-padding-bottom-1">
+    <section>
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-xs-12 mt20">
@@ -35,7 +35,7 @@
                                 <h5> <strong class="text-uppercase">Información de Contacto</strong> </h5>
 
                                 </div>
-                                <form action="" method="post" role="form">
+                                <form action="{{ route('update.perfil') }}" method="post" role="form">
                                     {{ csrf_field() }}
                                     <div class="col-sm-12">
                                         <div class="form-group">

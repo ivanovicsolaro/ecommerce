@@ -24,4 +24,7 @@ Route::get('logout', function(){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+/**Rutas de perfil */
 Route::get('perfil', ['uses' => 'MiCuentaController@getPerfil', 'as' => 'perfil']);
+Route::post('actualizar-perfil', ['uses' => 'MiCuentaController@postPerfil', 'as' => 'update.perfil']);

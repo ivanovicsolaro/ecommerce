@@ -44,7 +44,7 @@ class MiCuentaController extends Controller
             'address' => $address
         ]);
     }
-    /*
+    
     public function postPerfil(Request $request){
         
         $result = DB::table('customer_users')
@@ -98,6 +98,7 @@ class MiCuentaController extends Controller
         return redirect ('perfil')->with('guardado', 'El perfil se ha actualizado correctamente.');
     }
     
+    /* 
     public function listPedidos(){
         $orders = Order::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
         return view('front.usuario.pedidos', ['orders' => $orders]);

@@ -1,0 +1,504 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ProductoController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+    use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+
+use Vanilo\Product\Models\Product;
+use Vanilo\Framework\Models\Customer;
+use Konekt\Address\Models\Address;
+
+use App\Galeria;
+use App\ProductoGaleria;
+use App\ProductoCategoria;
+use App\Categoria;
+use App\Products;
+use App\Promotion;
+
+use Crypt;
+use Oca;
+use Search;
+use Log;
+
+
+use Vanilo\Contracts\Buyable;
+
+class ProductoController extends Controller
+{
+    
+    public function listarCategoria(Request $request, $categoria){
+        
+        //Me traigo el id de la cat
+        $cat = Categoria::where('slug', $categoria)->first();
+        
+        if($request->get('filtro')){
+            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
+        }else{
+            $productos = $this->getProductos($cat->id);
+        }
+        
+        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.bodega', '<>', "")
+                            ->select('products.bodega')
+                            ->groupBy('products.bodega')
+                            ->get();
+        
+        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.pais', '<>', "")
+                            ->select('products.pais')
+                            ->groupBy('products.pais')
+                            ->get();
+        
+        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.marca', '<>', "")
+                            ->select('products.marca')
+                            ->groupBy('products.marca')
+                            ->get();
+        
+        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.region', '<>', "")
+                            ->select('products.region')
+                            ->groupBy('products.region')
+                            ->get();
+        
+        if($categoria == 'bazar' || $categoria == 'gourmet' || $categoria == 'merchandising'){
+            $filtro = 'objetos';
+        }else{
+            $filtro = 'bebidas';
+        }
+        
+        return view('front.productos.index', [
+            'categoria' => $categoria,
+            'productos' => $productos,
+            'bodega' => $bodega,
+            'pais' => $pais,
+            'marca' => $marca,
+            'region' => $region,
+            'filtro' => $filtro
+        ]); 
+    }
+    
+    public function listarSubcategoria(Request $request, $subcategoria){
+        $cat = Categoria::where('slug', $subcategoria)->first();
+        
+        if($request->get('filtro')){
+            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
+        }else{
+            $productos = $this->getProductos($cat->id);
+        }
+        
+        $padre = Categoria::find($cat->subcategory_id);
+        
+        $categoria = $padre->slug;
+        
+        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.bodega', '<>', "")
+                            ->select('products.bodega')
+                            ->groupBy('products.bodega')
+                            ->get();
+        
+        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.pais', '<>', "")
+                            ->select('products.pais')
+                            ->groupBy('products.pais')
+                            ->get();
+        
+        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.marca', '<>', "")
+                            ->select('products.marca')
+                            ->groupBy('products.marca')
+                            ->get();
+        
+        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.region', '<>', "")
+                            ->select('products.region')
+                            ->groupBy('products.region')
+                            ->get();
+        
+        if($categoria == 'bazar' || $categoria == 'gourmet' || $categoria == 'merchandising'){
+            $filtro = 'objetos';
+        }else{
+            $filtro = 'bebidas';
+        }
+        
+        return view('front.productos.index', [
+            'categoria' => $categoria,
+            'productos' => $productos,
+            'bodega' => $bodega,
+            'pais' => $pais,
+            'marca' => $marca,
+            'region' => $region,
+            'filtro' => $filtro
+        ]); 
+    }
+    
+    public function listarSubcategoriaVinos(Request $request, $subcategoria){
+        $cat = Categoria::where('slug', $subcategoria)->first();
+
+        if($request->get('filtro')){
+            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
+        }else{
+            $productos = $this->getProductos($cat->id);
+        }
+        
+        $categoria = "vinos";
+        
+        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.bodega', '<>', "")
+                            ->select('products.bodega')
+                            ->groupBy('products.bodega')
+                            ->get();
+        
+        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.pais', '<>', "")
+                            ->select('products.pais')
+                            ->groupBy('products.pais')
+                            ->get();
+        
+        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.marca', '<>', "")
+                            ->select('products.marca')
+                            ->groupBy('products.marca')
+                            ->get();
+        
+        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                            ->where('product_categories.category_id', $cat->id)
+                            ->where('products.region', '<>', "")
+                            ->select('products.region')
+                            ->groupBy('products.region')
+                            ->get();
+        
+        $filtro = 'bebidas';
+        
+        return view('front.productos.index', [
+            'categoria' => $categoria,
+            'productos' => $productos,
+            'bodega' => $bodega,
+            'pais' => $pais,
+            'marca' => $marca,
+            'region' => $region,
+            'filtro' => $filtro
+        ]);
+    }
+    
+    public function detalleProducto($slug){
+        
+        $producto = $this->getProductoDetalle($slug);
+        
+        $categoria = ProductoCategoria::where('product_id', $producto->id)->get();
+        $cat_id = $categoria->last()->category_id;
+        
+        $relacionados = $this->getProductosRelacionados($cat_id, $slug);
+        
+        $direccion = "";
+        
+        if (Auth::check()){
+            $customer = Customer::join('customer_users', 'customers.id', 'customer_users.customer_id')
+                                ->join('users', 'users.id', 'customer_users.user_id')
+                                ->where('users.id', Auth::user()->id)->first();
+            
+            $direccion = Address::join('customer_addresses', 'addresses.id', 'customer_addresses.address_id')
+                                ->where('customer_addresses.customer_id', $customer->customer_id)
+                                ->first();
+        }
+        
+        //PROMOCIONES
+        $promociones = $this->getProductoPromociones($producto->id);
+        
+        return view('front.productos.view', [
+            'producto' => $producto,
+            'relacionados' => $relacionados,
+            'direccion' => $direccion,
+            'promociones' => $promociones
+        ]);
+    }
+    
+    public function search(Request $request){
+        $termino = $request->termino;
+        
+        $rta = Products::search($termino)->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
+                                         ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
+                                         ->where('products.state', 'active')
+                                         ->select('products.*', 'galeria.ruta')->paginate(5);
+        
+        return view('front.productos.search', ['rta' => $rta]);
+    }
+    
+    public function calcularEnvio(Request $request){
+
+         if ($request->ajax()) {
+             
+            Log::info('====== Calculo costos de envio desde el detalle del producto ======');
+             
+           $data = $request->all();
+             
+           $producto = Product::find($data['productoId']);
+           $cantidad = $data['cantidad'];
+             
+           //operativa : 279255(Envios P a P) 279256 (Envios P a S) 279257 (Envios S a P) 279258 (Envios S a S)
+            $oca    = new Oca($cuit = '30-71224182-5', $operativa = 279255);
+
+            $baseCm = $producto->ancho;
+            $baseMt = $baseCm / 100;
+            $altoCm = $producto->alto;
+            $altoMt = $altoCm / 100;
+            $profundidadCm = $producto->largo;
+            $profundidadMt = $profundidadCm / 100;
+             
+            $volumenTotal = ($baseMt * $altoMt * $profundidadMt) * $cantidad;
+            $volumenTotal = $this->exp_to_dec($volumenTotal);
+            $pesoTotal = $producto->peso * $cantidad;
+             
+            Log::info('Cantidad prod: '.$data['cantidad']);
+            Log::info('Volumen desde detalle prod: '.$volumenTotal);
+            Log::info('Peso desde detalle prod: '.$pesoTotal);
+             
+            $codigoPostalOrigen = '1900';
+            $codigoPostalDestino = $data['codigoPostal'];
+            Log::info('CP desde detalle prod: '.$codigoPostalDestino);
+             
+            $cantidadPaquetes = '1';
+
+            $respuesta  = $oca->tarifarEnvioCorporativo($pesoTotal, $volumenTotal, $codigoPostalOrigen, $codigoPostalDestino, $cantidadPaquetes, $operativa);
+            $precio = number_format($respuesta[0]['Total'], 2);
+            $plazo = $respuesta[0]['PlazoEntrega'];
+            
+            //configuro codigo postales envios gratuitos
+            $envios_gratuitos = array("1900", "1923", "1896", "1925", "1894", "1897");
+            $montoTotal = $producto->price * $cantidad;
+            Log::info('Monto total: '.$montoTotal);
+            if(in_array($codigoPostalDestino, $envios_gratuitos ) && $montoTotal >= 450){
+                $precio = "<p style='color:#00AE7C;font-size:15px;'><b>Sin Cargo!</b></p>";
+            }else{
+                $precio = "$ ".number_format($respuesta[0]['Total'], 2);
+            }
+            //fin envios gratuitos
+            //return $respuesta;
+            
+            Log::info('Costo envio desde detalle prod: '.$precio);
+             
+            return new JsonResponse([
+                'precio'=> $precio,
+                'plazo' => $plazo
+            ]);
+        }else{
+            echo "no se envio nada";
+        }
+    }
+    
+    private function exp_to_dec($float_str){
+        // make sure its a standard php float string (i.e. change 0.2e+2 to 20)
+        // php will automatically format floats decimally if they are within a certain range
+        $float_str = (string)((float)($float_str));
+
+        // if there is an E in the float string
+        if(($pos = strpos(strtolower($float_str), 'e')) !== false)
+        {
+            // get either side of the E, e.g. 1.6E+6 => exp E+6, num 1.6
+            $exp = substr($float_str, $pos+1);
+            $num = substr($float_str, 0, $pos);
+
+            // strip off num sign, if there is one, and leave it off if its + (not required)
+            if((($num_sign = $num[0]) === '+') || ($num_sign === '-')) $num = substr($num, 1);
+            else $num_sign = '';
+            if($num_sign === '+') $num_sign = '';
+
+            // strip off exponential sign ('+' or '-' as in 'E+6') if there is one, otherwise throw error, e.g. E+6 => '+'
+            if((($exp_sign = $exp[0]) === '+') || ($exp_sign === '-')) $exp = substr($exp, 1);
+            else trigger_error("Could not convert exponential notation to decimal notation: invalid float string '$float_str'", E_USER_ERROR);
+
+            // get the number of decimal places to the right of the decimal point (or 0 if there is no dec point), e.g., 1.6 => 1
+            $right_dec_places = (($dec_pos = strpos($num, '.')) === false) ? 0 : strlen(substr($num, $dec_pos+1));
+            // get the number of decimal places to the left of the decimal point (or the length of the entire num if there is no dec point), e.g. 1.6 => 1
+            $left_dec_places = ($dec_pos === false) ? strlen($num) : strlen(substr($num, 0, $dec_pos));
+
+            // work out number of zeros from exp, exp sign and dec places, e.g. exp 6, exp sign +, dec places 1 => num zeros 5
+            if($exp_sign === '+') $num_zeros = $exp - $right_dec_places;
+            else $num_zeros = $exp - $left_dec_places;
+
+            // build a string with $num_zeros zeros, e.g. '0' 5 times => '00000'
+            $zeros = str_pad('', $num_zeros, '0');
+
+            // strip decimal from num, e.g. 1.6 => 16
+            if($dec_pos !== false) $num = str_replace('.', '', $num);
+
+            // if positive exponent, return like 1600000
+            if($exp_sign === '+') return $num_sign.$num.$zeros;
+            // if negative exponent, return like 0.0000016
+            else return $num_sign.'0.'.$zeros.$num;
+        }
+        // otherwise, assume already in decimal notation and return
+        else return $float_str;
+    }
+    
+    private function getProductos($categoria_id){
+        return Products::join('product_categories', 'products.id', 'product_categories.product_id')
+                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
+                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
+                              ->where('products.state', 'active')
+                              ->where('product_categories.category_id', $categoria_id)
+                              ->orderBy('products.priority', 'desc')
+                              ->select('products.*', 'galeria.ruta')
+                              ->paginate(16); 
+    }
+    
+    private function getProductosFiltrados($data, $categoria_id){
+        return Products::join('product_categories', 'products.id', 'product_categories.product_id')
+                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
+                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
+                              ->where(['products.state' => 'active', 'product_categories.category_id' => $categoria_id])
+                              ->Bodega($data['bodega'])
+                              ->Region($data['region'])
+                              //->Marca($data['marca'])
+                              ->Pais($data['pais'])
+                              ->Precio($data['precio'])
+                              ->orderBy('products.id', 'desc')
+                              ->select('products.*', 'galeria.ruta')
+                              ->paginate(16);
+    }
+    
+    private function getProductoDetalle($slug){
+        return Product::join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
+                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
+                              ->where('products.slug', $slug)
+                              ->select('products.*', 'galeria.ruta')
+                              ->first();
+    }
+    
+    private function getProductosRelacionados($cat_id, $slug){
+        return Product::join('product_categories', 'products.id', 'product_categories.product_id')
+                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
+                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
+                              ->where('products.state', 'active')
+                              ->where('product_categories.category_id', $cat_id)
+                              ->where('products.slug', '<>', $slug)
+                              ->select('products.*', 'galeria.ruta')
+                              ->limit(4)->get();
+    }
+    
+    private function getProductoPromociones($prod_id){
+        $now = new \DateTime();
+        
+        $promocion = Promotion::join('promotions_conditions', 'promotions.id', 'promotions_conditions.promotion_id')
+                              ->join('promotions_rewards', 'promotions.id', 'promotions_rewards.promotion_id')
+                              ->where('promotions_conditions.product_id', $prod_id)
+                              ->where('promotions.date_from', '<=', $now->format('Y-m-d'))
+                              ->where('promotions.date_to', '>=', $now->format('Y-m-d'))
+                              ->get();
+        
+        return $promocion;
+    }
+    
+    
+
+    */
+}
