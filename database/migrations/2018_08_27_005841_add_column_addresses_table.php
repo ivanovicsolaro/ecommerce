@@ -13,7 +13,12 @@ class AddColumnAddressesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->string('number')->nullable();
+            $table->string('piso')->nullable();
+            $table->string('depto')->nullable();
+            $table->string('localidad')->nullable();
+        });
     }
 
     /**
@@ -23,6 +28,11 @@ class AddColumnAddressesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('addresses', function (Blueprint $table) {
+            $table->dropColumn('number');
+            $table->dropColumn('piso');
+            $table->dropColumn('depto');
+            $table->dropColumn('localidad');
+        });
     }
 }
