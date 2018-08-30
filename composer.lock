@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "baad62c6a1e349f2531e493c14c882f2",
+    "content-hash": "01e9690674e7b25ad21d2dc22d7bbb48",
     "packages": [
         {
             "name": "cocur/slugify",
@@ -73,27 +73,27 @@
         },
         {
             "name": "cviebrock/eloquent-sluggable",
-            "version": "4.5.1",
+            "version": "4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cviebrock/eloquent-sluggable.git",
-                "reference": "62ea99dbdd383697433add4f90a62a96a196578b"
+                "reference": "f3595c9672a063df765d0ac748a02cfaf4257095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/62ea99dbdd383697433add4f90a62a96a196578b",
-                "reference": "62ea99dbdd383697433add4f90a62a96a196578b",
+                "url": "https://api.github.com/repos/cviebrock/eloquent-sluggable/zipball/f3595c9672a063df765d0ac748a02cfaf4257095",
+                "reference": "f3595c9672a063df765d0ac748a02cfaf4257095",
                 "shasum": ""
             },
             "require": {
-                "cocur/slugify": "^3.1",
+                "cocur/slugify": "^3.0",
                 "illuminate/config": "~5.6.0",
                 "illuminate/database": "~5.6.0",
                 "illuminate/support": "~5.6.0",
                 "php": "^7.0"
             },
             "require-dev": {
-                "codedungeon/phpunit-result-printer": "^0.19.6",
+                "codedungeon/phpunit-result-printer": "^0.6.0",
                 "mockery/mockery": "^0.9.4",
                 "orchestra/database": "~3.6.0",
                 "orchestra/testbench": "~3.6.0",
@@ -132,7 +132,7 @@
                 "slug",
                 "sluggable"
             ],
-            "time": "2018-05-22T02:37:31+00:00"
+            "time": "2018-02-11T02:19:23+00:00"
         },
         {
             "name": "davejamesmiller/laravel-breadcrumbs",

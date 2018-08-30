@@ -10,7 +10,7 @@ class CountriesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+   public function run()
     {
         Countrie::insert([
         	'id' => 1,

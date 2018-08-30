@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('contenido')
 
 @section('title')
-    Listado de Productos
+    Agregar Producto
 @stop
 
     <!--=================== About Content Section ===================-->
@@ -10,20 +10,13 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="col-sm-12">
-                                
-                                    
+                     {!! Form::open(['route' => 'productos.store', 'id' => 'form-productos']) !!}
 
-                                </div>
-                        
+                        @include('productos.fields')
 
-
-
-                            </div>
-                        </div>
-                    </div>
+                    {!! Form::close() !!}
+                </div>
+                
                 </div>
 
          
@@ -35,7 +28,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/ajax-edit.js') }}"></script>
+    <script src="{{ asset('js/ajax-add.js') }}"></script>
     @parent
     <script type="text/javascript">
         $.ajaxSetup({
@@ -44,13 +37,13 @@
                     }
         });  
 
-        var data_form = $("#form-perfil");
+        var data_form = $("#form-productos");
 
         data_form.submit(function(e){
             e.preventDefault();
             var formData = data_form.serialize();
             var url = $(this).attr('action');
-            ajax_edit(url,'POST',formData,'#btn-guardar-perfil') 
+            ajax_add(url,'POST',formData,'#btn-guardar-perfil') 
         });
     </script> 
     

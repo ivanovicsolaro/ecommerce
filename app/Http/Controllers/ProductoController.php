@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\CreateProduct;
+
 
 class ProductoController extends Controller
 {
@@ -34,9 +37,28 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CreateProduct $request)
+    {   
+        if ($request->ajax()) {
+
+            $data = $request->all();
+
+      
+
+        $product = Product::create([
+            'name' => $data['name'],
+            'sku'  => $data['sku'],
+            'stock' => $data['stock'],
+            'price' =>$data['price'],
+            'description' => $data['description']
+        ]);
+
+         return new JsonResponse([
+            'msj' => 'Producto Agregado ;)',
+            'type' => 'success'
+        ]);    
+        }
+
     }
 
     /**
@@ -83,7 +105,6 @@ class ProductoController extends Controller
     {
         //
     }
-
 
 
 

@@ -1,24 +1,26 @@
+<div class="table-responsive">
 <table class="table datatable">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Código</th>
-            <th>Stock</th>
-            <th>Precio</th>
-            <th>Creado el</th>
-            <th class="text-nowrap">Acciones</th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Código</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Precio</th>
+            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach($productos as $producto)
             <tr id='trow_{{$producto->id}}'>
-                <td>{!! $producto->sku !!}</td>
-                <td>{!! $producto->stock !!}</td>
-                <td>{!! $producto->precio !!}</td>
-                <td>{!! $rol->created_at !!}</td>
-                <td align="center" style="width: 200px;" >
+                <td class="text-center">{!! $producto->id !!}</td>
+                <td class="text-center">{!! $producto->name !!}</td>
+                <td class="text-center">{!! $producto->sku !!}</td>
+                <td class="text-center" >{!! $producto->stock !!}</td>
+                <td class="text-center">{!! $producto->price !!}</td>
+                <td class="text-center" style="width: 200px;" >
                     <div class='btn-group'>
-                        <a href="{!! route('product.edit', [Crypt::encrypt($producto->id)]) !!}"  data-toggle="tooltip" data-original-title="Editar">
+                        <a href="{!! route('productos.edit', [Crypt::encrypt($producto->id)]) !!}"  data-toggle="tooltip" data-original-title="Editar">
                             <button type="button" class="btn btn-success btn-icon-anim btn-square btn-sm">
                              <i class="fa fa-pencil"></i>
                             </button>
@@ -35,3 +37,4 @@
         @endforeach
     </tbody>
 </table>
+</div>

@@ -9,9 +9,10 @@
 
     <div class="row">
          <div class="col-md-12">
-            <div class="header-btns-icon">
-                               <a>     <i class="fa fa-user-o"></i> Nuevo Producto</a>
-                                </div>
+            <div class="header-btns-icon text-right">
+                <a class="primary-btn" href="{{route('productos.create')}}"> <i class="fa fa-plus"></i> Agregar Producto</a>
+                              
+            </div>
          </div>
         <div class="col-md-12">
 
