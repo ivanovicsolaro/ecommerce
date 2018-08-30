@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Vanilo\Order\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Vanilo\Framework\Models\Customer;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\Usuarios\UpdatePerfilRequest;
 use DB;
 use App\Address;
 use App\User;
@@ -45,7 +47,7 @@ class MiCuentaController extends Controller
         ]);
     }
     
-    public function postPerfil(Request $request){
+    public function postPerfil(UpdatePerfilRequest $request){
         
         $result = DB::table('customer_users')
                         ->where('user_id', Auth::user()->id)
@@ -83,7 +85,6 @@ class MiCuentaController extends Controller
             DB::table('customer_addresses')->insert(['customer_id' => $customer->id, 'address_id' => $address->id]);
         
         }else{
-
              $address = Address::findOrFail($idAddress);
              
              $address[0]->postalcode =  $request->codigo_postal;
@@ -95,7 +96,11 @@ class MiCuentaController extends Controller
              $address[0]->save();
         }
         
-        return redirect ('perfil')->with('guardado', 'El perfil se ha actualizado correctamente.');
+       return new JsonResponse([
+            'msj' => 'Perfil editado corretamente',
+            'type' => 'success'
+        ]);
+        //return redirect ('perfil')->with('guardado', 'El perfil se ha actualizado correctamente.');
     }
     
     /* 

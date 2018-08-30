@@ -361,3 +361,13 @@
 		<!-- /container -->
 	</div>
 	<!-- /NAVIGATION -->
+
+	 <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="title-section">@yield('title')</p>
+            </div>
+        </div>
+    </div>
+
+	

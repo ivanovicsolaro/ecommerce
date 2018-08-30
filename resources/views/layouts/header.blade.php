@@ -19,20 +19,20 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
 	<!-- Bootstrap -->
-	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
 
 	<!-- Slick -->
-	<link type="text/css" rel="stylesheet" href="css/slick.css" />
-	<link type="text/css" rel="stylesheet" href="css/slick-theme.css" />
+	<link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />
 
 	<!-- nouislider -->
-	<link type="text/css" rel="stylesheet" href="css/nouislider.min.css" />
+	<link type="text/css" rel="stylesheet" href="{{asset('css/nouislider.min.css')}}" />
 
 	<!-- Font Awesome Icon -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
 
 	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="css/style.css" />
+	<link type="text/css" rel="stylesheet" href="{{asset('css/style.css')}}" />
 	@section('css')
 
 @show
@@ -59,26 +59,26 @@
 				</div>
 				<div class="pull-right">
 					<ul class="header-top-links">
-						<li><a href="#">Store</a></li>
-						<li><a href="#">Newsletter</a></li>
+						<li><a href="#" style="color:#fff;">Store</a></li>
+						<li><a href="#" style="color:#fff;">Newsletter</a></li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-user-secret" aria-hidden="true"></i> Roles <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;"><i class="fa fa-user-secret" aria-hidden="true"></i> Roles <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">  <i class="fa fa-list" aria-hidden="true"></i>  Listar Roles</a></li>
 								<li><a href="#">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  Nuevo Rol</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Productos <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Productos <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="#">  <i class="fa fa-cube" aria-hidden="true"></i>  Nuevo Producto</a></li>
+								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Nuevo Producto</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">USD <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">USD ($)</a></li>
 								<li><a href="#">EUR (€)</a></li>

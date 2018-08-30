@@ -2,14 +2,9 @@
 
 
      
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <p class="title-section">Mi Perfil</p>
-            </div>
-        </div>
-    </div>
-    
+   @section('title')
+   Productos
+   @endsection
     @if (session('guardado'))
     <div class="container">
         <div class="row notificacion">
@@ -35,7 +30,7 @@
                                 <h5> <strong class="text-uppercase">Información de Contacto</strong> </h5>
 
                                 </div>
-                                <form action="{{ route('update.perfil') }}" method="post" role="form">
+                                <form action="{{ route('update.perfil') }}" id="form-perfil" method="post" role="form">
                                     {{ csrf_field() }}
                                     <div class="col-sm-12">
                                         <div class="form-group">
@@ -131,7 +126,7 @@
 
                                 <div class="col-sm-12">
                                     <div class="buttons-set">
-                                        <button type="submit" class="primary-btn" style="float: right" title="Guardar Perfil" name="send" id="send2"><span>Guardar Perfil</span></button>
+                                        <button type="submit" class="primary-btn" style="float: right" title="Guardar" name="send" id="btn-guardar-perfil"><i class="fa fa-database"></i><span class="btn-text"> Guardar</span></button>
                                     </div>
                                 </div>
                                 </form>
@@ -158,3 +153,25 @@
 
 
 @endsection
+
+@section('js')
+    <script src="{{ asset('js/ajax-edit.js') }}"></script>
+    @parent
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+        });  
+
+        var data_form = $("#form-perfil");
+
+        data_form.submit(function(e){
+            e.preventDefault();
+            var formData = data_form.serialize();
+            var url = $(this).attr('action');
+            ajax_edit(url,'POST',formData,'#btn-guardar-perfil') 
+        });
+    </script> 
+    
+@endsection 
