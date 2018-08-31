@@ -3,21 +3,8 @@
 
      
    @section('title')
-   Productos
+   Mi Perfil
    @endsection
-    @if (session('guardado'))
-    <div class="container">
-        <div class="row notificacion">
-            <div class="col-md-12">
-                <div class="alert alert-success alert-dismissible show" role="alert">
-                  {{ session('guardado') }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-    
     <!--=================== About Content Section ===================-->
     <section>
         <div class="container">

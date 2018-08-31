@@ -20,8 +20,6 @@
   crossorigin="anonymous"></script>
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/min/dropzone.min.css">
-
 	<!-- Slick -->
 	<link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}" />
 	<link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}" />

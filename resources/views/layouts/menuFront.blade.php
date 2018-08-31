@@ -8,193 +8,278 @@
 					<span class="category-header">Categorias <i class="fa fa-list"></i></span>
 					<ul class="category-list">
 						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women’s Clothing <i class="fa fa-angle-right"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Templados <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Templados</a></li>
-											<li><a href="#">Fundas</a></li>
-											<li><a href="#">Accesorios</a></li>
-											<li><a href="#">Repuestos</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="./img/menu/templado.png" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color">TODAS LAS MARCAS</h2>
+											</div>
+										</a>
 									</div>
 								</div>
+							</div>
+						</li>
+						<li><a href="#">Accesorios</a></li>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Repuestos <i class="fa fa-angle-right"></i></a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Varios</h3></li>
+											<li><a href="#">Compatibles Chinos</a></li>
+											<li><a href="#">Tablet</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="./img/menu/repuesto.jpg" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color"></h2>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							</div>
+						</li>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Baterías <i class="fa fa-angle-right"></i></a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="./img/menu/baterias.jpg" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color"></h2>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							</div>
+						</li>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Flip Covers <i class="fa fa-angle-right"></i></a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
 								<div class="row hidden-sm hidden-xs">
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
 											<img src="./img/banner05.jpg" alt="">
 											<div class="banner-caption text-center">
-												<h2 class="white-color">NEW COLLECTION</h2>
-												<h3 class="white-color font-weak">HOT DEAL</h3>
+												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
 										</a>
 									</div>
 								</div>
 							</div>
+							</div>
 						</li>
-						<li><a href="#">Men’s Clothing</a></li>
-						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Phones & Accessories <i class="fa fa-angle-right"></i></a>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Fundas Rígidas <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
 										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
+										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4 hidden-sm hidden-xs">
-										<a class="banner banner-2" href="#">
-											<img src="./img/banner04.jpg" alt="">
-											<div class="banner-caption">
-												<h3 class="white-color">NEW<br>COLLECTION</h3>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="./img/banner05.jpg" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
 										</a>
 									</div>
 								</div>
 							</div>
+							</div>
 						</li>
-						<li><a href="#">Computer & Office</a></li>
-						<li><a href="#">Consumer Electronics</a></li>
-						<li class="dropdown side-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Jewelry & Watches <i class="fa fa-angle-right"></i></a>
+							<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Fundas Líquidas <i class="fa fa-angle-right"></i></a>
 							<div class="custom-menu">
 								<div class="row">
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4">
+									<div class="col-md-6">
 										<ul class="list-links">
 											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
-										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
-									<div class="col-md-4">
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
 										<hr>
-										<ul class="list-links">
-											<li>
-												<h3 class="list-links-title">Categories</h3></li>
-											<li><a href="#">Women’s Clothing</a></li>
-											<li><a href="#">Men’s Clothing</a></li>
-											<li><a href="#">Phones & Accessories</a></li>
-											<li><a href="#">Jewelry & Watches</a></li>
-											<li><a href="#">Bags & Shoes</a></li>
-										</ul>
+										<a class="banner banner-1" href="#">
+											<img src="./img/banner05.jpg" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
+											</div>
+										</a>
 									</div>
 								</div>
 							</div>
+							</div>
 						</li>
-						<li><a href="#">Bags & Shoes</a></li>
-						<li><a href="#">View All</a></li>
+						<li class="dropdown side-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Fundas Flexibles <i class="fa fa-angle-right"></i></a>
+							<div class="custom-menu">
+								<div class="row">
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Por Marca</h3></li>
+											<li><a href="#">Samsung</a></li>
+											<li><a href="#">Motorola</a></li>
+											<li><a href="#">Huawei</a></li>
+											<li><a href="#">Alcatel</a></li>
+											<li><a href="#">Sony</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+									<div class="col-md-6">
+										<ul class="list-links">
+											<li>
+												<h3 class="list-links-title">Universales</h3></li>
+											<li><a href="#">4.5</a></li>
+											<li><a href="#">5.0</a></li>
+											<li><a href="#">5.5</a></li>
+										</ul>
+										<hr class="hidden-md hidden-lg">
+									</div>
+								<div class="row hidden-sm hidden-xs">
+									<div class="col-md-12">
+										<hr>
+										<a class="banner banner-1" href="#">
+											<img src="./img/banner05.jpg" alt="">
+											<div class="banner-caption text-center">
+												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+							</div>
+						</li>
 					</ul>
 				</div>
 				<!-- /category nav -->
@@ -204,7 +289,7 @@
 					<span class="menu-header">Menu <i class="fa fa-bars"></i></span>
 					<ul class="menu-list">
 						<li><a href="{{url('/')}}">Home</a></li>
-						<li><a href="#">Shop</a></li>
+						<li><a href="{{url('/shop')}}">Shop</a></li>
 						<li class="dropdown mega-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Women <i class="fa fa-caret-down"></i></a>
 							<div class="custom-menu">
 								<div class="row">

@@ -31,3 +31,6 @@ Route::post('actualizar-perfil', ['uses' => 'MiCuentaController@postPerfil', 'as
 
 /**Rutas de los productos back */
 Route::resource('productos', 'ProductoController');
+
+/**Rutas del front */
+Route::get('/shop', 'FrontController@indexShop');

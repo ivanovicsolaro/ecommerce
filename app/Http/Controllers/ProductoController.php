@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\CreateProduct;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Contracts\Filesystem\Filesystem;
 
 
 class ProductoController extends Controller
@@ -41,9 +43,7 @@ class ProductoController extends Controller
     {   
         if ($request->ajax()) {
 
-            $data = $request->all();
-
-      
+        $data = $request->all();
 
         $product = Product::create([
             'name' => $data['name'],
@@ -57,7 +57,7 @@ class ProductoController extends Controller
         $product->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
             $fileAdder->toMediaCollection();
         });
-    }    
+        }    
 
          return new JsonResponse([
             'msj' => 'Producto Agregado ;)',
