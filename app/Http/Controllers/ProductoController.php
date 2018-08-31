@@ -53,6 +53,12 @@ class ProductoController extends Controller
             'description' => $data['description']
         ]);
 
+         if (!empty($request->files->filter('images'))) {
+        $product->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
+            $fileAdder->toMediaCollection();
+        });
+    }    
+
          return new JsonResponse([
             'msj' => 'Producto Agregado ;)',
             'type' => 'success'

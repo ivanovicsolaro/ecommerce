@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                     {!! Form::open(['route' => 'productos.store', 'id' => 'form-productos']) !!}
+                     {!! Form::open(['route' => 'productos.store', 'id' => 'form-productos', 'files'=>'true', 'enctype' => 'multipart/form-data']) !!}
 
                         @include('productos.fields')
 

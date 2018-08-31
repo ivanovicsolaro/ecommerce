@@ -16,6 +16,15 @@
         {!! Form::label('price', 'Precio: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('price', isset($producto)? $producto->price : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
+
+ <div class="form-group col-sm-12" id="div-image">
+        {!! Form::label('price', 'Imagen 1 (destacada): *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::file('images', ['multiple']) !!}
+    </div>
+    <div class="form-group col-sm-12" id="div-price">
+        {!! Form::label('price', 'Imagen 2:',['class' => 'control-label mb-10 text-left']) !!}
+   
+    </div>
    
 
 </div>
@@ -32,6 +41,17 @@
         {!! Form::label('description', 'Descripción: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('description', isset($producto)? $producto->description : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
+
+     <div class="form-group col-sm-12" id="div-price">
+        {!! Form::label('price', 'Imagen 3:',['class' => 'control-label mb-10 text-left']) !!}
+        
+    </div>
+    <div class="form-group col-sm-12" id="div-price">
+        {!! Form::label('price', 'Imagen 4:',['class' => 'control-label mb-10 text-left']) !!}
+        
+    </div>
+
+
     </div>
     <div class="form-group col-sm-12 col-xs-12 text-right">
     {!! Form::button('<i class="fa fa-database"></i><span class="btn-text"> Guardar</span>', 
