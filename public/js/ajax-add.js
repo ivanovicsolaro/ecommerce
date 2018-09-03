@@ -43,6 +43,10 @@ function ajax_add($url,$type,$formData,$boton)
                   showConfirmButton: false,
             timer: 1500
               });
+
+              $('#cargar-imagen').attr('disabled',false);
+              $('#cargar-imagen').attr('href','load-images/'+data['id']);
+              $("#cargar-imagen").attr('style','pointer-events: auto');
             }      
 
             setTimeout(function() {

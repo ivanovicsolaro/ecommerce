@@ -37,7 +37,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/menu/templado.png" alt="">
+											<img src="{{ URL::asset('img/menu/templado.png')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">TODAS LAS MARCAS</h2>
 											</div>
@@ -75,7 +75,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/menu/repuesto.jpg" alt="">
+											<img src="{{ URL::asset('img/menu/repuesto.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color"></h2>
 											</div>
@@ -114,7 +114,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/menu/baterias.jpg" alt="">
+											<img src="{{ URL::asset('img/menu/baterias.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color"></h2>
 											</div>
@@ -153,7 +153,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/banner05.jpg" alt="">
+											<img src="{{ URL::asset('img/banner05.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
@@ -192,7 +192,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/banner05.jpg" alt="">
+											<img src="{{ URL::asset('img/banner05.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
@@ -231,7 +231,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/banner05.jpg" alt="">
+											<img src="{{ URL::asset('img/banner05.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
@@ -270,7 +270,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/banner05.jpg" alt="">
+											<img src="{{ URL::asset('img/banner05.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">PRECIOS MAYORISTAS</h2>
 											</div>
@@ -333,7 +333,7 @@
 									<div class="col-md-12">
 										<hr>
 										<a class="banner banner-1" href="#">
-											<img src="./img/banner05.jpg" alt="">
+											<img src="{{ URL::asset('img/banner05.jpg')}}" alt="">
 											<div class="banner-caption text-center">
 												<h2 class="white-color">NEW COLLECTION</h2>
 												<h3 class="white-color font-weak">HOT DEAL</h3>
@@ -349,7 +349,7 @@
 									<div class="col-md-3">
 										<div class="hidden-sm hidden-xs">
 											<a class="banner banner-1" href="#">
-												<img src="./img/banner06.jpg" alt="">
+												<img src="{{ URL::asset('img/banner07.jpg')}}" alt="">
 												<div class="banner-caption text-center">
 													<h3 class="white-color text-uppercase">Women’s</h3>
 												</div>
@@ -369,7 +369,7 @@
 									<div class="col-md-3">
 										<div class="hidden-sm hidden-xs">
 											<a class="banner banner-1" href="#">
-												<img src="./img/banner07.jpg" alt="">
+												<img src="{{ URL::asset('img/banner07.jpg')}}" alt="">
 												<div class="banner-caption text-center">
 													<h3 class="white-color text-uppercase">Men’s</h3>
 												</div>
@@ -389,7 +389,7 @@
 									<div class="col-md-3">
 										<div class="hidden-sm hidden-xs">
 											<a class="banner banner-1" href="#">
-												<img src="./img/banner08.jpg" alt="">
+												<img src="{{ URL::asset('img/banner08.jpg')}}" alt="">
 												<div class="banner-caption text-center">
 													<h3 class="white-color text-uppercase">Accessories</h3>
 												</div>
@@ -409,7 +409,7 @@
 									<div class="col-md-3">
 										<div class="hidden-sm hidden-xs">
 											<a class="banner banner-1" href="#">
-												<img src="./img/banner09.jpg" alt="">
+												<img src="{{ URL::asset('img/banner09.jpg')}}" alt="">
 												<div class="banner-caption text-center">
 													<h3 class="white-color text-uppercase">Bags</h3>
 												</div>

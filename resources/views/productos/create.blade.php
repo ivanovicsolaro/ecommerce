@@ -35,7 +35,12 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-        });  
+        }); 
+
+         $(document).ready(function(){
+           $("#cargar-imagen").attr('disabled','disabled');
+           $("#cargar-imagen").attr('style','pointer-events: none');
+        });
 
         var data_form = $("#form-productos");
 
@@ -43,7 +48,7 @@
             e.preventDefault();
             var formData = data_form.serialize();
             var url = $(this).attr('action');
-            ajax_add(url,'POST',formData,'#btn-guardar-perfil') 
+            ajax_add(url,'POST',formData,'#add-producto') 
         });
     </script> 
     

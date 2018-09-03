@@ -4,32 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Vanilo\Contracts\Buyable;
-use Vanilo\Product\Models\Product as BaseProduct;
-use Vanilo\Support\Traits\BuyableModel;
-use Vanilo\Support\Traits\BuyableImageSpatieV7;
+use App\ProductsImages;
 
 
-class Product extends BaseProduct implements Buyable, HasMedia
+class Product extends Model
 {
-	//use Sluggable;
-     use BuyableModel; // Implements Buyable methods for common Eloquent models
-    use BuyableImageSpatieV7; // Implements Buyable's image methods using Spatie Media Library
-    use HasMediaTrait; // Spatie package's default trait
+	use Sluggable;
 
     protected $searchable = [
         'name',
         'description',
         'meta_keywords',
     ];
-    
+    protected $table = "products";
     protected $fillable = [
         'id', 'name', 'slug', 'sku', 'description', 'price', 'excerpt', 'state'
     ];
 
-  /*  public function sluggable()
+    public function sluggable()
     {
         return [
             'slug' => [
@@ -37,6 +29,9 @@ class Product extends BaseProduct implements Buyable, HasMedia
             ]
         ];
     }
-   */
+
+    public function productImages(){
+        return $this->hasMany(ProductsImages::class);
+    }
 }
  

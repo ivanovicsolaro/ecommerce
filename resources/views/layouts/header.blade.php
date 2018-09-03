@@ -18,6 +18,12 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
+
+  	<!-- DropZone -->
+  
+	
+
 	<!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
 	<!-- Slick -->
@@ -98,7 +104,7 @@
 					<!-- Logo -->
 					<div class="header-logo">
 						<a class="logo" href="#">
-							<img src="./img/logo.png" alt="">
+							<img src="{{ asset('img/logo.png')}}" alt="">
 						</a>
 					</div>
 					<!-- /Logo -->
@@ -164,7 +170,7 @@
 									<div class="shopping-cart-list">
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="{{ URL::asset('img/thumb-product01.jpg')}}" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
@@ -174,7 +180,7 @@
 										</div>
 										<div class="product product-widget">
 											<div class="product-thumb">
-												<img src="./img/thumb-product01.jpg" alt="">
+												<img src="{{ URL::asset('img/thumb-product01.jpg')}}" alt="">
 											</div>
 											<div class="product-body">
 												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>

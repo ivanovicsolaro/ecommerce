@@ -29,12 +29,19 @@
     </div>
 
     </div>
-    <div class="form-group col-sm-12 col-xs-12 text-right">
+
+    <div class="form-group col-sm-12 col-xs-12">
+        <div class="text-left col-md-6">
+              <a href="" class="btn main-btn btn-anim" id="cargar-imagen">
+                <i class="fa fa-file-image-o"></i><span class="btn-text"> Cargar Imágenes</span></a>
+        </div>
+        <div class="text-right col-md-6">
     {!! Form::button('<i class="fa fa-database"></i><span class="btn-text"> Guardar</span>', 
                     ['type' => 'submit', 'class' => 'primary-btn btn-success btn-anim', 'id'=>'add-producto']) !!}
     <a href="{!! route('productos.index') !!}" class="btn main-btn btn-anim">
         <i class="fa fa-reply"></i><span class="btn-text"> Cancelar</span>
     </a>
+</div>
 </div>
 
 </div>

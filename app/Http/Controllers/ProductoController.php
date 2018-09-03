@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use File;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\CreateProduct;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Contracts\Filesystem\Filesystem;
-
+use Illuminate\Support\Filesystem\Filesystem;
+use DB;
+use Illuminate\Support\Facades\Crypt;
+use Intervention\Image\ImageManager;
+use Image;
+use App\ProductsImages;
 
 class ProductoController extends Controller
 {
@@ -20,7 +25,8 @@ class ProductoController extends Controller
     public function index()
     {
         $productos = Product::all();
-        return view('productos.index',compact('productos'));
+
+       return view('productos.index',compact('productos'));
     }
 
     /**
@@ -53,15 +59,10 @@ class ProductoController extends Controller
             'description' => $data['description']
         ]);
 
-         if (!empty($request->files->filter('images'))) {
-        $product->addMultipleMediaFromRequest(['images'])->each(function ($fileAdder) {
-            $fileAdder->toMediaCollection();
-        });
-        }    
-
          return new JsonResponse([
             'msj' => 'Producto Agregado ;)',
-            'type' => 'success'
+            'type' => 'success',
+            'id' => $product->id
         ]);    
         }
 
@@ -85,8 +86,10 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $producto = Product::find(Crypt::decrypt($id));
+
+        return view('productos.edit', compact('producto'));
     }
 
     /**
@@ -98,7 +101,25 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $data = $request->all();
+            $producto = Product::findOrFail(Crypt::decrypt($id));
+
+            $producto->name = $data['name'];
+            $producto->sku = $data['sku'];
+            $producto->stock = $data['stock'];
+            $producto->price = $data['price'];
+            $producto->description = $data['description'];
+
+            $producto->save();
+
+            return new JsonResponse([
+                'msj' => 'Producto editado exitosamente!!!',
+                'type' => 'success'
+            ]);
+        }
+        
+
     }
 
     /**
@@ -111,6 +132,85 @@ class ProductoController extends Controller
     {
         //
     }
+
+
+    public function indexUploadImage($id){
+
+        $producto = Product::find($id);
+        return view('productos.cargar-imagenes', compact('producto'));
+
+    }
+
+    public function uploadImageProducts(Request $request){
+        
+        $id = $request->id;
+
+        $path = public_path('/img/products/'.$id.'/');
+        $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
+
+        if(!is_dir($path)) mkdir($path,0777);
+        if(!is_dir($pathIcon)) mkdir($pathIcon,0777);
+
+       
+        $files = $request->file('file');
+
+        foreach($files as $file){
+            $fileName = $file->getClientOriginalName();
+            if (file_exists(public_path('img/products/'.$id.'/'.$fileName))) {
+                  //  return new JsonResponse(['error' => 400]);
+ 
+            }else{
+                $file->move($path, $fileName); 
+                $img = Image::make(public_path('img/products/'.$id.'/'.$fileName))->resize(140, 140);
+                $img->save(public_path('img/products/'.$id.'/thumbnails/'.$fileName));
+
+                DB::table('products_images')
+                ->insert(['product_id' => $id, 'name' => $fileName, 'destacada' => 0]);
+            }     
+            
+        }
+
+          
+    }
+
+    public function removeImageProducts(Request $request){
+        $id = $request->id;
+        $directory = public_path('/img/products/'.$id.'/');
+        $path = public_path('/img/products/'.$id.'/');
+        $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
+        
+        if(file_exists($path.$request->name)){
+            DB::table('products_images')
+            ->where('product_id', '=', $id)
+            ->where('name', '=', $request->name)
+            ->delete();
+            File::delete($path.$request->name);
+            File::delete($pathIcon.$request->name);
+        }
+    }
+
+    public function getServerImages($id){
+        $images = DB::table('products_images')
+                    ->select('*')
+                    ->where('product_id', '=', $id)
+                    ->get();
+
+        $imageAnswer = [];
+
+        foreach ($images as $image) {
+            $imageAnswer[] = [
+                'name' => $image->name,
+                'server' => $image->name,
+                'size' => 123
+            ];
+        }
+
+        return response()->json([
+            'images' => $imageAnswer
+        ]);
+    }
+    
+
 
 
 

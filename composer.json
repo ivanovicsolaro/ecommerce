@@ -12,7 +12,8 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "~5.0",
         "laraveles/spanish": "^1.0",
-        "vanilo/framework": "^0.3.0"
+        "vanilo/framework": "^0.3.0",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

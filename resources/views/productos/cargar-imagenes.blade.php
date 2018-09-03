@@ -14,10 +14,6 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                 
-                    {!! Form::open(['route'=> ['productos.update',Crypt::encrypt($producto->id)], 'method' => 'PUT', 'id' => 'form-productos']) !!}
-                    @include('productos.fields')
-                    {!! Form::close() !!}
 
                     {!! Form::open(['route'=> ['upload.images',$producto->id], 'method' => 'POST', 'files'=>'true', 'id' => 'my-dropzone' , 'class' => 'dropzone']) !!}
                     <div class="dz-message" style="height:200px;">
@@ -28,7 +24,9 @@
                     {!! Form::close() !!}
                 </div>
                 <div class="text-right col-md-12">
-                 
+                    <a href="{!! route('productos.index') !!}" class="primary-btn btn-success btn-anim">
+                       <span class="btn-text"> Finalizar</span>
+                    </a>
                 </div>
                 </div>
 
@@ -41,30 +39,8 @@
 @endsection
 
 @section('js')
-    @parent
+    @parent 
 <script src="{{asset('libs/dropzone/dist/dropzone.js')}}"></script>
-    <script src="{{ asset('js/ajax-edit.js') }}"></script>
-<script>
-     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-        }); 
-     $(document).ready(function(){
-           $("#cargar-imagen").attr('disabled','disabled');
-           $("#cargar-imagen").attr('style','pointer-events: none');
-        });
-
-        var data_form = $("#form-productos");
-
-        data_form.submit(function(e){
-            e.preventDefault();
-            var formData = data_form.serialize();
-            var url = $(this).attr('action');
-            ajax_edit(url,'POST',formData,'#add-producto') 
-        });
-</script>
-
  <script> 
         Dropzone.options.myDropzone = {
             autoProcessQueue: true,
@@ -102,7 +78,7 @@
  
                 this.on("success", 
                     myDropzone.processQueue.bind(myDropzone)
-                );
+                );                
             },
 
             removedfile: function(file) {
