@@ -39,7 +39,7 @@
     {!! Form::button('<i class="fa fa-database"></i><span class="btn-text"> Guardar</span>', 
                     ['type' => 'submit', 'class' => 'primary-btn btn-success btn-anim', 'id'=>'add-producto']) !!}
     <a href="{!! route('productos.index') !!}" class="btn main-btn btn-anim">
-        <i class="fa fa-reply"></i><span class="btn-text"> Cancelar</span>
+        <i class="fa fa-reply"></i><span class="btn-text"> Listado</span>
     </a>
 </div>
 </div>

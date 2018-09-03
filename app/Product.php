@@ -18,7 +18,7 @@ class Product extends Model
     ];
     protected $table = "products";
     protected $fillable = [
-        'id', 'name', 'slug', 'sku', 'description', 'price', 'excerpt', 'state'
+        'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state'
     ];
 
     public function sluggable()

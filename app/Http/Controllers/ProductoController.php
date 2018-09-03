@@ -24,8 +24,11 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Product::all();
+        $productos = DB::table('products')
+                    ->select('*')
+                    ->get();
 
+        
        return view('productos.index',compact('productos'));
     }
 
@@ -180,12 +183,14 @@ class ProductoController extends Controller
         $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
         
         if(file_exists($path.$request->name)){
+           
             DB::table('products_images')
             ->where('product_id', '=', $id)
             ->where('name', '=', $request->name)
             ->delete();
             File::delete($path.$request->name);
-            File::delete($pathIcon.$request->name);
+                File::delete($pathIcon.$request->name);
+            
         }
     }
 

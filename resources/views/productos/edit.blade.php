@@ -102,7 +102,7 @@
  
                 this.on("success", 
                     myDropzone.processQueue.bind(myDropzone)
-                );
+                );  
             },
 
             removedfile: function(file) {

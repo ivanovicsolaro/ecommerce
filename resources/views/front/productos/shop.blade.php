@@ -38,7 +38,7 @@
                                  <span class="sale">-20%</span>
                             </div>
                             <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver detalle</button>
-                            <img src="./img/product01.jpg" alt="">
+                            <img src="{{asset('img/products/'.$producto->id.'/'.$producto->imageName)}}" alt="">
                         </div>
                         <div class="product-body">
                             <h3 class="product-price">{{$producto->price}} <del class="product-old-price">{{$producto->price}}</del></h3>
