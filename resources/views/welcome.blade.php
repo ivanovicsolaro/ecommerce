@@ -59,9 +59,9 @@
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
                     <a class="banner banner-1" href="#">
-                        <img src="./img/banner10.jpg" alt="">
+                        <img src="./img/banners/arreglo.jpg" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">VOS ENCARGATE DE REPARAR</h2>
                         </div>
                     </a>
                 </div>
@@ -70,7 +70,7 @@
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
                     <a class="banner banner-1" href="#">
-                        <img src="./img/banner11.jpg" alt="">
+                        <img src="./img/banners/envio.jpg" alt="" height="200">
                         <div class="banner-caption text-center">
                             <h2 class="white-color">NEW COLLECTION</h2>
                         </div>
