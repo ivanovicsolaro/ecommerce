@@ -13,11 +13,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->trucateTables([
             'countries',
-            'provinces'           
+            'provinces',
+            'categories',
+            'subcategories'           
         ]);
         
         $this->call(CountriesTableSeeder::class);
         $this->call(ProvinceTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+         $this->call(SubcategoriesTableSeeder::class);
     }
     
     protected function trucateTables(array $tables){

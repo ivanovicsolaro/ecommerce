@@ -16,7 +16,9 @@ class Product extends Model
         'description',
         'meta_keywords',
     ];
+
     protected $table = "products";
+    
     protected $fillable = [
         'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state'
     ];

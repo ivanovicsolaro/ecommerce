@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Categoria;
+use App\Marca;
 use File;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\CreateProduct;
@@ -40,7 +42,10 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        $marcas = Marca::all();
+        $categorias = Categoria::all();
+
+        return view('productos.create', compact('marcas', 'categorias'));
     }
 
     /**

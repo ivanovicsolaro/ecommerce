@@ -23,6 +23,16 @@
         {!! Form::text('sku', isset($producto)? $producto->sku : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
 
+     <div class="form-group col-sm-6" id="div-stock">
+        {!! Form::label('stock', 'Stock: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('stock', isset($producto)? $producto->stock : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+    <div class="form-group col-sm-6" id="div-categoria">
+            {!! Form::label('price', 'Precio: *',['class' => 'control-label mb-10 text-left']) !!}
+           {!! Form::select('categoria_id', $categorias, isset($categoria->id)? $segmento->subcategoria->id : 'null', ['class' => 'form-control','autofocus'=>'autofocus', 'placeholder' => 'Seleccione una opci&oacute;n..']) !!}
+        </div>
+
     <div class="form-group col-sm-12" id="div-description">
         {!! Form::label('description', 'Descripción: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('description', isset($producto)? $producto->description : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
