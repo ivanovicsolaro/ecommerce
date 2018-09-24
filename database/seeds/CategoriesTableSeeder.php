@@ -25,7 +25,7 @@ class CategoriesTableSeeder extends Seeder
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Baterías'
+        	'descripcion' => 'Baterias'
         ]);
 
         Categoria::create([
