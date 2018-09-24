@@ -215,7 +215,7 @@
                                             <span>Nuevo</span>
                                             <span class="sale">-30%</span>
                                         </div>
-                                        <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</button>
+                                        <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
                                         <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->imageName)}}" alt="">
                                     </div>
                                     <div class="product-body">
@@ -342,7 +342,7 @@
                                     <span>New</span>
                                      <span class="sale">-20%</span>
                                 </div>
-                                <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver detalle</button>
+                                <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i>Ver detalle</a>
                                 <img src="{{asset('img/products/'.$producto->id.'/'.$producto->imageName)}}" alt="">
                             </div>
                             <div class="product-body">

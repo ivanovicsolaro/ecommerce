@@ -13,47 +13,58 @@ class SubcategoriesTableSeeder extends Seeder
     public function run()
     {
         Subcategoria::create([
-        	'nombre' => 'Samsung'
+        	'descripcion' => 'Samsung',
+             'slug' => 'samsung'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Motorola'
+        	'descripcion' => 'Motorola',
+             'slug' => 'motorola'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Iphone'
+        	'descripcion' => 'Iphone',
+             'slug' => 'iphone'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Huawei'
+        	'descripcion' => 'Huawei',
+             'slug' => 'huawei'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Alcatel'
+        	'descripcion' => 'Alcatel',
+             'slug' => 'alcatel'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Sony'
+        	'descripcion' => 'Sony',
+             'slug' => 'sony'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Univ. 4.5'
+        	'descripcion' => 'Universal 4.5',
+             'slug' => 'universal-4-5'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Univ. 5.0'
+        	'descripcion' => 'Universal 5.0',
+             'slug' =>'universal-5-0'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Univ. 5.5'
+        	'descripcion' => 'Universal 5.5',
+             'slug' => 'universal-5-5'
         ]);
 
         Subcategoria::create([
-        	'nombre' => 'Generícos'
+        	'descripcion' => 'Generícos',
+             'slug' => 'genericos'
         ]);
 
            Subcategoria::create([
-        	'nombre' => 'Tablet 7"'
+        	'descripcion' => 'Tablet 7',
+             'slug' => 'tablet-7'
         ]);
 
 

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Categoria;
-use App\Marca;
+use App\subcategoria;
 use File;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\CreateProduct;
@@ -42,10 +42,10 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $marcas = Marca::all();
-        $categorias = Categoria::all();
+        $subcategorias = Subcategoria::pluck('descripcion','id')->all();
+        $categorias = Categoria::pluck('descripcion','id')->all();
 
-        return view('productos.create', compact('marcas', 'categorias'));
+        return view('productos.create', compact('subcategorias', 'categorias'));
     }
 
     /**
@@ -62,6 +62,8 @@ class ProductoController extends Controller
 
         $product = Product::create([
             'name' => $data['name'],
+            'categorie_id' => $data['categoria_id'],
+            'subcategorie_id' => $data['subcategoria_id'],
             'sku'  => $data['sku'],
             'stock' => $data['stock'],
             'price' =>$data['price'],
@@ -98,7 +100,10 @@ class ProductoController extends Controller
     {   
         $producto = Product::find(Crypt::decrypt($id));
 
-        return view('productos.edit', compact('producto'));
+        $subcategorias = Subcategoria::pluck('descripcion','id')->all();
+        $categorias = Categoria::pluck('descripcion','id')->all();
+
+        return view('productos.edit', compact('producto', 'subcategorias', 'categorias'));
     }
 
     /**
@@ -115,6 +120,8 @@ class ProductoController extends Controller
             $producto = Product::findOrFail(Crypt::decrypt($id));
 
             $producto->name = $data['name'];
+            $producto->categorie_id = $data['categoria_id'];
+            $producto->subcategorie_id = $data['subcategoria_id'];
             $producto->sku = $data['sku'];
             $producto->stock = $data['stock'];
             $producto->price = $data['price'];
@@ -220,19 +227,43 @@ class ProductoController extends Controller
             'images' => $imageAnswer
         ]);
     }
-    
 
 
+    public function detalleProducto($slug){
+
+        $producto = Product::findBySlug($slug);
+
+        $categoria = Categoria::where('id', $producto->categorie_id)->get();
+
+        $subcategoria = Subcategoria::where('id', $producto->subcategorie_id)->get();
+
+        $relacionados = $this->getProductosRelacionados($producto->categorie_id, $producto->subcategorie_id);
+
+        $imagenes = DB::table('products_images')->where('product_id', $producto->id)->get();
+       
+        $imagenes = json_encode($imagenes);
 
 
+     
+        $producto = array_add($producto, 'imagenes', $imagenes);
+       
+        return view('front.productos.view', [
+            'producto' => $producto,
+            'relacionados' => $relacionados,
+            'categoria' => $categoria,
+            'subcategoria' => $subcategoria
+        ]);
+    }
 
-
-
-
-
-
-
-
+    private function getProductosRelacionados($categoria_id, $subcategoria_id ){
+        return DB::table('products_images')
+                        ->select('products_images.name as imageName', 'products.*')
+                        ->join('products', 'products_images.product_id', '=', 'products.id')
+                        ->groupBy('products_images.product_id')
+                        ->where('categorie_id', $categoria_id)
+                        ->where('subcategorie_id', $subcategoria_id)
+                        ->limit(4)->get();
+    }
 
 
 
@@ -614,16 +645,7 @@ class ProductoController extends Controller
                               ->first();
     }
     
-    private function getProductosRelacionados($cat_id, $slug){
-        return Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
-                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
-                              ->where('products.state', 'active')
-                              ->where('product_categories.category_id', $cat_id)
-                              ->where('products.slug', '<>', $slug)
-                              ->select('products.*', 'galeria.ruta')
-                              ->limit(4)->get();
-    }
+    
     
     private function getProductoPromociones($prod_id){
         $now = new \DateTime();

@@ -13,35 +13,43 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         Categoria::create([
-        	'descripcion' => 'Templados'
+        	'descripcion' => 'Templados',
+            'slug' => 'templados'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Accesorios'
+        	'descripcion' => 'Accesorios',
+            'slug' => 'accesorios'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Repuestos'
+        	'descripcion' => 'Repuestos',
+            'slug' => 'repuestos'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Baterias'
+        	'descripcion' => 'Baterias',
+            'slug' => 'baterias'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Flip Covers'
+        	'descripcion' => 'Flip Covers',
+            'slug' => 'flip-covers'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Fundas Rígidas'
+        	'descripcion' => 'Fundas Rígidas',
+            'slug' => 'fundas-rigidas'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Fundas Líquidas'
+        	'descripcion' => 'Fundas Líquidas',
+            'slug' => 'fundas-liquidas'
         ]);
 
         Categoria::create([
-        	'descripcion' => 'Fundas Flexibles'
+        	'descripcion' => 'Fundas Flexibles',
+            'slug' => 'fundas-flexibles'
         ]);
     }
 }

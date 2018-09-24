@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\ProductsImages;
 
 
 class Product extends Model
 {
 	use Sluggable;
+    use SluggableScopeHelpers;
 
     protected $searchable = [
         'name',
@@ -20,7 +22,7 @@ class Product extends Model
     protected $table = "products";
     
     protected $fillable = [
-        'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state'
+        'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state', 'categorie_id', 'subcategorie_id'
     ];
 
     public function sluggable()

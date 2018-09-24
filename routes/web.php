@@ -38,3 +38,4 @@ Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getSer
 
 /**Rutas del front */
 Route::get('/shop', 'FrontController@indexShop');
+Route::get('/producto/{slug}', 'ProductoController@detalleProducto');
