@@ -231,7 +231,7 @@
                                         <div class="product-btns">
                                             <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                             <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                            <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                            <button class="primary-btn add-to-cart" onclick="addCart({{$producto->id}}, 1)"><i class="fa fa-shopping-cart" ></i> Agregar al carrito</button>
                                         </div>
                                     </div>
                                 </div>
@@ -288,105 +288,8 @@
         <!-- /container -->
     </div>
     <!-- /section -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- section -->
-    <div class="section">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row">
-                <!-- section title -->
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h2 class="title">SHOPPING MAYORISTA</h2>
-                    </div>
-                </div>
-                <!-- section title -->
-
-                <div class="col-md-3 col-sm-12">
-                    Filtros
-                </div>
-                <div class="col-md-9 col-sm-9">
-               		@foreach($productos as $producto)
-                   
-                    <!-- Product Single -->
-                    <div class="col-md-4 col-sm-4 col-xs-4">
-                        <div class="product product-single" >
-                            <div class="product-thumb" style="height: 200px;">
-                            	 <div class="product-label">
-                                    <span>New</span>
-                                     <span class="sale">-20%</span>
-                                </div>
-                                <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i>Ver detalle</a>
-                                <img src="{{asset('img/products/'.$producto->id.'/'.$producto->imageName)}}" alt="">
-                            </div>
-                            <div class="product-body">
-                                <h3 class="product-price">{{$producto->price}} <br/><del class="product-old-price">{{$producto->price}}</del></h3>
-                                <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o empty"></i>
-                                </div>
-                                <h2 class="product-name"><a href="#">{{$producto->name}}</a></h2>
-                                <div class="product-btns">
-                                    <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                    <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                    <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Product Single -->
-                    @endforeach
-                
-            </div>
-            </div>
-            <!-- /row -->
-        </div>
-        <!-- /container -->
     </div>
-    <!-- /section -->
-
-
-
-
-
-
-
-
-
-
-
-                		
-                </div>
-            </div>
+</div>
   
 
 

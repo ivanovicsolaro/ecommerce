@@ -39,3 +39,4 @@ Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getSer
 /**Rutas del front */
 Route::get('/shop', 'FrontController@indexShop');
 Route::get('/producto/{slug}', 'ProductoController@detalleProducto');
+Route::post('agregar-carrito', ['uses' => 'CartController@addItem', 'as' => 'carrito.addItem']);

@@ -104,9 +104,26 @@
 	<script src="{{asset('js/nouislider.min.js')}}"></script>
 	<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 	<script src="{{asset('js/main.js')}}"></script>
+	<script src="{{asset('js/ajax_agregar_carrito.js')}}"></script>
 	@section('js')  
     @show      
+
+    <script type="text/javascript">
+
+    	 $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+        }); 
+    	
+    	function addCart(id, cantidad){
+            var url = "{{route('carrito.addItem')}}";
+            ajax_add_cart(url,'post',{id:id, cantidad:cantidad});
+    	}
+
+    </script>
 
 </body>
 
 </html>
+

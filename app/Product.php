@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use App\ProductsImages;
+use Konekt\Enum\Eloquent\CastsEnums;
+use Vanilo\Contracts\Buyable;
+use Vanilo\Support\Traits\BuyableModel;
 
 
-class Product extends Model
+
+class Product extends Model implements Buyable
 {
-	use Sluggable;
-    use SluggableScopeHelpers;
+    use CastsEnums, Sluggable, SluggableScopeHelpers, BuyableModel;
+
 
     protected $searchable = [
         'name',
@@ -36,6 +40,18 @@ class Product extends Model
 
     public function productImages(){
         return $this->hasMany(ProductsImages::class);
+    }
+
+    public function getImageUrl(){
+
+    }
+
+    public function getThumbnailUrl(){
+
+    }
+
+    public function hasImage(){
+        
     }
 }
  
