@@ -60,7 +60,7 @@ class CartController extends Controller
             }else{            	
                 return new JsonResponse([
                     'validate' => 0,
-                    'msg' => 'Superó el stock'
+                    'msg' => 'No hay stock suficiente, disculpa la molestia'
                 ]);
             }
           }

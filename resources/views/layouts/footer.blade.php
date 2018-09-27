@@ -143,7 +143,11 @@
 		                });
 		              
 		          }else{
-		              console.log('Supero el stock');
+		              swal({
+						  type: 'error',
+						  title: 'Oops...  :(',
+						  text: data['msg']
+						})
 		          }
 		        },
 		        error: function (data) {
