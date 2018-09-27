@@ -91,6 +91,40 @@ class CartController extends Controller
 
     }   
 
+    public function update(Request $request){
+          
+          if ($request->ajax()) {
+            
+          $data = $request->all();
+
+          $producto = Product::find($data['id']);
+          
+          if($data['cantidad'] <= 0){
+             Cart::removeProduct($producto);
+           }elseif($producto->stock >= $data['cantidad']){
+              $cantidadActual = $this->getCantidadByProducto($producto);
+              Cart::addItem($producto, (-1)*$cantidadActual);
+             // dd($cantidadActual);
+              Cart::addItem($producto, $data['cantidad']);
+           }else{             
+                return new JsonResponse([
+                    'validate' => 0,
+                    'msg' => 'No hay stock suficiente, selecciona una cantidad menor a o igual a '.$producto->stock
+                ]);
+            }
+  
+           $total = number_format(Cart::total(),2);
+           
+           return new JsonResponse([
+                'validate' => 1,
+                'total'=> $total, 
+                'cantidad' => Cart::itemCount()
+            ]);
+        
+          };        
+
+    }   
+
     private function getCantidadByProducto($producto){
         /*traigo los productos del carrito*/
         $items = Cart::model()->items->all();
@@ -122,21 +156,17 @@ class CartController extends Controller
         return view('front.carrito.carrito-menu');
     }
 
-    public function view(){
+    public function viewTable(){
      
       if(Cart::exists()){
 
           $items = Cart::model()->items->all();
-       
 
           foreach ($items as $item) {
-      
             $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
-              $item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+              $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
           }
-
-        }
-        
-        return view('front.carrito.index-viewCarrito');
+      }
+      return view('front.carrito.table-carrito');
     }
 }

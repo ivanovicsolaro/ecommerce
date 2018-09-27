@@ -11,7 +11,7 @@
 	</div>
 @endforeach
 <div class="shopping-cart-btns">
-	<a class="main-btn" href="{{route('carrito.viewAll')}}">Ver Carrito</a>
+	<a class="main-btn" href="{{asset('/carrito')}}">Ver Carrito</a>
 		<a class="primary-btn" >Finalizar <i class="fa fa-arrow-circle-right"></i></a>
 </div>
 									

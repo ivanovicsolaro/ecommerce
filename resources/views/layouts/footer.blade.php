@@ -115,8 +115,9 @@
                     }
         }); 
 
-    	 $(document).ready(function() {
+    	 $(document).ready(function(){
        $('#div-menu-carrito').load('{{route("carrito.view")}}');
+       $('#table-carrito').load('{{route("carrito.viewTable")}}');
    
 });
 
@@ -129,6 +130,7 @@
 		        success: function(data) {
 		          if(data['validate'] == 1){
 		          	 $('#div-menu-carrito').load('{{route("carrito.view")}}');
+		          	 $('#table-carrito').load('{{route("carrito.viewTable")}}');
 		          	 $("#header-precio-total").html("$ "+ data['total']);
 		          	 $("#header-cantidad-items").html(data['cantidad']);
 		      
@@ -166,6 +168,7 @@
 		        data:{id:id, cantidad:cantidad},
                 success: function(data) {
                  	$('#div-menu-carrito').load('{{route("carrito.view")}}');
+                    $('#table-carrito').load('{{route("carrito.viewTable")}}');
 		          	$("#header-precio-total").html("$ "+ data['total']);
 		          	$("#header-cantidad-items").html(data['cantidad']);
 		      
@@ -179,6 +182,40 @@
         function getCantidad(){
         	return $('#cantidad').val();
         }
+
+         function getCantidadById(id){
+        	return $('#cantidad'+id).val();
+        }
+
+        function updateCart(id)
+        {
+        	cantidad = $('#cantidad'+id).val();
+            $.ajax({
+             	url: "{{route('carrito.update')}}",
+		        type:'post',
+		        data:{id:id, cantidad:cantidad},
+                success: function(data) {
+                	  if(data['validate'] == 1){
+                	  	$('#div-menu-carrito').load('{{route("carrito.view")}}');
+	                    $('#table-carrito').load('{{route("carrito.viewTable")}}');
+			          	$("#header-precio-total").html("$ "+ data['total']);
+			          	$("#header-cantidad-items").html(data['cantidad']);
+                	  }else{
+                	  	  swal({
+						  type: 'error',
+						  title: 'Oops...  :(',
+						  text: data['msg']
+						})
+                	  }
+                 
+		      
+                },
+                error: function (data) {
+                   $('#div-menu-carrito').load('{{route("carrito.view")}}');
+                }
+            });
+        }
+
 
 
     </script>
