@@ -87,9 +87,9 @@
 							<div class="product-btns">
 								<div class="qty-input">
 									<span class="text-uppercase">QTY: </span>
-									<input class="input" type="number">
+									<input class="input" id="cantidad" type="number">
 								</div>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+								<button class="primary-btn add-to-cart" onclick="addCart({{$producto->id}}, getCantidad())"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
 								<div class="pull-right">
 									<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
 									<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>

@@ -40,4 +40,6 @@ Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getSer
 Route::get('/shop', 'FrontController@indexShop');
 Route::get('/producto/{slug}', 'ProductoController@detalleProducto');
 Route::post('agregar-carrito', ['uses' => 'CartController@addItem', 'as' => 'carrito.addItem']);
+Route::post('remover-carrito', ['uses' => 'CartController@removeItem', 'as' => 'carrito.removeItem']);
 Route::get('ver-carrito', ['uses' => 'CartController@viewCart', 'as' => 'carrito.view']);
+Route::get('ver-carrito-completo', ['uses' => 'CartController@view', 'as' => 'carrito.viewAll']);

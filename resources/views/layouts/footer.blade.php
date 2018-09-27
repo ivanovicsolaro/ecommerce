@@ -104,7 +104,6 @@
 	<script src="{{asset('js/nouislider.min.js')}}"></script>
 	<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 	<script src="{{asset('js/main.js')}}"></script>
-	<script src="{{asset('js/ajax_agregar_carrito.js')}}"></script>
 	@section('js')  
     @show      
 
@@ -130,18 +129,20 @@
 		        success: function(data) {
 		          if(data['validate'] == 1){
 		          	 $('#div-menu-carrito').load('{{route("carrito.view")}}');
+		          	 $("#header-precio-total").html("$ "+ data['total']);
+		          	 $("#header-cantidad-items").html(data['cantidad']);
+		      
 		              swal({
 		                  title: 'Producto Agregado!',
 		                  html: '<strong>'+data['nombre']+'</strong> agregado al carrito!',
 		                  imageUrl: data['urlImagen'],
 		                  imageWidth: 200,
 		                  imageHeight: 200,
-		                  imageAlt: data['nombre'],
 		                  animation: true,
 		                  customClass: 'animated tada',
 		                   confirmButtonText: 'Continuar',
 		                });
-		              
+		               	     
 		          }else{
 		              swal({
 						  type: 'error',
@@ -156,6 +157,29 @@
 		    });
            
     	}
+
+    	 function removeCart(id, cantidad)
+        {
+            $.ajax({
+             	url: "{{route('carrito.removeItem')}}",
+		        type:'post',
+		        data:{id:id, cantidad:cantidad},
+                success: function(data) {
+                 	$('#div-menu-carrito').load('{{route("carrito.view")}}');
+		          	$("#header-precio-total").html("$ "+ data['total']);
+		          	$("#header-cantidad-items").html(data['cantidad']);
+		      
+                },
+                error: function (data) {
+                   $('#div-menu-carrito').load('{{route("carrito.view")}}');
+                }
+            });
+        }
+
+        function getCantidad(){
+        	return $('#cantidad').val();
+        }
+
 
     </script>
 

@@ -54,17 +54,42 @@ class CartController extends Controller
                         'nombre' => $producto->name,
                         'slug' => $producto->slug,
                         'precio' => $precio,
-                        'cantidad' => $cantidad,
+                        'cantidad' => Cart::itemCount(),
                         'urlImagen' => $urlImagen
                     ]);
             }else{            	
                 return new JsonResponse([
                     'validate' => 0,
-                    'msg' => 'No hay stock suficiente, disculpa la molestia'
+                    'msg' => 'No hay stock suficiente, selecciona una cantidad menor a o igual a '.$producto->stock
                 ]);
             }
           }
     }
+
+    public function removeItem(Request $request){
+          
+          if ($request->ajax()) {
+            
+           $data = $request->all();
+
+           $producto = Product::find($data['id']);
+            
+           Cart::addItem($producto, $data['cantidad']);
+
+           if($this->getCantidadByProducto($producto) == 0){
+                Cart::removeProduct($producto);
+           }
+
+           $total = number_format(Cart::total(),2);
+           
+           return new JsonResponse([
+                'total'=> $total, 
+                'cantidad' => Cart::itemCount()
+            ]);
+        
+          };        
+
+    }   
 
     private function getCantidadByProducto($producto){
         /*traigo los productos del carrito*/
@@ -94,6 +119,24 @@ class CartController extends Controller
 
         }
         
-        return view('front.productos.carrito-menu');
+        return view('front.carrito.carrito-menu');
+    }
+
+    public function view(){
+     
+      if(Cart::exists()){
+
+          $items = Cart::model()->items->all();
+       
+
+          foreach ($items as $item) {
+      
+            $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              $item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+          }
+
+        }
+        
+        return view('front.carrito.index-viewCarrito');
     }
 }

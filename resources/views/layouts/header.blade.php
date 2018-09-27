@@ -160,19 +160,19 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 								<div class="header-btns-icon">
 									<i class="fa fa-shopping-cart"></i>
-									<span class="qty">3</span>
+									<span class="qty" id="header-cantidad-items">{{Cart::itemCount()}}</span>
 								</div>
 								<strong class="text-uppercase">Mi Carrito:</strong>
 								<br>
-								<span>35.20$</span>
+								<div id="header-precio-total">$ {{number_format(Cart::total(),2)}}</div>
 							</a>
-								<div class="custom-menu">
+							<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
 								<div id="div-menu-carrito"></div>
 								</div>
 								</div>
-</div>
+							</div>
 
 							<!-- la vista del carrito -->
 
