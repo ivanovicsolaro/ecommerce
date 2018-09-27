@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
+use DB;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
@@ -29,14 +30,23 @@ class CartController extends Controller
             	$cantTotal = $this->getCantidadByProducto($producto) + $cantidad; 
             }
 
-            dd($producto->productImages()->name);
 
-           /* if($cantTotal <= $producto->stock){ 
+            if($cantTotal <= $producto->stock){ 
            		
            		Cart::addItem($producto, $cantidad);
                 
                 $precio = ($producto->price * $cantidad);
                 $total = number_format(Cart::total(),2);
+
+                $path = $request->root();
+                $i = 0;
+	            foreach($producto->productImages as $images){
+	            	if($i == 0){
+	            		$urlImagen = $path.'/img/products/'.$producto->id.'/'.$images->name;
+	            	}
+	            	
+	            	$i++;
+	            }
 
                return new JsonResponse([
                         'validate' => 1,
@@ -44,14 +54,15 @@ class CartController extends Controller
                         'nombre' => $producto->name,
                         'slug' => $producto->slug,
                         'precio' => $precio,
-                        'cantidad' => $cantidad
+                        'cantidad' => $cantidad,
+                        'urlImagen' => $urlImagen
                     ]);
             }else{            	
                 return new JsonResponse([
                     'validate' => 0,
                     'msg' => 'Superó el stock'
                 ]);
-            }*/
+            }
           }
     }
 
@@ -67,4 +78,22 @@ class CartController extends Controller
         }
         return $cantidadCarrito;
     }  
+
+    public function viewCart(){
+    	
+    	if(Cart::exists()){
+
+        	$items = Cart::model()->items->all();
+  		 
+
+        	foreach ($items as $item) {
+      
+        		$imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+          		$item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+        	}
+
+        }
+        
+        return view('front.productos.carrito-menu');
+    }
 }

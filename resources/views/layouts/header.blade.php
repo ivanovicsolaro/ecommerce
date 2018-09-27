@@ -166,36 +166,16 @@
 								<br>
 								<span>35.20$</span>
 							</a>
-							<div class="custom-menu">
+								<div class="custom-menu">
 								<div id="shopping-cart">
 									<div class="shopping-cart-list">
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="{{ URL::asset('img/thumb-product01.jpg')}}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-										<div class="product product-widget">
-											<div class="product-thumb">
-												<img src="{{ URL::asset('img/thumb-product01.jpg')}}" alt="">
-											</div>
-											<div class="product-body">
-												<h3 class="product-price">$32.50 <span class="qty">x3</span></h3>
-												<h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
-											</div>
-											<button class="cancel-btn"><i class="fa fa-trash"></i></button>
-										</div>
-									</div>
-									<div class="shopping-cart-btns">
-										<button class="main-btn">Ver Carrito</button>
-										<button class="primary-btn">Finalizar <i class="fa fa-arrow-circle-right"></i></button>
-									</div>
+								<div id="div-menu-carrito"></div>
 								</div>
-							</div>
+								</div>
+</div>
+
+							<!-- la vista del carrito -->
+
 						</li>
 						<!-- /Cart -->
 

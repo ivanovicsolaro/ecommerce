@@ -115,10 +115,42 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
         }); 
+
+    	 $(document).ready(function() {
+       $('#div-menu-carrito').load('{{route("carrito.view")}}');
+   
+});
+
     	
     	function addCart(id, cantidad){
-            var url = "{{route('carrito.addItem')}}";
-            ajax_add_cart(url,'post',{id:id, cantidad:cantidad});
+            $.ajax({
+		        url: "{{route('carrito.addItem')}}",
+		        type:'post',
+		        data:{id:id, cantidad:cantidad},
+		        success: function(data) {
+		          if(data['validate'] == 1){
+		          	 $('#div-menu-carrito').load('{{route("carrito.view")}}');
+		              swal({
+		                  title: 'Producto Agregado!',
+		                  html: '<strong>'+data['nombre']+'</strong> agregado al carrito!',
+		                  imageUrl: data['urlImagen'],
+		                  imageWidth: 200,
+		                  imageHeight: 200,
+		                  imageAlt: data['nombre'],
+		                  animation: true,
+		                  customClass: 'animated tada',
+		                   confirmButtonText: 'Continuar',
+		                });
+		              
+		          }else{
+		              console.log('Supero el stock');
+		          }
+		        },
+		        error: function (data) {
+		          
+		        }
+		    });
+           
     	}
 
     </script>
