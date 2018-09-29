@@ -7,6 +7,9 @@ use Vanilo\Product\Models\Product;
 use Illuminate\Http\JsonResponse;
 use DB;
 
+use App\Categoria;
+use App\Subcategoria;
+
 class FrontController extends Controller
 {
    	public function indexShop(){
@@ -16,6 +19,9 @@ class FrontController extends Controller
 		            ->groupBy('products_images.product_id')
 		            ->get();
 
-    	return view('front.productos.shop', compact('productos'));
+		$categorias = Categoria::all();
+		$subcategorias = Subcategoria::all();
+
+    	return view('front.productos.shop', compact('productos', 'categorias', 'subcategorias'));
     }
 }
