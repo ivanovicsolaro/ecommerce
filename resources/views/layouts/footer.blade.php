@@ -189,7 +189,7 @@
 
         function updateCart(id)
         {
-        	cantidad = $('#cantidad'+id).val();
+        	var cantidad = $('#cantidad'+id).val();
             $.ajax({
              	url: "{{route('carrito.update')}}",
 		        type:'post',
@@ -201,6 +201,7 @@
 			          	$("#header-precio-total").html("$ "+ data['total']);
 			          	$("#header-cantidad-items").html(data['cantidad']);
                 	  }else{
+                	  	  $('#cantidad'+id).val(data['cantidad']);
                 	  	  swal({
 						  type: 'error',
 						  title: 'Oops...  :(',

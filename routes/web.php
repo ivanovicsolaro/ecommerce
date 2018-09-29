@@ -48,3 +48,6 @@ Route::get('/carrito', function(){
  });
 Route::get('ver-tabla-carrito', ['uses' => 'CartController@viewTable', 'as' => 'carrito.viewTable']);
 Route::post('update-carrito', ['uses' => 'CartController@update', 'as' => 'carrito.update']);
+
+//Checkout
+Route::get('/checkout', 'CheckoutController@index');

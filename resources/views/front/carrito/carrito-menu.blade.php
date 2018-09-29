@@ -12,7 +12,7 @@
 @endforeach
 <div class="shopping-cart-btns">
 	<a class="main-btn" href="{{asset('/carrito')}}">Ver Carrito</a>
-		<a class="primary-btn" >Finalizar <i class="fa fa-arrow-circle-right"></i></a>
+		<a class="primary-btn" href="{{asset('/checkout')}}" >Finalizar <i class="fa fa-arrow-circle-right"></i></a>
 </div>
 									
 

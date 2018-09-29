@@ -104,12 +104,12 @@ class CartController extends Controller
            }elseif($producto->stock >= $data['cantidad']){
               $cantidadActual = $this->getCantidadByProducto($producto);
               Cart::addItem($producto, (-1)*$cantidadActual);
-             // dd($cantidadActual);
               Cart::addItem($producto, $data['cantidad']);
            }else{             
                 return new JsonResponse([
                     'validate' => 0,
-                    'msg' => 'No hay stock suficiente, selecciona una cantidad menor a o igual a '.$producto->stock
+                    'msg' => 'No hay stock suficiente, selecciona una cantidad menor a o igual a '.$producto->stock, 
+                    'cantidad' =>  $this->getCantidadByProducto($producto)
                 ]);
             }
   
