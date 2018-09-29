@@ -73,7 +73,7 @@
                     <div id="store">
                         <!-- row -->
                         <div class="row">
-
+                            <?php $i=0;?>
                             @foreach($productos as $producto)
                             <!-- Product Single -->
                             <div class="col-md-4 col-sm-6 col-xs-6">
@@ -84,7 +84,7 @@
                                             <span class="sale">-30%</span>
                                         </div>
                                         <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
-                                        <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->imageName)}}" alt="">
+                                        <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->image)}}" alt="">
                                     </div>
                                     <div class="product-body">
                                         <h3 class="product-price">{{$producto->price}} <del class="product-old-price">{{$producto->price*1.5}}</del></h3>
@@ -95,7 +95,7 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star-o empty"></i>
                                         </div>
-                                        <h2 class="product-name"><a href="#">Product Name Goes Here</a></h2>
+                                        <h2 class="product-name"><a href="#">{{$producto->name}}</a></h2>
                                         <div class="product-btns">
                                             <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                             <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
@@ -105,6 +105,7 @@
                                 </div>
                             </div>
                             <!-- /Product Single -->
+                            <?php $i++; ?>
                             @endforeach
 
                         </div>
@@ -139,11 +140,9 @@
                                     </select>
                             </div>
                             <ul class="store-pages">
-                                <li><span class="text-uppercase">Page:</span></li>
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
+
+                                {{ $productos->onEachSide(1)->links() }}
+                              
                             </ul>
                         </div>
                     </div>

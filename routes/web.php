@@ -37,7 +37,7 @@ Route::post('productos/remove-images', ['uses' => 'ProductoController@removeImag
 Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getServerImages', 'as' => 'server.images' ]);
 
 /**Rutas del front */
-Route::get('/shop', 'FrontController@indexShop');
+Route::get('/shop', ['uses' => 'FrontController@indexShop', 'as' => 'shop.index']);
 Route::get('/producto/{slug}', 'ProductoController@detalleProducto');
 
 Route::post('agregar-carrito', ['uses' => 'CartController@addItem', 'as' => 'carrito.addItem']);

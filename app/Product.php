@@ -53,5 +53,27 @@ class Product extends Model implements Buyable
     public function hasImage(){
         
     }
+
+    public function scopeBusqueda($query, $cadena){
+        if($cadena != ''){
+            $query->where('name', 'like', '%'.$cadena.'%')
+                ->orWhere('description', 'like', '%'.$cadena.'%')
+                ->get();
+        }
+    
+    }
+
+    public function scopeCategoria($query, $categoria_id){
+        if($categoria_id != ''){
+            $query->where('categorie_id', $categoria_id)->get();
+        }
+        
+    }
+
+    public function scopeSubcategoria($query, $subcategoria_id){
+        if($subcategoria_id != ''){
+            $query->where('subcategorie_id', $subcategoria_id)->get();
+        }
+    }
 }
  

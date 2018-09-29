@@ -1,37 +1,23 @@
     <!-- ASIDE -->
                 <div id="aside" class="col-md-3">
-                    <!-- aside widget -->
+                    {!! Form::model(Request::all(), ['route' => 'shop.index', 'method' => 'GET']) !!}
                     <div class="aside">
-                        <h3 class="aside-title">Shop by:</h3>
-
-                        <ul class="filter-list">
-                            <li><span class="text-uppercase">Precio:</span></li>
-                            <li><a href="#">MIN: $20.00</a></li>
-                            <li><a href="#">MAX: $120.00</a></li>
-                        </ul>
-
-                        <ul class="filter-list">
-                            <li><span class="text-uppercase">Marca:</span></li>
-                            <li><a href="#">Samsung</a></li>
-                        </ul>
-
-                        <button class="primary-btn">Clear All</button>
+                        <h3 class="aside-title">Ingrese búsqueda</h3>
+                        <div class="qty-input">
+                        {!! Form::text('busqueda', null, ['class' => 'input', 'placeholder' => 'Ejemplo: J1 Ace, J110, etc.'])!!}
+                        </div>
                     </div>
-                    <!-- /aside widget -->
 
                     <!-- aside widget -->
                     <div class="aside">
-                        <h3 class="aside-title">Filter by Price</h3>
-                        <div id="price-slider"></div>
-                    </div>
-                    <!-- aside widget -->
-
-                      <!-- aside widget -->
-                    <div class="aside">
-                        <h3 class="aside-title">Filtrar por Categoría</h3>
+                        <h3 class="aside-title">Seleccione Categoría</h3>
                         <ul class="list-links">
-                        	@foreach($categorias as $categoria)
-                            <li><a href="#">{{$categoria->descripcion}}</a></li>
+                            @foreach($categorias as $categoria)
+                            <li>
+                                {!! Form::radio('categoria', $categoria->id)!!}
+
+
+                                {{strtoupper($categoria->descripcion)}}</li>
                            @endforeach
                         </ul>
                     </div>
@@ -39,14 +25,23 @@
 
                      <!-- aside widget -->
                     <div class="aside">
-                        <h3 class="aside-title">Filtrar por Modelo</h3>
+                        <h3 class="aside-title">Seleccione Categoría</h3>
                         <ul class="list-links">
-                        	@foreach($subcategorias as $subcategoria)
-                            <li><a href="#">{{$subcategoria->descripcion}}</a></li>
+                            @foreach($subcategorias as $subcategoria)
+                            <li>
+                                {!! Form::radio('marca', $subcategoria->id)!!}
+                                
+
+                                {{strtoupper($subcategoria->descripcion)}}</li>
                            @endforeach
                         </ul>
                     </div>
                     <!-- /aside widget -->
+
+
+                    <button class="primary-btn add-to-cart" type="submit"><i class="fa fa-search"></i> Buscar</button>
+
+                    {!! Form::close()!!}
 
                     <!-- aside widget -->
                     <div class="aside">
