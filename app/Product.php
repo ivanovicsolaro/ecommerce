@@ -64,15 +64,15 @@ class Product extends Model implements Buyable
     }
 
     public function scopeCategoria($query, $categoria_id){
-        if($categoria_id != ''){
-            $query->where('categorie_id', $categoria_id)->get();
+        if(isset($categoria_id)){          
+            $query->whereIn('categorie_id', $categoria_id)->get();
         }
         
     }
 
     public function scopeSubcategoria($query, $subcategoria_id){
-        if($subcategoria_id != ''){
-            $query->where('subcategorie_id', $subcategoria_id)->get();
+        if(isset($subcategoria_id)){
+            $query->whereIn('subcategorie_id', $subcategoria_id)->get();
         }
     }
 }

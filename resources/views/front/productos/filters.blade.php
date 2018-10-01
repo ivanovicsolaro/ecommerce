@@ -1,4 +1,5 @@
-    <!-- ASIDE -->
+    <!-- ASIDE -->                 
+
                 <div id="aside" class="col-md-3">
                     {!! Form::model(Request::all(), ['route' => 'shop.index', 'method' => 'GET']) !!}
                     <div class="aside">
@@ -14,10 +15,9 @@
                         <ul class="list-links">
                             @foreach($categorias as $categoria)
                             <li>
-                                {!! Form::radio('categoria', $categoria->id)!!}
-
-
-                                {{strtoupper($categoria->descripcion)}}</li>
+                                {!! Form::checkbox('categoria[]', $categoria->id)!!}
+                                {{strtoupper($categoria->descripcion)}}
+                            </li>
                            @endforeach
                         </ul>
                     </div>
@@ -29,10 +29,9 @@
                         <ul class="list-links">
                             @foreach($subcategorias as $subcategoria)
                             <li>
-                                {!! Form::radio('marca', $subcategoria->id)!!}
-                                
-
-                                {{strtoupper($subcategoria->descripcion)}}</li>
+                                {!! Form::checkbox('marca[]', $subcategoria->id)!!}
+                                {{strtoupper($subcategoria->descripcion)}}
+                            </li>
                            @endforeach
                         </ul>
                     </div>
@@ -40,6 +39,7 @@
 
 
                     <button class="primary-btn add-to-cart" type="submit"><i class="fa fa-search"></i> Buscar</button>
+                    <a  class="main-btn quick-view" href="{{url('/shop')}}">Limpiar Filtros</a>
 
                     {!! Form::close()!!}
 
