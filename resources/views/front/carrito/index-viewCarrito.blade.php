@@ -27,7 +27,7 @@
 							</div>
 								<div id="table-carrito"></div>
 							<div class="pull-right">
-								<button class="primary-btn">Realizar Pedido</button>
+								<a class="primary-btn"  href="{{asset('/checkout')}}" >Realizar Pedido</a>
 							</div>
 						</div>
 
