@@ -118,6 +118,8 @@
     	 $(document).ready(function(){
        $('#div-menu-carrito').load('{{route("carrito.view")}}');
        $('#table-carrito').load('{{route("carrito.viewTable")}}');
+
+  
    
 });
 
@@ -171,7 +173,6 @@
                     $('#table-carrito').load('{{route("carrito.viewTable")}}');
 		          	$("#header-precio-total").html("$ "+ data['total']);
 		          	$("#header-cantidad-items").html(data['cantidad']);
-		      
                 },
                 error: function (data) {
                    $('#div-menu-carrito').load('{{route("carrito.view")}}');
@@ -215,6 +216,26 @@
                    $('#div-menu-carrito').load('{{route("carrito.view")}}');
                 }
             });
+        }
+
+ function checkEnvio(id){
+         	switch(id){
+         		case 1:
+         		$("#labelEnvio").html('Retiro del Local (sin costo)');
+         		num = {{Cart::total()}};
+         		$("#labelTotal").html(num.toFixed(2));
+   	      		break;
+         		case 2:
+         		$("#labelEnvio").html('Área Metropolitana - $70.00');
+         		num = {{Cart::total() + 70}};
+         		$("#labelTotal").html(num.toFixed(2));
+         		break;
+         		case 3:
+         		$("#labelEnvio").html('Envio Regional - $200.00');
+         		num = {{Cart::total() + 200}};
+         		$("#labelTotal").html(num.toFixed(2));
+         		break;
+         	}
         }
 
 

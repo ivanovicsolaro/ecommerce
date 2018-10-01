@@ -147,7 +147,7 @@
 								<h4 class="title">Medios de Envío</h4>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-1" checked>
+								<input type="radio" name="shipping" id="shipping" checked onclick="checkEnvio(1)">
 								<label for="shipping-1">Retiro del local -  $0.00</label>
 								<div class="caption">
 									<p>Retirar el pedido personalmente o por un tercero en nuestro local de venta al público.
@@ -155,7 +155,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-2">
+								<input type="radio" name="shipping" id="shipping" onclick="checkEnvio(2)">
 								<label for="shipping-2">Área Metropolitana - $70.00</label>
 								<div class="caption">
 									<p>Envío el pedido a domicilio.<br/>Esta opción es válida para la ciudad de Colonia Avellaneda, Paraná, Oro Verde y San Benito.
@@ -163,7 +163,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping-2">
+								<input type="radio" name="shipping" id="shipping" onclick="checkEnvio(3)">
 								<label for="shipping-2">Envio Regional - $200.00</label>
 								<div class="caption">
 									<p>Envío el pedido a domicilio.<br/>Esta opción es válida cualquier localidad de la provincia de Entre Ríos y Santa Fe.
@@ -186,6 +186,14 @@
 							</div>
 							<div class="input-checkbox">
 								<input type="radio" name="payments" id="payments-2">
+								<label for="payments-2">Contra Reembolso</label>
+								<div class="caption">
+									<p>Abone el pedido en el momento de la entrega
+										<p>
+								</div>
+							</div>
+							<div class="input-checkbox">
+								<input type="radio" name="payments" id="payments-2">
 								<label for="payments-2">Todo Pago (todas las tarjetas)</label>
 								<div class="caption">
 									<p>Abone el pedido con tarjeta. <b><u>Esta opción posee un recargo del 25%.</u></b>
@@ -198,7 +206,7 @@
 					<div class="col-md-12">
 						<div class="order-summary clearfix">
 							<div class="section-title">
-								<h3 class="title">Order Review</h3>
+								<h3 class="title">Revisión del Pedido</h3>
 							</div>
 						<table class="shopping-cart-table table">
 								<thead>
@@ -236,12 +244,12 @@
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>Envío</th>
-										<td colspan="2">Tarifa Reducida ($70.00)</td>
+										<td colspan="2" id="labelEnvio">Retiro del Local (sin costo)</td>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>TOTAL</th>
-										<th colspan="2" class="total">{{number_format(Cart::total() + 70,2) }}</th>
+										<th colspan="2" class="total" id="labelTotal">{{number_format(Cart::total(),2) }}</th>
 									</tr>
 								</tfoot>
 							</table>
