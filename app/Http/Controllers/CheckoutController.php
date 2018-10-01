@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Vanilo\Framework\Models\Customer;
+use Vanilo\Cart\Contracts\CartItem;
+use Vanilo\Cart\Facades\Cart;
 
 use Auth;
 use DB;
@@ -21,6 +23,14 @@ class CheckoutController extends Controller
         if(Auth::guest()){
             return view('auth.login');
         }else{
+
+
+          $items = Cart::model()->items->all();
+
+          foreach ($items as $item) {
+            $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+          }
             
             $result = DB::table('customer_users')
                         ->where('user_id', $this->getUserId())

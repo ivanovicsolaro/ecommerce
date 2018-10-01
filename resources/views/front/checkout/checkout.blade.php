@@ -22,34 +22,122 @@
 				<form id="checkout-form" class="clearfix">
 					<div class="col-md-6">
 						<div class="billing-details">
-							<p>Already a customer ? <a href="#">Login</a></p>
 							<div class="section-title">
-								<h3 class="title">Billing Details</h3>
+								<h3 class="title">Detalles de Facturación</h3>
 							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="first-name" placeholder="First Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="last-name" placeholder="Last Name">
-							</div>
-							<div class="form-group">
-								<input class="input" type="email" name="email" placeholder="Email">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="address" placeholder="Address">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="city" placeholder="City">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="country" placeholder="Country">
-							</div>
-							<div class="form-group">
-								<input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-							</div>
-							<div class="form-group">
-								<input class="input" type="tel" name="tel" placeholder="Telephone">
-							</div>
+
+
+
+
+
+
+  <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nombre <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="firstname" value="@if(isset($customer->firstname)){{$customer->firstname}} @endif" >
+                                     @if ($errors->has('firstname'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Apellido <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="lastname" value="@if(isset($customer->lastname)){{$customer->lastname}} @endif" >
+                                     @if ($errors->has('lastname'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email <span class="required">*</span></label>
+                                    <input type="email" class="form-control" name="email" value="@if(isset($customer->email)){{$customer->email}} @endif" >
+                                     @if ($errors->has('email'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Teléfono <span class="required">*</span></label>
+                                    <input type="phone" class="form-control" name="phone" value="@if(isset($customer->phone)){{$customer->phone}} @endif" >
+                                     @if ($errors->has('phone'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('phone') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                        </div>
+
+                                <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Ciudad <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="localidad" value="@if(isset($address[0]->city)){{$address[0]->city}} @endif" >
+                                     @if ($errors->has('localidad'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('localidad') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Calle <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="calle" id="calle" value="@if(isset($address[0]->address)){{$address[0]->address}} @endif" >
+                                     @if ($errors->has('calle'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('calle') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Número <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="numero" value="@if(isset($address[0]->number)){{$address[0]->number}} @endif" >
+                                     @if ($errors->has('numero'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('numero') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Piso</label>
+                                    <input type="text" class="form-control" name="piso" value="@if(isset($address[0]->piso)){{$address[0]->piso}} @endif">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Dpto.</label>
+                                    <input type="text" class="form-control" name="depto" value="@if(isset($address[0]->depto)){{$address[0]->depto}} @endif">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Código Postal <span class="required">*</span></label>
+                                    <input type="text" class="form-control" name="codigo_postal" id="codigo_postal" value="@if(isset($address[0]->postalcode)){{$address[0]->postalcode}} @endif" >
+                                     @if ($errors->has('codigo_postal'))
+                                                    <span class="help-block">
+                                                        <strong>{{ $errors->first('codigo_postal') }}</strong>
+                                                    </span>
+                                                @endif
+                                </div>
+                            </div>
+                        </div>
+
 						</div>
 					</div>
 
@@ -112,76 +200,48 @@
 							<div class="section-title">
 								<h3 class="title">Order Review</h3>
 							</div>
-							<table class="shopping-cart-table table">
+						<table class="shopping-cart-table table">
 								<thead>
 									<tr>
-										<th>Product</th>
+										<th>Producto</th>
 										<th></th>
-										<th class="text-center">Price</th>
-										<th class="text-center">Quantity</th>
+										<th class="text-center">Precio</th>
+										<th class="text-center">Cantidad</th>
 										<th class="text-center">Total</th>
 										<th class="text-right"></th>
 									</tr>
 								</thead>
 								<tbody>
+									@foreach(Cart::model()->items->all() as $item)
 									<tr>
-										<td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
+										<td class="thumb"><img src="{{asset($item->product->imagen)}}" alt=""></td>
 										<td class="details">
-											<a href="#">Product Name Goes Here</a>
+											<a href="{{asset('producto/'.$item->product->slug)}}">{{$item->product->name}}</a>
 											<ul>
-												<li><span>Size: XL</span></li>
-												<li><span>Color: Camelot</span></li>
+												<li><span>Código: {{$item->product->sku}}</span></li>
 											</ul>
 										</td>
-										<td class="price text-center"><strong>$32.50</strong><br><del class="font-weak"><small>$40.00</small></del></td>
-										<td class="qty text-center"><input class="input" type="number" value="1"></td>
-										<td class="total text-center"><strong class="primary-color">$32.50</strong></td>
-										<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
+										<td class="price text-center"><strong>${{number_format($item->product->price,2)}}</strong><br><del class="font-weak"><small>$40.00</small></del></td>
+										<td class="qty text-center">{{$item->quantity}}</td>
+										<td class="total text-center"><strong class="primary-color">${{number_format($item->quantity * $item->price,2)}}</strong></td>										
 									</tr>
-									<tr>
-										<td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
-										<td class="details">
-											<a href="#">Product Name Goes Here</a>
-											<ul>
-												<li><span>Size: XL</span></li>
-												<li><span>Color: Camelot</span></li>
-											</ul>
-										</td>
-										<td class="price text-center"><strong>$32.50</strong></td>
-										<td class="qty text-center"><input class="input" type="number" value="1"></td>
-										<td class="total text-center"><strong class="primary-color">$32.50</strong></td>
-										<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
-									</tr>
-									<tr>
-										<td class="thumb"><img src="./img/thumb-product01.jpg" alt=""></td>
-										<td class="details">
-											<a href="#">Product Name Goes Here</a>
-											<ul>
-												<li><span>Size: XL</span></li>
-												<li><span>Color: Camelot</span></li>
-											</ul>
-										</td>
-										<td class="price text-center"><strong>$32.50</strong></td>
-										<td class="qty text-center"><input class="input" type="number" value="1"></td>
-										<td class="total text-center"><strong class="primary-color">$32.50</strong></td>
-										<td class="text-right"><button class="main-btn icon-btn"><i class="fa fa-close"></i></button></td>
-									</tr>
+									@endforeach
 								</tbody>
 								<tfoot>
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>SUBTOTAL</th>
-										<th colspan="2" class="sub-total">$97.50</th>
+										<th colspan="2" class="sub-total">{{number_format(Cart::total(),2)}}</th>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
-										<th>SHIPING</th>
-										<td colspan="2">Free Shipping</td>
+										<th>Envío</th>
+										<td colspan="2">Tarifa Reducida ($70.00)</td>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>TOTAL</th>
-										<th colspan="2" class="total">$97.50</th>
+										<th colspan="2" class="total">{{number_format(Cart::total() + 70,2) }}</th>
 									</tr>
 								</tfoot>
 							</table>
