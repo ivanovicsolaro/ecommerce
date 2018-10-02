@@ -51,3 +51,4 @@ Route::post('update-carrito', ['uses' => 'CartController@update', 'as' => 'carri
 
 //Checkout
 Route::get('/checkout', 'CheckoutController@index');
+Route::post('/finalizar-pedido', 'CheckoutController@finalizarPedido');

@@ -102,6 +102,7 @@
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('js/slick.min.js')}}"></script>
 	<script src="{{asset('js/nouislider.min.js')}}"></script>
+	<script src="{{asset('js/loader.js')}}"></script>
 	<script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 	<script src="{{asset('js/main.js')}}"></script>
 	@section('js')  
@@ -125,10 +126,14 @@
 
     	
     	function addCart(id, cantidad){
+    		$boton = '#btn-addcart-'+id;
             $.ajax({
 		        url: "{{route('carrito.addItem')}}",
 		        type:'post',
 		        data:{id:id, cantidad:cantidad},
+		         beforeSend: function() {
+		         	$($boton).buttonLoader('start');
+		         },
 		        success: function(data) {
 		          if(data['validate'] == 1){
 		          	 $('#div-menu-carrito').load('{{route("carrito.view")}}');
@@ -146,13 +151,16 @@
 		                  customClass: 'animated tada',
 		                   confirmButtonText: 'Continuar',
 		                });
+
+		              $($boton).buttonLoader('stop');
 		               	     
 		          }else{
 		              swal({
 						  type: 'error',
 						  title: 'Oops...  :(',
 						  text: data['msg']
-						})
+						});
+		              $($boton).buttonLoader('stop');
 		          }
 		        },
 		        error: function (data) {
@@ -237,6 +245,8 @@
          		break;
          	}
         }
+
+
 
 
 

@@ -19,19 +19,14 @@
 		<div class="container">
 			<!-- row -->
 			<div class="row">
-				<form id="checkout-form" class="clearfix">
+				<form id="checkout-form" action="{{url('/finalizar-pedido')}}" method="post" class="clearfix">
+					    {{ csrf_field() }}
 					<div class="col-md-6">
 						<div class="billing-details">
 							<div class="section-title">
 								<h3 class="title">Detalles de Facturación</h3>
 							</div>
-
-
-
-
-
-
-  <div class="row">
+							<div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Nombre <span class="required">*</span></label>
@@ -254,7 +249,7 @@
 								</tfoot>
 							</table>
 							<div class="pull-right">
-								<button class="primary-btn">Place Order</button>
+								<button class="primary-btn">Generar Pedido</button>
 							</div>
 						</div>
 

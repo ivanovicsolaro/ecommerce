@@ -99,7 +99,7 @@
                                         <div class="product-btns">
                                             <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                             <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                            <button class="primary-btn add-to-cart" onclick="addCart({{$producto->id}}, 1)"><i class="fa fa-shopping-cart" ></i> Agregar al carrito</button>
+                                            <button class="primary-btn add-to-cart" id="btn-addcart-{{$producto->id}}" onclick="addCart({{$producto->id}}, 1)" ><i class="fa fa-shopping-cart" ></i> Agregar al carrito</button>
                                         </div>
                                     </div>
                                 </div>
