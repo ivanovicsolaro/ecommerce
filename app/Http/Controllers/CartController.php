@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
 use DB;
+use Redirect;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
@@ -15,6 +16,16 @@ use App\Product;
 
 class CartController extends Controller
 {
+
+      public function index(){
+        
+        if(Cart::isEmpty()){
+            return Redirect::back()->with('error', 'No posees productos en tu carrito');;
+        }
+
+        return view('front.carrito.index-viewCarrito');
+      }
+
       public function addItem(Request $request){
           
           if ($request->ajax()) {

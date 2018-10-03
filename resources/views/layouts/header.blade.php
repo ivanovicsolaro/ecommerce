@@ -141,8 +141,7 @@
 									<i class="fa fa-caret-down"></i></strong>
 							</div>
 							<ul class="custom-menu">
-								<li><a href="#"><i class="fa fa-exchange"></i> Comparar</a></li>
-								<li><a href="#"><i class="fa fa-check"></i> Finalizar Compra</a></li>
+								<li><a href="{{url('/checkout')}}"><i class="fa fa-check"></i> Finalizar Compra</a></li>
 									@if(\Auth::check())
 										<li><a href="{{url('/home')}}"><i class="fa fa-user-o"></i> Mi cuenta</a></li>
 										<li><a href="#"><i class="fa fa-heart-o"></i> Mi lista de deseos</a></li>

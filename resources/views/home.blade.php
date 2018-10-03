@@ -19,7 +19,7 @@
                         Desde aquí podrás hacer el seguimiento de todos sus pedidos, cambiar la información personal o dirección de envío.
                     </p><br/>
                     <div class="col-md-10">
-                        <h5> <strong class="text-uppercase">Pedidos Recientes</strong></div><div class="col-md-2"> <a class="text-rigth" style="text-decoration: underline;" href="">Ver Todos</a> </h5>
+                        <h5> <strong class="text-uppercase">Pedidos Recientes</strong></div><div class="col-md-2"> <a class="text-rigth" style="text-decoration: underline;" href="{{route('pedidos')}}">Ver Todos</a> </h5>
                     </div>
 
                     
@@ -37,33 +37,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
-                                <tr>
-                                    <td>0001</td>
-                                    <td><span class="nobr">13/10/2018</span></td>
-                                    <td><span class="price">109.90</span></td>
-                                    <td>Entregado</td>
-                                    <td class="a-center last"><span class="nobr"> <a href="">Ver Pedido</a></span>
+                               @foreach($orders as $o)
+                                <tr class="even">
+                                    <td>{{ $o->number }}</td>
+                                    <td><span class="nobr"></span>{{ $o->updated_at->format('d-m-Y') }}</td>
+                                    <td><span class="price">${{ $o->total() }}</span></td>
+                                    <td>
+                                        @switch($o->status)
+                                            @case('Pending')
+                                                <em>Pendiente</em>
+                                                @break
+                                            @case('Completed')
+                                                <em>Completada</em>
+                                                @break
+                                        @endswitch    
+                                    </td>
+                                    <td class="a-center last"><span class="nobr"> <a href="pedido/{{ $o->number }}">Ver Pedido</a></span>
                                     </td>
                                 </tr>
+                                @endforeach
                               
                             </tbody>
   </table>
 </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-3 col-xs-12 mt20 block">
-                    <div class="block-title"> Mi cuenta </div>
-                    <div class="block-content">
-                        <ul>
-                            <li><a href=""><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mi Cuenta</a></li>
-                            <li><a href="{{route('perfil')}}"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Mi Perfil</a></li>
-                            <li><a href=""><i class="fa fa-angle-double-right" aria-hidden="true"></i> Pedidos</a></li>
-                            <li><a href=""><i class="fa fa-angle-double-right" aria-hidden="true"></i> Cambiar Contraseña</a></li>
-                            <li><a href="www.google.com"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Salir</a></li>
-                        </ul>
-                    </div>
-                </div>
+             @include('layouts.menu-perfil')
             </div>
         </div>
 

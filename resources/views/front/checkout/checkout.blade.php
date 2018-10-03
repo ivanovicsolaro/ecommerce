@@ -7,7 +7,7 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li class="active">Checkout</li>
+				<li class="active">Finalizar Compra</li>
 			</ul>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
                                     <input type="text" class="form-control" name="firstname" value="@if(isset($customer->firstname)){{$customer->firstname}} @endif" >
                                      @if ($errors->has('firstname'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('firstname') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('firstname') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -44,7 +44,7 @@
                                     <input type="text" class="form-control" name="lastname" value="@if(isset($customer->lastname)){{$customer->lastname}} @endif" >
                                      @if ($errors->has('lastname'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('lastname') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('lastname') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -56,7 +56,7 @@
                                     <input type="email" class="form-control" name="email" value="@if(isset($customer->email)){{$customer->email}} @endif" >
                                      @if ($errors->has('email'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('email') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('email') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -67,7 +67,7 @@
                                     <input type="phone" class="form-control" name="phone" value="@if(isset($customer->phone)){{$customer->phone}} @endif" >
                                      @if ($errors->has('phone'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('phone') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('phone') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -81,7 +81,7 @@
                                     <input type="text" class="form-control" name="localidad" value="@if(isset($address[0]->city)){{$address[0]->city}} @endif" >
                                      @if ($errors->has('localidad'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('localidad') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('localidad') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -92,7 +92,7 @@
                                     <input type="text" class="form-control" name="calle" id="calle" value="@if(isset($address[0]->address)){{$address[0]->address}} @endif" >
                                      @if ($errors->has('calle'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('calle') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('calle') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -103,7 +103,7 @@
                                     <input type="text" class="form-control" name="numero" value="@if(isset($address[0]->number)){{$address[0]->number}} @endif" >
                                      @if ($errors->has('numero'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('numero') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('numero') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -126,7 +126,7 @@
                                     <input type="text" class="form-control" name="codigo_postal" id="codigo_postal" value="@if(isset($address[0]->postalcode)){{$address[0]->postalcode}} @endif" >
                                      @if ($errors->has('codigo_postal'))
                                                     <span class="help-block">
-                                                        <strong>{{ $errors->first('codigo_postal') }}</strong>
+                                                        <strong style="color:red">{{ $errors->first('codigo_postal') }}</strong>
                                                     </span>
                                                 @endif
                                 </div>
@@ -142,7 +142,7 @@
 								<h4 class="title">Medios de Envío</h4>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping" checked onclick="checkEnvio(1)">
+								<input type="radio" name="envio" value="1" id="shipping" checked onclick="checkEnvio(1)">
 								<label for="shipping-1">Retiro del local -  $0.00</label>
 								<div class="caption">
 									<p>Retirar el pedido personalmente o por un tercero en nuestro local de venta al público.
@@ -150,7 +150,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping" onclick="checkEnvio(2)">
+								<input type="radio" name="envio" value="2" id="shipping" onclick="checkEnvio(2)">
 								<label for="shipping-2">Área Metropolitana - $70.00</label>
 								<div class="caption">
 									<p>Envío el pedido a domicilio.<br/>Esta opción es válida para la ciudad de Colonia Avellaneda, Paraná, Oro Verde y San Benito.
@@ -158,7 +158,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="shipping" id="shipping" onclick="checkEnvio(3)">
+								<input type="radio" name="envio" value="3" id="shipping" onclick="checkEnvio(3)">
 								<label for="shipping-2">Envio Regional - $200.00</label>
 								<div class="caption">
 									<p>Envío el pedido a domicilio.<br/>Esta opción es válida cualquier localidad de la provincia de Entre Ríos y Santa Fe.
@@ -172,15 +172,7 @@
 								<h4 class="title">Medios de Pago</h4>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="payments" id="payments-1" checked>
-								<label for="payments-1">Transferencia Bancaria Directa</label>
-								<div class="caption">
-									<p>Datos Bancarios.
-										<p>
-								</div>
-							</div>
-							<div class="input-checkbox">
-								<input type="radio" name="payments" id="payments-2">
+								<input type="radio" name="medio_pago" id="payments-1" value="1" checked>
 								<label for="payments-2">Contra Reembolso</label>
 								<div class="caption">
 									<p>Abone el pedido en el momento de la entrega
@@ -188,7 +180,15 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="payments" id="payments-2">
+								<input type="radio" name="medio_pago" id="payments-2" value="2">
+								<label for="payments-1">Transferencia Bancaria Directa</label>
+								<div class="caption">
+									<p>Datos Bancarios.
+										<p>
+								</div>
+							</div>
+							<div class="input-checkbox">
+								<input type="radio" name="medio_pago" id="payments-3" value="3">
 								<label for="payments-2">Todo Pago (todas las tarjetas)</label>
 								<div class="caption">
 									<p>Abone el pedido con tarjeta. <b><u>Esta opción posee un recargo del 25%.</u></b>

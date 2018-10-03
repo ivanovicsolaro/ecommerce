@@ -2,9 +2,14 @@
 
 
      
-   @section('title')
-   Mi Perfil
-   @endsection
+     
+   <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="title-section">Mi Perfil</p>
+            </div>
+        </div>
+    </div>
     <!--=================== About Content Section ===================-->
     <section>
         <div class="container">
@@ -122,18 +127,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-3 col-xs-12 mt20 block">
-                    <div class="block-title"> Mi cuenta </div>
-                    <div class="block-content">
-                        <ul>
-                            <li><a href="{{route('home')}}"><span> Mi Cuenta</span></a></li>
-                            <li><a href=""><span> Mi Perfil</span></a></li>
-                            <li><a href=""><span> Pedidos</span></a></li>
-                            <li><a href=""><span> Cambiar Contraseña</span></a></li>
-                            <li><a href=""><span> Salir</span></a></li>
-                        </ul>
-                    </div>
-                </div>
+                            @include('layouts.menu-perfil')
             </div>
         </div>
     </section>

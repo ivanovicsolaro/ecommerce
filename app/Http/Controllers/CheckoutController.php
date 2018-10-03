@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 use Vanilo\Framework\Models\Customer;
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
+use Vanilo\Order\Models\Order;
 
 use Auth;
 use DB;
+use Redirect;
 
 use App\Product;
 use App\Address;
+
+
+use App\Http\Requests\CheckOutRequest;
 
 class CheckoutController extends Controller
 {
@@ -24,8 +29,12 @@ class CheckoutController extends Controller
     public function index()
     {
         if(Auth::guest()){
-            return view('auth.login');
+            return redirect('login')->with('error', 'Debes estar logueado para finalizar la compra');
         }else{
+
+            if(Cart::isEmpty()){
+                return Redirect::back()->with('error', 'No posees productos en tu carrito');;
+            }
 
 
           $items = Cart::model()->items->all();
@@ -55,14 +64,18 @@ class CheckoutController extends Controller
     }
 
 
-    public function finalizarPedido(Request $request){
-           
+    public function finalizarPedido(CheckOutRequest $request){
+
+        if(Cart::isEmpty()){
+            return Redirect::back()->with('error', 'No posees productos en tu carrito');;
+        }
+
         $stock = $this->validarStock();
         
         if($stock['stock']){
             
            $s = $this->reducirStock();
-           //$mp = $request->medio_pago;
+           //$mp = ;
            $result = DB::table('customer_users')
                             ->where('user_id', $this->getUserId())
                             ->select('customer_id')
@@ -111,6 +124,7 @@ class CheckoutController extends Controller
 
                      $address[0]->save();
                 }
+
             
             $mtototal = number_format(Cart::total(),2);
             $mtototal = str_replace(",","",$mtototal);
@@ -121,11 +135,11 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'number' => $nro_pedido,
                 'user_id' => $this->getUserId(),
-                'shipping_address_id' => $address->id,
-                'costo_envio' => $request->costo_envio_email,
-                'plazo_envio' => $request->plazo_entrega_email,
-                'payment' => 'nose',
-                'shipping' => $request->radio,
+                'shipping_address_id' => 2,
+                'costo_envio' => '70.00',
+                'plazo_envio' => '1 dia',
+                'payment' => $request->medio_pago,
+                'shipping' => $request->envio,// $request->radio,
                 'total_amount' => $mtototal + $request->costo_envio_email
             ]);
 
@@ -142,9 +156,9 @@ class CheckoutController extends Controller
                     'quantity'     => $item->quantity,
                 ]);
             }
-            /**
-            switch($mp){
-                    case('todopago'):
+            
+            switch($request->medio_pago){
+                  /*  case('todopago'):
                        
                         $nombre_producto = $this->getTPproductos();
                         $codigos_productos = $this->getTPCodigosProductos();
@@ -172,15 +186,17 @@ class CheckoutController extends Controller
                             'total_producto' => $total_por_producto,
                             'url' => $url
                         ]);
-                    break;
-                    case('contraentrega'):
-                        return redirect('/retorno?trx=ok&operationid='.$nro_pedido.'&mp=ceft');
+                    break;*/
+                    case('1'):
+                        Cart::clear();
+                         return view('front.checkout.finalizado', ['nroPedido' => $nro_pedido, 'rta' => 'ok', 'mp' => $request->medio_pago]);
                         break;
-                    case('efectivo'):
+                    case('2'):
+                        Cart::clear();
                         return redirect('/retorno?trx=ok&operationid='.$nro_pedido.'&mp=eft');
                         break;
             }
-            */
+            
             
         }else{
             return redirect('checkout')->with('error', $stock['producto']);

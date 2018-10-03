@@ -107,6 +107,19 @@
 	<script src="{{asset('js/main.js')}}"></script>
 	@section('js')  
     @show      
+@if((session()->get('error')))
+    	<script>
+		$(document).ready(function(){
+			swal({
+	  		title: 'Error!',
+	  		text: '{{session()->get('error')}}',
+	  		type: 'error',
+	 		 confirmButtonText: 'Cool'
+	})
+	});
+
+	</script>
+	 @endif
 
     <script type="text/javascript">
 

@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Vanilo\Framework\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\Usuarios\UpdatePerfilRequest;
+use App\Http\Requests\Usuarios\UpdatePasswordRequest;
 use DB;
 use App\Address;
 use App\User;
+use Validator;
 
 class MiCuentaController extends Controller
 {
@@ -20,7 +22,7 @@ class MiCuentaController extends Controller
     
     public function index(){
         $orders = Order::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->limit(5)->get();
-        return view('front.usuario.mi-cuenta', [
+        return view('home', [
             'orders' => $orders
         ]);
     }
@@ -100,34 +102,30 @@ class MiCuentaController extends Controller
             'msj' => 'Perfil editado corretamente',
             'type' => 'success'
         ]);
-        //return redirect ('perfil')->with('guardado', 'El perfil se ha actualizado correctamente.');
     }
-    
-    /* 
-    public function listPedidos(){
-        $orders = Order::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
-        return view('front.usuario.pedidos', ['orders' => $orders]);
-    }
-    
+
     public function detallePedido($nro_pedido){
         $order = Order::where('number', $nro_pedido)->first();
-        return view('front.usuario.detalle-pedido', ['order' => $order]);
+        return view('usuarios.detalle-pedido', ['order' => $order]);
     }
-    
-    public function getCambiarPassword(){
-        return view('front.usuario.cambiar-contrasena');
+
+    public function listPedidos(){
+        $orders = Order::where('user_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(5);
+        return view('usuarios.pedidos', ['orders' => $orders]);
     }
-    
-    public function postCambiarPassword(Request $request){
-        $newpass = $request->get('new-pass');
-        $reppass = $request->get('re-pass');
+
+     public function indexCambiarPassword(){
+        return view('usuarios.cambiar-contrasena');
+    }
+     
+    public function postCambiarPassword(UpdatePasswordRequest $request){   
         
-        if($newpass == $reppass){
+       
             $idCliente = Auth::id();
-            User::where('users.id', '=', $idCliente)->update(['password' => bcrypt($newpass)]);
-            return redirect('/cambiar-contrasena')->with('guardado', 'La contraseña se ha modificado correctamente.');
-        }else{
-            return redirect('/cambiar-contrasena')->with('error', 'Las contraseñas ingresadas no coinciden.');
-        }
-    }*/
+            User::where('users.id', '=', $idCliente)->update(['password' => bcrypt($request->password)]);
+             return new JsonResponse([
+                'msj' => 'Contraseña editada corretamente',
+                'type' => 'success'
+            ]);
+    }
 }
