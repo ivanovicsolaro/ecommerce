@@ -12,32 +12,31 @@
                 <!-- home slick -->
                 <div id="home-slick">
                     <!-- banner -->
-                    <div class="banner banner-1">
-                        <img src="./img/banners/{{$banner->name_file_banner_1}}" alt="">
+                    <div class="banner banner-1" style="height:450px">
+                        <img  height="450px" src="./img/banners/{{$banner->name_file_banner_1}}" alt="">
                         <div class="banner-caption text-center">
-                            <h1>Bags sale</h1>
-                            <h3 class="white-color font-weak">Up to 50% Discount</h3>
-                            <button class="primary-btn">Shop Now</button>
+                            <h1 class="white-color">{{$banner->title_banner_1}}</h1>
+                            <a class="primary-btn" href="{{asset($banner->url_banner_1)}}">Ver Detalles</a>
                         </div>
                     </div>
                     <!-- /banner -->
 
                     <!-- banner -->
-                    <div class="banner banner-1">
-                        <img src="./img/banners/{{$banner->name_file_banner_2}}" alt="">
+                    <div class="banner banner-1" style="height:450px">
+                        <img height="450px" src="./img/banners/{{$banner->name_file_banner_2}}" alt="">
                         <div class="banner-caption">
-                            <h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-                            <button class="primary-btn" onclick="prueba()">Shop Now</button>
+                            <h1 class="white-color">{{$banner->title_banner_2}}</h1>
+                            <a class="primary-btn" href="{{asset($banner->url_banner_2)}}">Ver Detalles</a>
                         </div>
                     </div>
                     <!-- /banner -->
 
                     <!-- banner -->
-                    <div class="banner banner-1">
-                        <img src="./img/banners/{{$banner->name_file_banner_3}}" alt="">
+                    <div class="banner banner-1" style="height:450px">
+                        <img height="450px" src="./img/banners/{{$banner->name_file_banner_3}}" alt="">
                         <div class="banner-caption">
-                            <h1 class="white-color">New Product <span>Collection</span></h1>
-                            <button class="primary-btn">Shop Now</button>
+                             <h1 class="white-color">{{$banner->title_banner_3}}</h1>
+                             <a class="primary-btn" href="{{asset($banner->url_banner_3)}}">Ver Detalles</a>
                         </div>
                     </div>
                     <!-- /banner -->
@@ -58,10 +57,10 @@
             <div class="row">
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
-                    <a class="banner banner-1" href="#">
+                    <a class="banner banner-1" href="{{asset($banner->url_banner_4)}}">
                         <img src="./img/banners/{{$banner->name_file_banner_4}}" alt="" height="200">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">VOS ENCARGATE DE REPARAR</h2>
+                            <h2 class="white-color">{{$banner->title_banner_4}}</h2>
                         </div>
                     </a>
                 </div>
@@ -69,10 +68,10 @@
 
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
-                    <a class="banner banner-1" href="#">
+                    <a class="banner banner-1" href="{{asset($banner->url_banner_5)}}">
                         <img src="./img/banners/{{$banner->name_file_banner_5}}" alt="" height="200">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">ENVIOS A DOMICILIO  </h2>
+                            <h2 class="white-color">{{$banner->title_banner_5}}</h2>
                         </div>
                     </a>
                 </div>
@@ -80,10 +79,10 @@
 
                 <!-- banner -->
                 <div class="col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3">
-                    <a class="banner banner-1" href="#">
+                    <a class="banner banner-1" href="{{asset($banner->url_banner_6)}}">
                         <img src="./img/banners/{{$banner->name_file_banner_6}}" alt="" height="200">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">PRECIOS MAYORISTAS</h2>
+                            <h2 class="white-color">{{$banner->title_banner_6}}</h2>
                         </div>
                     </a>
                 </div>
@@ -114,12 +113,12 @@
                 <!-- /section-title -->
 
                 <!-- banner -->
-                <div class="col-md-3 col-sm-6 col-xs-6">
-                    <div class="banner banner-2">
-                        <img src="./img/banners/{{$banner->name_file_banner_7}}" alt="">
+                <div class="col-md-3 col-sm-6 col-xs-6" style="height:450px">
+                    <div  class="banner banner-2">
+                        <img height="450px" src="./img/banners/{{$banner->name_file_banner_7}}" alt="">
                         <div class="banner-caption">
-                            <h2 class="white-color">NEW<br>COLLECTION</h2>
-                            <button class="primary-btn">Shop Now</button>
+                            <h2 class="white-color">{{$banner->title_banner_7}}</h2>
+                             <a class="primary-btn" href="{{asset($banner->url_banner_7)}}">Ver Detalles</a>
                         </div>
                     </div>
                 </div>
@@ -285,8 +284,8 @@
                     <div class="banner banner-1">
                         <img src="./img/banners/{{$banner->name_file_banner_8}}" alt="">
                         <div class="banner-caption text-center">
-                            <h1 class="primary-color">HOT DEAL<br><span class="white-color font-weak">Up to 50% OFF</span></h1>
-                            <button class="primary-btn">Shop Now</button>
+                             <h1 class="white-color">{{$banner->title_banner_8}}</h1>
+                            <a class="primary-btn" href="{{asset($banner->url_banner_8)}}">Ver detalles</a>
                         </div>
                     </div>
                 </div>
@@ -294,10 +293,10 @@
 
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
-                    <a class="banner banner-1" href="#">
+                    <a class="banner banner-1" href="{{asset($banner->url_banner_9)}}">
                         <img src="./img/banners/{{$banner->name_file_banner_9}}" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">{{$banner->title_banner_9}}</h2>
                         </div>
                     </a>
                 </div>
@@ -305,10 +304,10 @@
 
                 <!-- banner -->
                 <div class="col-md-4 col-sm-6">
-                    <a class="banner banner-1" href="#">
+                    <a class="banner banner-1" href="{{asset($banner->url_banner_10)}}">
                         <img src="./img/banners/{{$banner->name_file_banner_10}}" alt="">
                         <div class="banner-caption text-center">
-                            <h2 class="white-color">NEW COLLECTION</h2>
+                            <h2 class="white-color">{{$banner->title_banner_10}}</h2>
                         </div>
                     </a>
                 </div>

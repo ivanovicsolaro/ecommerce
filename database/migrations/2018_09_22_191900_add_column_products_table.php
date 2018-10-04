@@ -14,7 +14,6 @@ class AddColumnProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table){
-            $table->string('name', 30);
             $table->integer('categorie_id')->unsigned()->after('name');
             $table->foreign('categorie_id')->references('id')->on('categories');
             $table->integer('subcategorie_id')->unsigned()->after('categorie_id');
