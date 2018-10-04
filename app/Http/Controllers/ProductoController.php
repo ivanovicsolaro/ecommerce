@@ -27,12 +27,17 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = DB::table('products')
-                    ->select('*')
-                    ->get();
+        $productos = Product::all();
 
         
-       return view('productos.index',compact('productos'));
+        foreach ($productos as $producto) {
+            $imagen = DB::table('products_images')->where('product_id', $producto->id)->first();
+            if(isset($imagen)){
+                $producto->image =  '/img/products/'.$producto->id.'/thumbnails/'.$imagen->name;
+            }       
+        }
+
+        return view('productos.index',compact('productos'));
     }
 
     /**

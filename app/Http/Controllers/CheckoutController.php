@@ -111,6 +111,8 @@ class CheckoutController extends Controller
 
                     DB::table('customer_addresses')->insert(['customer_id' => $customer->id, 'address_id' => $address->id]);
 
+                       $idAddress = $address->id;
+
                 }else{
 
                      $address = Address::findOrFail($idAddress);
@@ -132,10 +134,11 @@ class CheckoutController extends Controller
             /* genero el pedido en estado pendiente */
             $nro_pedido = $this->getUserId().strftime("%d%m%g%H%M");
 
+            dd($idAddress);
             $order = Order::create([
                 'number' => $nro_pedido,
                 'user_id' => $this->getUserId(),
-                'shipping_address_id' => 2,
+                'shipping_address_id' =>  $idAddress,
                 'costo_envio' => '70.00',
                 'plazo_envio' => '1 dia',
                 'payment' => $request->medio_pago,
@@ -193,7 +196,7 @@ class CheckoutController extends Controller
                         break;
                     case('2'):
                         Cart::clear();
-                        return redirect('/retorno?trx=ok&operationid='.$nro_pedido.'&mp=eft');
+                       return view('front.checkout.finalizado', ['nroPedido' => $nro_pedido, 'rta' => 'ok', 'mp' => $request->medio_pago]);
                         break;
             }
             

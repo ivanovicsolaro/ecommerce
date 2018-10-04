@@ -2,7 +2,7 @@
 <table class="table datatable">
     <thead>
         <tr>
-            <th class="text-center">ID</th>
+            <th class="text-center">#   </th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Código</th>
             <th class="text-center">Stock</th>
@@ -13,7 +13,7 @@
     <tbody>
         @foreach($productos as $producto)
             <tr id='trow_{{$producto->id}}'>
-                <td class="text-center">{!! $producto->id !!}</td>
+                <td class="thumb text-center"><img width="70px" src="{{asset($producto->image)}}" alt=""></td>
                 <td class="text-center">{!! $producto->name !!}</td>
                 <td class="text-center">{!! $producto->sku !!}</td>
                 <td class="text-center" >{!! $producto->stock !!}</td>

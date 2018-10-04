@@ -1817,3 +1817,8 @@ textarea.input {
   min-width: 20px;
 }
 
+.ocultar{
+  display: none;
+  text-decoration: none;
+}
+
