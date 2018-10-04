@@ -44,6 +44,6 @@ class FrontController extends Controller
         }
     }
   
-     return view('front.productos.shop1', compact('productos', 'categorias', 'subcategorias', 'ranking'));
+     return view('front.productos.shop', compact('productos', 'categorias', 'subcategorias', 'ranking'));
     }
 }

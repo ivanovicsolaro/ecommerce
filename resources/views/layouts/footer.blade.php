@@ -108,19 +108,6 @@
 	@section('js')  
     @show      
 	
-	@if((session('error')))
-    	<script>
-		$(document).ready(function(){
-			swal({
-	  		title: 'Error!',
-	  		text: '{{session()->get('error')}}',
-	  		type: 'error',
-	 		 confirmButtonText: 'Continuar'
-	})
-	});
-
-	</script>
-	 @endif
 
     <script type="text/javascript">
 
@@ -130,13 +117,10 @@
                     }
         }); 
 
-    	 $(document).ready(function(){
-       $('#div-menu-carrito').load('{{route("carrito.view")}}');
-       $('#table-carrito').load('{{route("carrito.viewTable")}}');
-
-  
-   
-});
+    	$(document).ready(function(){
+       		$('#div-menu-carrito').load('{{route("carrito.view")}}');
+       		$('#table-carrito').load('{{route("carrito.viewTable")}}');
+		});
 
     	
     	function addCart(id, cantidad){
@@ -240,7 +224,7 @@
             });
         }
 
- function checkEnvio(id){
+ 			function checkEnvio(id){
          	switch(id){
          		case 1:
          		$("#labelEnvio").html('Retiro del Local (sin costo)');
