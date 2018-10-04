@@ -77,17 +77,17 @@
 						<li class="dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Productos <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Nuevo Producto</a></li>
+								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Listar Productos</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">USD <i class="fa fa-caret-down"></i></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Configuraciones <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="#">USD ($)</a></li>
-								<li><a href="#">EUR (€)</a></li>
+								<li><a href="{{url('banners')}}"> <i class="fa fa-picture-o" aria-hidden="true"></i> Listado Banners</a></li>
+								<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i> Configuraciones</a></li>									
 							</ul>
 						</li>
 					</ul>

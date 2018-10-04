@@ -27,7 +27,9 @@ class CreateProduct extends BaseCreateProduct
 
             // Extend the rules with a new mandatory field:
             $rules['stock'] = 'required';
+            $rules['sku'] = '';
             $rules['state'] = '';
+            $rules['name'] = 'max:30';
 
             return $rules;
     }

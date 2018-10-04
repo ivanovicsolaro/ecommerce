@@ -10,9 +10,17 @@ use Session;
 
 use App\Categoria;
 use App\Subcategoria;
+use App\Banner;
 
 class FrontController extends Controller
 {
+    public function index(){
+      
+      $banner = Banner::find(1);
+
+      return view('welcome', compact('banner'));
+    }
+
    	public function indexShop(Request $request){
    	$productos = Product::busqueda($request->get('busqueda'))
    					->categoria($request->get('categoria'))

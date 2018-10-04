@@ -49,12 +49,18 @@
 
                                             <div class="form-group ">
                                                 <div class="col-md-8">
+                                                    <button type="submit" class="primary-btn" style="float: right">
+                                                        <i class="fa fa-sign-in" aria-hidden="true"></i> {{ __('Login') }}
+                                                    </button>
+
                                                 <a style="float: right" class="btn btn-link" href="{{ route('password.request') }}">
                                                         {{ __('Olvidé mi contraseña?') }}
                                                     </a>
-                                                    <button type="submit" class="primary-btn" style="float: right">
-                                                        {{ __('Login') }}
-                                                    </button>
+                                                     <a href={{route('register')}} class="main-btn quick-view" style="float: right">
+                                                        {{ __('Registrarme') }}
+                                                    </a>
+                    
+                                                    
                     
                                                    
                                                 </div>

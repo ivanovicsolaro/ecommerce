@@ -14,11 +14,15 @@ class AddColumnProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table){
+            $table->string('name', 30);
             $table->integer('categorie_id')->unsigned()->after('name');
             $table->foreign('categorie_id')->references('id')->on('categories');
             $table->integer('subcategorie_id')->unsigned()->after('categorie_id');
             $table->foreign('subcategorie_id')->references('id')->on('subcategories');
             $table->integer('stock')->after('sku');
+            $table->decimal('price_real', 15, 2)->after('price');
+            $table->boolean('if_dolar')->after('stock'); 
+            $table->boolean('destacado')->after('price');  
         });
     }
 
@@ -33,6 +37,9 @@ class AddColumnProductsTable extends Migration
             $table->dropColumn('categorie_id');
             $table->dropColumn('subcategorie_id');
             $table->dropColumn('stock');
+            $table->dropColumn('price_real');
+            $table->dropColumn('if_dolar');
+            $table->dropColumn('destacado');
         });
     }
 }

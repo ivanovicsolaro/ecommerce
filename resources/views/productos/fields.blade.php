@@ -3,7 +3,7 @@
 
     <div class="form-group col-sm-12" id="div-name">
         {!! Form::label('name', 'Nombre: *',['class' => 'control-label mb-10 text-left']) !!}
-        {!! Form::text('name', isset($producto)? $producto->name : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+        {!! Form::text('name', isset($producto)? $producto->name : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
     </div>
 
     <div class="form-group col-sm-6" id="div-stock">

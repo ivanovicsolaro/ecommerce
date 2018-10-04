@@ -21,6 +21,9 @@ use App\Http\Requests\CheckOutRequest;
 
 class CheckoutController extends Controller
 {
+     public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,11 +33,12 @@ class CheckoutController extends Controller
     {
         if(Auth::guest()){
             return redirect('login')->with('error', 'Debes estar logueado para finalizar la compra');
-        }else{
+        }
 
-            if(Cart::isEmpty()){
-                return Redirect::back()->with('error', 'No posees productos en tu carrito');;
-            }
+        if(Cart::isEmpty()){
+                return redirect('/shop')->with('error', 'No posees productos en tu carrito');
+        }
+        
 
 
           $items = Cart::model()->items->all();
@@ -59,7 +63,7 @@ class CheckoutController extends Controller
                               ->get();
         
             return view('front.checkout.checkout', ['customer' => $customer, 'address' => $address]);
-       }
+       
 
     }
 

@@ -20,7 +20,7 @@ class CartController extends Controller
       public function index(){
         
         if(Cart::isEmpty()){
-            return Redirect::back()->with('error', 'No posees productos en tu carrito');;
+            return redirect('/shop')->with('error', 'No posees productos en tu carrito');;
         }
 
         return view('front.carrito.index-viewCarrito');

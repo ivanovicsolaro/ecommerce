@@ -75,14 +75,19 @@
                                 <div class="product product-single">
                                     <div class="product-thumb">
                                         <div class="product-label">
-                                            <span>Nuevo</span>
-                                            <span class="sale">-30%</span>
+                                            @if($producto->created_at->diffInDays() >= 1)
+                                            <span>
+                                                    Nuevo
+                                                  
+                                            </span>
+                                              @endif
+                                            <span class="sale">- {{number_format($producto->price_real - (($producto->price * $producto->price_real)/100),0)}} %</span>
                                         </div>
                                         <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
                                         <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->image)}}" alt="">
                                     </div>
                                     <div class="product-body">
-                                        <h3 class="product-price">{{$producto->price}} <del class="product-old-price">{{$producto->price*1.5}}</del></h3>
+                                        <h3 class="product-price">{{number_format($producto->price,2)}} <del class="product-old-price">{{number_format($producto->price_real,2)}}</del></h3>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>

@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
 
 Auth::routes();
 
@@ -34,12 +32,22 @@ Route::get('pedidos', ['uses' => 'MiCuentaController@listPedidos', 'as' => 'pedi
 Route::get('cambiar-contrasena', ['uses' => 'MiCuentaController@indexCambiarPassword', 'as' => 'cambiar-password']);
 Route::post('actualizar-contrasena', ['uses' => 'MiCuentaController@postCambiarPassword', 'as' => 'update.password']);
 
-/**Rutas de los productos back */
+/**Rutas back */
+
+//Productos
 Route::resource('productos', 'ProductoController');
 Route::get('productos/load-images/{id}', 'ProductoController@indexUploadImage');
 Route::post('productos/upload-images/{id}', ['uses' => 'ProductoController@uploadImageProducts', 'as' => 'upload.images']);
 Route::post('productos/remove-images', ['uses' => 'ProductoController@removeImageProducts', 'as' => 'remove.images']);
 Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getServerImages', 'as' => 'server.images' ]);
+
+
+//Banner
+Route::get('banners', 'ConfigController@indexBanner');
+Route::post('update-banners',['uses' => 'ConfigController@updateBanner', 'as' => 'update.banner']);
+
+
+
 
 /**Rutas del front */
 Route::get('/shop', ['uses' => 'FrontController@indexShop', 'as' => 'shop.index']);

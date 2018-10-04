@@ -20,6 +20,10 @@ use App\ProductsImages;
 
 class ProductoController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -64,6 +68,10 @@ class ProductoController extends Controller
         if ($request->ajax()) {
 
         $data = $request->all();
+
+        if($data['sku'] == ''){
+             $data['sku'] = $data['categoria_id'].$data['subcategoria_id'].strftime("%d%m%g%H%M");
+        }
 
         $product = Product::create([
             'name' => $data['name'],

@@ -5,7 +5,7 @@
 @stop
 
 @section('title')
-    Cargar Imagen Producto
+    Editar producto
 @stop
 
     <!--=================== About Content Section ===================-->
