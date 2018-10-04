@@ -7,9 +7,9 @@
 		<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="#">Home</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a href="#">Category</a></li>
-				<li class="active">Product Name Goes Here</li>
+				<li><a href="#">Productos</a></li>
+				<li><a href="{{asset('shop?categoria%5B%5D='.$categoria[0]->id)}}">{{$categoria[0]->descripcion}}</a></li>
+				<li class="active">{{$producto->name}}</li>
 			</ul>
 		</div>
 	</div>

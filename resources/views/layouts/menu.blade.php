@@ -17,9 +17,9 @@
 												<h3 class="list-links-title">Por Marca</h3></li>
 											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=1')}}">Samsung</a></li>
 											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=2')}}">Motorola</a></li>
-											<li><a href="{{asset('shop?')}}">Huawei</a></li>
-											<li><a href="{{asset('shop?')}}">Alcatel</a></li>
-											<li><a href="{{asset('shop?')}}">Sony</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=3')}}">Iphone</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=4')}}">Huawei</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=5')}}">Sony</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>
@@ -27,9 +27,9 @@
 										<ul class="list-links">
 											<li>
 												<h3 class="list-links-title">Universales</h3></li>
-											<li><a href="{{asset('shop?')}}">4.5</a></li>
-											<li><a href="{{asset('shop?')}}">5.0</a></li>
-											<li><a href="{{asset('shop?')}}">5.5</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=7')}}">4.5</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=8')}}">5.0</a></li>
+											<li><a href="{{asset('shop?categoria%5B%5D=1&marca%5B%5D=9')}}">5.5</a></li>
 										</ul>
 										<hr class="hidden-md hidden-lg">
 									</div>

@@ -120,6 +120,14 @@
     	$(document).ready(function(){
        		$('#div-menu-carrito').load('{{route("carrito.view")}}');
        		$('#table-carrito').load('{{route("carrito.viewTable")}}');
+
+       		@if(session('error'))
+       		swal({
+						  type: 'error',
+						  title: 'Oops...  :(',
+						  text: '{{session("error")}}'
+						});
+       		@endif
 		});
 
     	

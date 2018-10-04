@@ -67,7 +67,7 @@ class CheckoutController extends Controller
     public function finalizarPedido(CheckOutRequest $request){
 
         if(Cart::isEmpty()){
-            return Redirect::back()->with('error', 'No posees productos en tu carrito');;
+            return redirect('/shop')->with('error', 'No posees productos en tu carrito');;
         }
 
         $stock = $this->validarStock();
@@ -125,6 +125,8 @@ class CheckoutController extends Controller
                      $address[0]->depto = $request->depto;
 
                      $address[0]->save();
+
+                     $idAddress = $address[0]->id;
                 }
 
             
@@ -134,7 +136,6 @@ class CheckoutController extends Controller
             /* genero el pedido en estado pendiente */
             $nro_pedido = $this->getUserId().strftime("%d%m%g%H%M");
 
-            dd($idAddress);
             $order = Order::create([
                 'number' => $nro_pedido,
                 'user_id' => $this->getUserId(),
