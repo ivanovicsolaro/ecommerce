@@ -18,7 +18,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_1_title', 'Titulo Banner Landing 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_1_title', isset($banner)? $banner->title_banner_1 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30, 'required' => 'true' ]) !!}
+                            {!! Form::text('banner_1_title', isset($banner)? $banner->title_banner_1 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -37,7 +37,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_2_title', 'Titulo Banner Landing 2: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_2_title', isset($banner)? $banner->title_banner_2 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_2_title', isset($banner)? $banner->title_banner_2 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -56,7 +56,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_3_title', 'Titulo Banner Landing 3: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_3_title', isset($banner)? $banner->title_banner_3 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_3_title', isset($banner)? $banner->title_banner_3 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -80,7 +80,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_4_title', 'Titulo Banner Individual 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_4_title', isset($banner)? $banner->title_banner_4 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_4_title', isset($banner)? $banner->title_banner_4 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -99,7 +99,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_5_title', 'Titulo Banner Individual 2: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_5_title', isset($banner)? $banner->title_banner_5 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_5_title', isset($banner)? $banner->title_banner_5 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -118,7 +118,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_6_title', 'Titulo Banner Individual 3: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_6_title', isset($banner)? $banner->title_banner_6 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_6_title', isset($banner)? $banner->title_banner_6 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -140,7 +140,7 @@
 
                             <div class="form-group col-sm-12" id="div-name">
                                 {!! Form::label('banner_7_title', 'Titulo Banner 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                                {!! Form::text('banner_7_title', isset($banner)? $banner->title_banner_7 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                                {!! Form::text('banner_7_title', isset($banner)? $banner->title_banner_7 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                             </div>
                        
 
@@ -163,7 +163,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_8_title', 'Titulo Banner 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_8_title', isset($banner)? $banner->title_banner_8 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_8_title', isset($banner)? $banner->title_banner_8 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -182,7 +182,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_9_title', 'Titulo Banner 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_9_title', isset($banner)? $banner->title_banner_9 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_9_title', isset($banner)? $banner->title_banner_9 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">
@@ -201,7 +201,7 @@
 
                         <div class="form-group col-sm-12" id="div-name">
                             {!! Form::label('banner_10_title', 'Titulo Banner 1: *',['class' => 'control-label mb-10 text-left']) !!}
-                            {!! Form::text('banner_10_title', isset($banner)? $banner->title_banner_10 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true', 'maxlength' => 30 ]) !!}
+                            {!! Form::text('banner_10_title', isset($banner)? $banner->title_banner_10 : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
                         </div>
 
                         <div class="form-group col-sm-12" id="div-stock">

@@ -46,21 +46,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <div class="page-filter">
-                                <span class="text-uppercase">Mostrar:</span>
-                                <select class="input">
-                                        <option value="0">10</option>
-                                        <option value="1">20</option>
-                                        <option value="2">30</option>
-                                    </select>
-                            </div>
-                            <ul class="store-pages">
-                                <li><span class="text-uppercase">Pagina:</span></li>
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right"></i></a></li>
-                            </ul>
+                             {{ $productos->onEachSide(1)->links() }}                
                         </div>
                     </div>
                     <!-- /store top filter -->
@@ -127,19 +113,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <div class="page-filter">
-                                <span class="text-uppercase">Show:</span>
-                                <select class="input">
-                                        <option value="0">10</option>
-                                        <option value="1">20</option>
-                                        <option value="2">30</option>
-                                    </select>
-                            </div>
-                            <ul class="store-pages">
-
-                                {{ $productos->onEachSide(1)->links() }}
-                              
-                            </ul>
+                            {{ $productos->onEachSide(1)->links() }}
                         </div>
                     </div>
                     <!-- /store bottom filter -->
