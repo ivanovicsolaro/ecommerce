@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Input;
 
 class ConfigController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     public function indexBanner(){
         $banner = Banner::find(1);
 
