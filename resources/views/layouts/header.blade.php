@@ -78,7 +78,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Productos <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Listar Productos</a></li>
-								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
+								<li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>
 								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>
 							</ul>

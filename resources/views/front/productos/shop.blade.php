@@ -67,7 +67,7 @@
                                                   
                                             </span>
                                               @endif
-                                            <span class="sale">- {{number_format($producto->price_real - (($producto->price * $producto->price_real)/100),0)}} %</span>
+                                            <span class="sale">- {{number_format(100 - (($producto->price * 100)/$producto->price_real),0)}} %</span>
                                         </div>
                                         <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
                                         <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->image)}}" alt="">

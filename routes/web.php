@@ -36,6 +36,7 @@ Route::post('actualizar-contrasena', ['uses' => 'MiCuentaController@postCambiarP
 
 //Productos
 Route::resource('productos', 'ProductoController');
+Route::get('productos-create-massive', 'ProductoController@createCargaMasiva');
 Route::get('productos/load-images/{id}', 'ProductoController@indexUploadImage');
 Route::post('productos/upload-images/{id}', ['uses' => 'ProductoController@uploadImageProducts', 'as' => 'upload.images']);
 Route::post('productos/remove-images', ['uses' => 'ProductoController@removeImageProducts', 'as' => 'remove.images']);

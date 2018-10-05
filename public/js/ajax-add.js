@@ -5,9 +5,6 @@ function ajax_add($url,$type,$formData,$boton)
 	$.ajax({
         url:$url,
         type:$type,
-        contentType: true,
-                    cache: false,
-                    processData:false,
         data:$formData,
         beforeSend: function() {
            $($boton).html('');

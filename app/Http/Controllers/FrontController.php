@@ -25,6 +25,8 @@ class FrontController extends Controller
    	$productos = Product::busqueda($request->get('busqueda'))
    					->categoria($request->get('categoria'))
    					->subcategoria($request->get('marca'))
+            ->whereNull('deleted_at')
+            ->orderBy('destacado', 'desc')
    					->paginate(12);
 
     $ranking = DB::table('cart_items')

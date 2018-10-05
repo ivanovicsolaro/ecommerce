@@ -6,17 +6,35 @@
         {!! Form::text('name', isset($producto)? $producto->name : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
     </div>
 
+    <div class="form-group col-sm-6" id="div-price">
+            {!! Form::label('price', 'Precio Descuento: *',['class' => 'control-label mb-10 text-left']) !!}
+            {!! Form::text('price', isset($producto)? $producto->price : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+        </div>
+
+    <div class="form-group col-sm-6" id="div-price">
+            {!! Form::label('price_real', 'Precio Real: *',['class' => 'control-label mb-10 text-left']) !!}
+            {!! Form::text('price_real', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'min'=>'1']) !!}
+    </div>
+
     <div class="form-group col-sm-6" id="div-stock">
         {!! Form::label('stock', 'Stock: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('stock', isset($producto)? $producto->stock : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
 
-    <div class="form-group col-sm-6" id="div-price">
-            {!! Form::label('price', 'Precio: *',['class' => 'control-label mb-10 text-left']) !!}
-            {!! Form::text('price', isset($producto)? $producto->price : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
-        </div>
+    <div class="form-group col-sm-6" id="div-stock">
+        {!! Form::checkbox('dolar', 1, isset($producto) && ($producto->if_dolar == 1) ? true : false) !!}
+        {!! Form::label('dolar', 'Varia con el dolar',['class' => 'control-label mb-10 text-left']) !!}<br/>
+        {!! Form::checkbox('destacado', 1, isset($producto) && ($producto->destacado == 1) ? true : 0) !!}
+        {!! Form::label('destacado', 'Producto destacado',['class' => 'control-label mb-10 text-left']) !!}<br/>
+        {!! Form::checkbox('combo', 1, isset($producto) && ($producto->combo == 1) ? true : false) !!}
+        {!! Form::label('combo', 'Es combo',['class' => 'control-label mb-10 text-left']) !!}
+     
+    </div>
 
-         <div class="form-group col-sm-6" id="div-price">
+    </div>
+ <div class="col-sm-12 col-md-6">
+
+     <div class="form-group col-sm-6" id="div-price">
             {!! Form::label('price', 'Categoria: *',['class' => 'control-label mb-10 text-left']) !!}
            {!! Form::select('categoria_id', $categorias, isset($producto)? $producto->categorie_id : 'null', ['class' => 'form-control','autofocus'=>'autofocus', 'placeholder' => 'Seleccione una opci&oacute;n..']) !!}
         </div>
@@ -26,8 +44,6 @@
            {!! Form::select('subcategoria_id', $subcategorias, isset($producto)? $producto->subcategorie_id : 'null', ['class' => 'form-control','autofocus'=>'autofocus', 'placeholder' => 'Seleccione una opci&oacute;n..']) !!}
         </div>
 
-    </div>
- <div class="col-sm-12 col-md-6">
 
     <div class="form-group col-sm-12" id="div-sku">
         {!! Form::label('sku', 'Código: *',['class' => 'control-label mb-10 text-left']) !!}

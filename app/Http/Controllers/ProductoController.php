@@ -31,7 +31,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Product::all();
+        $productos = Product::whereNull('deleted_at')->paginate(12);
 
         
         foreach ($productos as $producto) {
@@ -67,27 +67,38 @@ class ProductoController extends Controller
     {   
         if ($request->ajax()) {
 
-        $data = $request->all();
+            $data = $request->all();
 
-        if($data['sku'] == ''){
-             $data['sku'] = $data['categoria_id'].$data['subcategoria_id'].strftime("%d%m%g%H%M");
-        }
+            if($data['sku'] == ''){
+                 $data['sku'] = $data['categoria_id'].$data['subcategoria_id'].strftime("%d%m%g%H%M");
+            }
 
-        $product = Product::create([
-            'name' => $data['name'],
-            'categorie_id' => $data['categoria_id'],
-            'subcategorie_id' => $data['subcategoria_id'],
-            'sku'  => $data['sku'],
-            'stock' => $data['stock'],
-            'price' =>$data['price'],
-            'description' => $data['description']
-        ]);
+            if(!isset($data['destacado'])){
+                $data['destacado'] = 0;
+            }
 
-         return new JsonResponse([
-            'msj' => 'Producto Agregado ;)',
-            'type' => 'success',
-            'id' => $product->id
-        ]);    
+            if(!isset($data['dolar'])){
+                $data['dolar'] = 0;
+            }
+
+            $product = Product::create([
+                'name' => $data['name'],
+                'categorie_id' => $data['categoria_id'],
+                'subcategorie_id' => $data['subcategoria_id'],
+                'sku'  => $data['sku'],
+                'stock' => $data['stock'],
+                'if_dolar' => $data['dolar'],
+                'destacado' => $data['destacado'],
+                'price' => $data['price'],
+                'price_real' => $data['price_real'],
+                'description' => $data['description']
+            ]);
+
+             return new JsonResponse([
+                'msj' => 'Producto Agregado ;)',
+                'type' => 'success',
+                'id' => $product->id
+            ]);    
         }
 
     }
@@ -132,12 +143,23 @@ class ProductoController extends Controller
             $data = $request->all();
             $producto = Product::findOrFail(Crypt::decrypt($id));
 
+            if(!isset($data['destacado'])){
+                $data['destacado'] = 0;
+            }
+
+            if(!isset($data['dolar'])){
+                $data['dolar'] = 0;
+            }
+
             $producto->name = $data['name'];
             $producto->categorie_id = $data['categoria_id'];
             $producto->subcategorie_id = $data['subcategoria_id'];
             $producto->sku = $data['sku'];
             $producto->stock = $data['stock'];
+            $producto->if_dolar = $data['dolar'];
+            $producto->destacado = $data['destacado'];
             $producto->price = $data['price'];
+            $producto->price_real = $data['price_real'];
             $producto->description = $data['description'];
 
             $producto->save();
@@ -276,6 +298,13 @@ class ProductoController extends Controller
                         ->where('categorie_id', $categoria_id)
                         ->where('subcategorie_id', $subcategoria_id)
                         ->limit(4)->get();
+    }
+
+    public function createCargaMasiva(){
+        $subcategorias = Subcategoria::pluck('descripcion','id')->all();
+        $categorias = Categoria::pluck('descripcion','id')->all();
+
+        return view('productos.fields-massive', compact('subcategorias', 'categorias'));
     }
 
 

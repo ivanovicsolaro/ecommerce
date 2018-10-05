@@ -37,4 +37,7 @@
         @endforeach
     </tbody>
 </table>
+ <div class="pull-right">
+                            {{ $productos->onEachSide(1)->links() }}
+                        </div>
 </div>
