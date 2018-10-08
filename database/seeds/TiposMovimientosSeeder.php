@@ -12,7 +12,7 @@ class TiposMovimientosSeeder extends Seeder
      */
     public function run()
     {
-        TiposMovimiento::insert([
+         TiposMovimiento::insert([
         	'description' => 'Boleta'
         ]);
 

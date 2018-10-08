@@ -69,3 +69,4 @@ Route::post('/finalizar-pedido', 'CheckoutController@finalizarPedido');
 //Ventas
 
 Route::resource('ventas', 'VentasController');
+Route::get('ver-tabla-venta', ['uses' => 'CartController@viewTableVenta', 'as' => 'carrito.viewTableVenta']);

@@ -18,7 +18,7 @@
          <!-- START DEFAULT DATATABLE -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @include('ventas.table')
+                    
                 </div>
             </div>
             <!-- END DEFAULT DATATABLE -->

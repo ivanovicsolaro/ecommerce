@@ -44,7 +44,10 @@ class CartController extends Controller
 
             if($cantTotal <= $producto->stock){ 
            		
-           		Cart::addItem($producto, $cantidad);
+           		Cart::addItem($producto, $cantidad, [ 'attributes' => [
+                    'price_real' => $producto->price_real
+              ]
+            ]);
                 
                 $precio = ($producto->price * $cantidad);
                 $total = number_format(Cart::total(),2);
@@ -180,7 +183,7 @@ class CartController extends Controller
           $items = Cart::model()->items->all();
 
           foreach ($items as $item) {
-              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first(); 
               if(!$imagen){
                   $item->product->imagen = '/img/products/sin-imagen.jpg';
               }else{
@@ -190,5 +193,38 @@ class CartController extends Controller
           }
       }
       return view('front.carrito.table-carrito');
+    }
+
+    public function viewTableVenta(){
+     
+      if(Cart::exists()){
+
+          $items = Cart::model()->items->all();
+
+          foreach ($items as $item) {
+              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              if(!$imagen){
+                  $item->product->imagen = '/img/products/sin-imagen.jpg';
+              }else{
+                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+              }
+              
+          }
+
+          $total_real = $this->getTotalReal();
+      }
+
+      return view('ventas.table', compact('total_real'));
+    }
+
+    private static function getTotalReal(){
+
+        $items = Cart::model()->items->all();
+        $total_real = 0;
+        foreach ($items as $item) {
+            $total_real = $total_real + ($item->quantity * $item->price_real); 
+        }
+
+      return $total_real;
     }
 }

@@ -29,7 +29,8 @@ class VentasController extends Controller
      */
     public function create()
     {
-        //
+        $tiposMovimientos = TiposMovimiento::pluck('description', 'id')->all();
+        return view('ventas.create', compact('tiposMovimientos'));
     }
 
     /**
