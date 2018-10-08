@@ -31,6 +31,16 @@
      
     </div>
 
+    <div class="form-group col-sm-6" id="div-stock_minimo">
+        {!! Form::label('stock_minimo', 'Stock: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('stock_minimo', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+    <div class="form-group col-sm-6" id="div-stock_maximo">
+        {!! Form::label('stock_maximo', 'Stock: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('stock_maximo', isset($producto)? $producto->max : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
     </div>
  <div class="col-sm-12 col-md-6">
 

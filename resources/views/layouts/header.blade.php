@@ -66,12 +66,18 @@
 				<div class="pull-right">
 					<ul class="header-top-links">
 						<li><a href="#" style="color:#fff;">Store</a></li>
-						<li><a href="#" style="color:#fff;">Newsletter</a></li>
 						<li class="dropdown default-dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;"><i class="fa fa-user-secret" aria-hidden="true"></i> Roles <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
 								<li><a href="#">  <i class="fa fa-list" aria-hidden="true"></i>  Listar Roles</a></li>
 								<li><a href="#">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  Nuevo Rol</a></li>
+							</ul>
+						</li>
+						<li class="dropdown default-dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Compras <i class="fa fa-caret-down"></i></a>
+							<ul class="custom-menu">
+								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Orden de Compra</a></li>
+								<li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Facturas de Compra</a></li>						
 							</ul>
 						</li>
 						<li class="dropdown default-dropdown">

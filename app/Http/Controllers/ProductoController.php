@@ -38,6 +38,8 @@ class ProductoController extends Controller
             $imagen = DB::table('products_images')->where('product_id', $producto->id)->first();
             if(isset($imagen)){
                 $producto->image =  '/img/products/'.$producto->id.'/thumbnails/'.$imagen->name;
+            }else{
+                $producto->image =  '/img/products/sin-imagen.jpg';
             }       
         }
 
@@ -88,6 +90,8 @@ class ProductoController extends Controller
                 'sku'  => $data['sku'],
                 'stock' => $data['stock'],
                 'if_dolar' => $data['dolar'],
+                'min' => $data['stock_minimo'],
+                'max' => $data['stock_maximo'],
                 'destacado' => $data['destacado'],
                 'price' => $data['price'],
                 'price_real' => $data['price_real'],
@@ -157,6 +161,8 @@ class ProductoController extends Controller
             $producto->sku = $data['sku'];
             $producto->stock = $data['stock'];
             $producto->if_dolar = $data['dolar'];
+            $producto->min = $data['stock_minimo'];
+            $producto->max = $data['stock_maximo'];
             $producto->destacado = $data['destacado'];
             $producto->price = $data['price'];
             $producto->price_real = $data['price_real'];

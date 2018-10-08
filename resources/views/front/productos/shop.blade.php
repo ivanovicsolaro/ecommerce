@@ -70,7 +70,14 @@
                                             <span class="sale">- {{number_format(100 - (($producto->price * 100)/$producto->price_real),0)}} %</span>
                                         </div>
                                         <a href="{{asset('producto/'.$producto->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
-                                        <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->image)}}" alt="">
+                                         @if(!isset($producto->image))
+                                          <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
+                                         @else
+                                          <img  src="{{asset('img/products/'.$producto->id.'/'.$producto->image)}}" alt="">
+                                          @endif
+
+                                   
+                                       
                                     </div>
                                     <div class="product-body">
                                         <h3 class="product-price">{{number_format($producto->price,2)}} <del class="product-old-price">{{number_format($producto->price_real,2)}}</del></h3>

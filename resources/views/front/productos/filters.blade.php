@@ -116,7 +116,12 @@
                                             <span class="sale">-30%</span>
                                         </div>
                                         <a href="{{asset('producto/'.$ranking[$i]->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
-                                        <img  src="{{asset('img/products/'.$ranking[$i]->id.'/'.$ranking[$i]->image)}}" alt="">
+                                         @if(!isset($ranking[$i]->image))
+                                          <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
+                                         @else
+                                          <img  src="{{asset('img/products/'.$ranking[$i]->id.'/'.$ranking[$i]->image)}}" alt="">
+                                          @endif
+                                       
                                     </div>
                                     <div class="product-body">
                                         <h3 class="product-price">{{$ranking[$i]->price}} <del class="product-old-price">{{$ranking[$i]->price*1.5}}</del></h3>

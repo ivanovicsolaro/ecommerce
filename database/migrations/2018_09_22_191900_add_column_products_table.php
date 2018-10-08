@@ -19,6 +19,8 @@ class AddColumnProductsTable extends Migration
             $table->integer('subcategorie_id')->unsigned()->after('categorie_id');
             $table->foreign('subcategorie_id')->references('id')->on('subcategories');
             $table->integer('stock')->after('sku');
+            $table->integer('min')->after('stock')->nullable();
+            $table->integer('max')->after('min')->nullable();
             $table->decimal('price_real', 15, 2)->after('price');
             $table->boolean('if_dolar')->after('stock'); 
             $table->boolean('destacado')->after('price');  
@@ -36,6 +38,8 @@ class AddColumnProductsTable extends Migration
             $table->dropColumn('categorie_id');
             $table->dropColumn('subcategorie_id');
             $table->dropColumn('stock');
+            $table->dropColumn('max');
+            $table->dropColumn('min');
             $table->dropColumn('price_real');
             $table->dropColumn('if_dolar');
             $table->dropColumn('destacado');
