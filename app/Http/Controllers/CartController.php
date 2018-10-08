@@ -51,13 +51,17 @@ class CartController extends Controller
 
                 $path = $request->root();
                 $i = 0;
+
 	            foreach($producto->productImages as $images){
 	            	if($i == 0){
 	            		$urlImagen = $path.'/img/products/'.$producto->id.'/'.$images->name;
 	            	}
-	            	
 	            	$i++;
 	            }
+
+              if(!isset($urlImagen)){
+                  $urlImagen = $path.'/img/products/sin-imagen.jpg';
+              }
 
                return new JsonResponse([
                         'validate' => 1,
@@ -158,8 +162,10 @@ class CartController extends Controller
 
         	foreach ($items as $item) {
       
-        		$imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
-          		$item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+        	$imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+            if(isset($imagen)){
+          		  $item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+            }
         	}
 
         }

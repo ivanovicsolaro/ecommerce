@@ -1,7 +1,13 @@
 @foreach(Cart::model()->items->all() as $item)
 	<div class="product product-widget">
 		<div class="product-thumb">
-			<img src="{{asset($item->product->imagen)}}" alt="">
+
+			@if(!isset($item->product->imagen))
+                <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
+            @else
+                <img src="{{asset($item->product->imagen)}}" alt="">
+            @endif
+			
 		</div>
 		<div class="product-body">
 			<h3 class="product-price">$ {{number_format($item->product->price,2)}}<span class="qty"> x {{$item->quantity}}</span></h3>

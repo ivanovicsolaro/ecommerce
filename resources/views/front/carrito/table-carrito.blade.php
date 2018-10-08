@@ -12,7 +12,13 @@
 								<tbody>
 									@foreach(Cart::model()->items->all() as $item)
 									<tr>
-										<td class="thumb"><img src="{{asset($item->product->imagen)}}" alt=""></td>
+										<td class="thumb">
+											 @if(!isset($item->product->imagen))
+                                          <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
+                                         @else
+                                         <img src="{{asset($item->product->imagen)}}" alt="">
+                                          @endif
+										</td>
 										<td class="details">
 											<a href="{{asset('producto/'.$item->product->slug)}}">{{$item->product->name}}</a>
 											<ul>
