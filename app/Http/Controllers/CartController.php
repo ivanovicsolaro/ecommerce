@@ -180,8 +180,13 @@ class CartController extends Controller
           $items = Cart::model()->items->all();
 
           foreach ($items as $item) {
-            $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
-              $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              if(!$imagen){
+                  $item->product->imagen = '/img/products/sin-imagen.jpg';
+              }else{
+                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+              }
+              
           }
       }
       return view('front.carrito.table-carrito');

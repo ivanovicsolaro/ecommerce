@@ -45,7 +45,11 @@ class CheckoutController extends Controller
 
           foreach ($items as $item) {
             $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
-              $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+             if(!$imagen){
+                  $item->product->imagen = '/img/products/sin-imagen.jpg';
+              }else{
+                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+              }
           }
             
             $result = DB::table('customer_users')

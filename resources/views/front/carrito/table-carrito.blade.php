@@ -13,7 +13,7 @@
 									@foreach(Cart::model()->items->all() as $item)
 									<tr>
 										<td class="thumb">
-											 @if(!isset($item->product->imagen))
+										 @if(!isset($item->product->imagen))
                                           <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
                                          @else
                                          <img src="{{asset($item->product->imagen)}}" alt="">
