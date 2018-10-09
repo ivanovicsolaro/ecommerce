@@ -94,14 +94,17 @@ class ClientsController extends Controller
                 ->orWhere('cuit', 'LIKE', '%' . $request->get('query') . '%')
                 ->get();
 
-        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+        if(count($client)>0){
+            $output = '<ul class="dropdown-menu" style="display:block; position:absolute">';
 
-        foreach ($client as $c) {
-           $output .= '<li><a href="#">'.$c->name.', '.$c->lastname.' ('.$c->cuit.')</a></li>';
+            foreach ($client as $c) {
+               $output .= '<li><a href="#">'.$c->name.', '.$c->lastname.' ('.$c->cuit.')</a><input type="hidden" id="cliente_id" value="'.$c->id.'"></li>';
+            }
+
+            $output .= '</ul>';
+
+            echo $output;   
         }
-
-        $output .= '</ul>';
-
-        echo $output;      
+         
     }   
 }

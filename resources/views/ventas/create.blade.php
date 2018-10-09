@@ -11,6 +11,8 @@
 				           {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
 				           {!! Form::text('cliente', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'client', 'min'=>'1']) !!}
 				           <div id="clientList"></div>
+				           <input type="hidden" id="id_cliente" name="id_cliente">
+				          
 				    	</div>
 
 				    	<div class="form-group col-sm-6" id="div-price">
@@ -81,6 +83,10 @@
        		$(document).on('click', 'li', function(){
         		$('#client').val($(this).text());
         		$('#clientList').fadeOut();
+
+        		//$('#id_cliente').val($('#cliente_id').val());
+        		alert($('#cliente_id').val());
+        		
         	});
 		});
 
