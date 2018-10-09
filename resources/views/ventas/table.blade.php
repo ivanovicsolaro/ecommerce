@@ -27,11 +27,11 @@
                                         </td>
                                         <td class="qty text-center"><strong><input class="input" type="text" id="precio{{$item->product->id}}" value="{{number_format($item->price_real,2)}}"></strong></td>
 
-                                        <td class="qty text-center"><input class="input" type="number" id="cantidad{{$item->product->id}}" value="{{$item->quantity}}"></td>
+                                        <td class="qty text-center"><input class="input" type="text" id="cantidad{{$item->product->id}}" value="{{$item->quantity}}" readonly="true"></td>
 
                                         <td class="total text-center"><input class="input" type="text" id="precio{{$item->product->id}}" value="{{number_format($item->quantity * $item->price_real,2)}}" readonly="true"></td>
 
-                                        <td class="text-right"><button class="main-btn icon-btn" onclick="removeCart({{$item->product->id}}, getCantidadById({{$item->product->id}})*-1)"><i class="fa fa-close"></i></button></td>
+                                        <td class="text-right"><button class="main-btn icon-btn" onclick="removeCartVenta({{$item->product->id}}, -1)"><i class="fa fa-close"></i></button></td>
 
                                     </tr>
                                     @endforeach

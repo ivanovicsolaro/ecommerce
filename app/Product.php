@@ -75,5 +75,9 @@ class Product extends Model implements Buyable
             $query->whereIn('subcategorie_id', $subcategoria_id)->get();
         }
     }
+
+    public static function findBySku($sku){
+        return Product::where('sku', $sku)->get();
+    }
 }
  

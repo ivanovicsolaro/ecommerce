@@ -8,23 +8,22 @@
                     <div class="dashboard">
                    
                         <div class="form-group col-sm-6" id="div-price">
-				            {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
-				            {!! Form::text('cliente', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'min'=>'1']) !!}
+				           {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
+				           {!! Form::text('cliente', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'min'=>'1']) !!}
 				    	</div>
 
 				    	<div class="form-group col-sm-6" id="div-price">
-				            {!! Form::label('price', 'Tipo de Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
+				           {!! Form::label('price', 'Tipo de Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
 				           {!! Form::select('tipo_movimiento', $tiposMovimientos, isset($producto)? $producto->categorie_id : 'null', ['class' => 'form-control','autofocus'=>'autofocus', 'placeholder' => 'Seleccione una opci&oacute;n..']) !!}
 				    	</div>
-				 		{!! Form::open(['route' => 'ventas.store', 'action'=>'post', 'id' => 'form-productos']) !!}
-
-				        {{ csrf_field() }}
+				 		
+				 		{!! Form::open(['route' => 'carrito.addItem', 'action'=>'post', 'id' => 'find-productos']) !!}
 						<div class="form-group col-sm-6" id="div-stock_minimo">
 				  			{!! Form::label('producto', 'Ingrese Código o Nombre del Producto: *',['class' => 'control-label mb-10 text-left']) !!}
 				    	<div class="input-group">
-				     		  {!! Form::text('producto', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+				     		  {!! Form::text('sku', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'cadena']) !!}
 				      			<span class="input-group-btn">
-				        			<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+				        			<button class="btn primary-btn" id="boton-find" type="submit">Buscar</button>
 				      			</span>
 				    	</div><!-- /input-group -->
 				    	{!! Form::close() !!}
@@ -65,14 +64,56 @@
                     }
         }); 
 
-        var data_form = $("#form-productos");
+        $("#find-productos").submit(function(e){
+        	e.preventDefault();
+        	var cadena = $("#cadena").val();
+        	$boton = '#boton-find';
+      		$.ajax({
+		        url: "{{route('carrito.addItem')}}",
+		        type:'post',
+		        data: {sku: cadena, cantidad: 1},
+		        beforeSend: function() {
+		         	$($boton).buttonLoader('start');
+		        },
+		        success: function(data) {
+		          if(data['validate'] == 1){
+		          	 $('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
+		             $($boton).buttonLoader('stop');
+		          }else{
+		              swal({
+						  type: 'error',
+						  title: 'Oops...  :(',
+						  text: data['msg']
+						});
+		              $($boton).buttonLoader('stop');
+		          }
+		        },
+		        error: function (data) {
+		           swal({
+						  type: 'error',
+						  title: 'Oops...  :(',
+						  text: 'No existen productos con este código'
+						});
+		              $($boton).buttonLoader('stop');
+		        }
+		    });
+		})
 
-        data_form.submit(function(e){
-            e.preventDefault();
-            var formData = data_form.serialize();
-            var url = $(this).attr('action');
-            ajax_add(url,'POST',formData,'#add-producto') 
-        });
+		function removeCartVenta(id, cantidad)
+        {
+            $.ajax({
+             	url: "{{route('carrito.removeItem')}}",
+		        type:'post',
+		        data:{id:id, cantidad:cantidad},
+                success: function(data) {
+                 	$('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
+                },
+                error: function (data) {
+                    $('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
+                }
+            });
+        }
+
 
 
 

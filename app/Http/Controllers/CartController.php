@@ -31,8 +31,14 @@ class CartController extends Controller
           if ($request->ajax()) {
             
             $data = $request->all();
-            
-            $producto = Product::find($data['id']);
+
+            if(!isset($data['sku'])){
+               $producto = Product::find($data['id']);
+            }else{
+               $result = Product::select('id')->where('sku', $data['sku'])->first();
+               $producto = Product::find($result['id']);
+            }
+
             $cantidad = $data['cantidad'];
 
             if(Cart::doesNotExist()){ 
