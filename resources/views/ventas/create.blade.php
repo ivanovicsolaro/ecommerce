@@ -9,7 +9,8 @@
                    
                         <div class="form-group col-sm-6" id="div-price">
 				           {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
-				           {!! Form::text('cliente', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'min'=>'1']) !!}
+				           {!! Form::text('cliente', isset($producto)? $producto->price_real : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'client', 'min'=>'1']) !!}
+				           <div id="clientList"></div>
 				    	</div>
 
 				    	<div class="form-group col-sm-6" id="div-price">
@@ -53,16 +54,38 @@
 
     <script type="text/javascript">
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    }); 
+
     $(document).ready(function(){
        		$('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
+
+       		$('#client').keyup(function(){
+       			var query = $(this).val();
+       			if(query != ''){
+       				$.ajax({
+       					url: "{{ route('client.find')}}",
+       					method: 'get',
+       					data: {query:query},
+       					success:function(data){
+       						$('#clientList').fadeIn();
+       						$('#clientList').html(data);
+       					}
+       				})
+       			}
+       		});
+
+       		$(document).on('click', 'li', function(){
+        		$('#client').val($(this).text());
+        		$('#clientList').fadeOut();
+        	});
 		});
 
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-        }); 
+      
 
         $("#find-productos").submit(function(e){
         	e.preventDefault();
@@ -113,6 +136,8 @@
                 }
             });
         }
+
+       
 
 
 

@@ -28,5 +28,6 @@ class AddColumnsCartItems extends Migration
     {
         Schema::table('cart_items',  function (Blueprint $table){
             $table->dropColumn('price_real');
-    });
+        });
+    }
 }

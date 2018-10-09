@@ -70,3 +70,6 @@ Route::post('/finalizar-pedido', 'CheckoutController@finalizarPedido');
 
 Route::resource('ventas', 'VentasController');
 Route::get('ver-tabla-venta', ['uses' => 'CartController@viewTableVenta', 'as' => 'carrito.viewTableVenta']);
+
+//Clientes
+Route::get('buscar-cliente', ['uses' => 'ClientsController@find', 'as' => 'client.find']);
