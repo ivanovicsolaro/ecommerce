@@ -155,7 +155,8 @@
         	$('#clientList').fadeOut();        	        		
         };
 
-        function checkout(){
+        function checkout(e){
+        	e.preventDefault();
         	cliente = $('#id_cliente').val();
         	tipoMovimiento =  $('#tipoMovimiento').val();    
         	formaPago = $('#formaPago').val();
