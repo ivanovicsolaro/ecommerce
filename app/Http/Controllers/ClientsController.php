@@ -98,7 +98,7 @@ class ClientsController extends Controller
             $output = '<ul class="dropdown-menu" style="display:block; position:absolute">';
 
             foreach ($client as $c) {
-               $output .= '<li><a href="#">'.$c->name.', '.$c->lastname.' ('.$c->cuit.')</a><input type="hidden" id="cliente_id" value="'.$c->id.'"></li>';
+               $output .= '<li id="list'.$c->id.'" onClick="seleccionar('.$c->id.')"><a>'.$c->name.' '.$c->lastname.' '.$c->cuit.'</a></li>';
             }
 
             $output .= '</ul>';
