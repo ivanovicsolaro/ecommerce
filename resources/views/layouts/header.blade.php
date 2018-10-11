@@ -57,56 +57,74 @@
 	@if(\Auth::check())
 	<!-- HEADER -->
 	<header>
-		<!-- top Header -->
-		<div id="top-header">
-			<div class="container">
-				<div class="pull-left">
-				<strong class="text-uppercase" style="color: #fff !important">Bienvenido {{Auth::user()->name}}!</strong>
-				</div>
-				<div class="pull-right">
-					<ul class="header-top-links">						
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;"><i class="fa fa-user-secret" aria-hidden="true"></i> Roles <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="#">  <i class="fa fa-list" aria-hidden="true"></i>  Listar Roles</a></li>
-								<li><a href="#">  <i class="fa fa-plus-square-o" aria-hidden="true"></i>  Nuevo Rol</a></li>
-							</ul>
-						</li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Ventas <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="{{route('ventas.index')}}">  <i class="fa fa-shopping-basket" aria-hidden="true"></i>  Punto de Venta</a></li>
-								<li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Facturas de Compra</a></li>						
-							</ul>
-						</li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Compras <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Orden de Compra</a></li>
-								<li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Facturas de Compra</a></li>						
-							</ul>
-						</li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Productos <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="{{route('productos.index')}}">  <i class="fa fa-cube" aria-hidden="true"></i>  Listar Productos</a></li>
-								<li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li>
-								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>
-								<li><a href="#">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>
-							</ul>
-						</li>
-						<li class="dropdown default-dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" style="color:#fff;">Configuraciones <i class="fa fa-caret-down"></i></a>
-							<ul class="custom-menu">
-								<li><a href="{{url('banners')}}"> <i class="fa fa-picture-o" aria-hidden="true"></i> Listado Banners</a></li>
-								<li><a href="#"> <i class="fa fa-cog" aria-hidden="true"></i> Configuraciones</a></li>									
-							</ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- /top Header -->
+		
+
+	<nav class="navbar navbar-inverse navbar-static-top" style="border-top: 2px solid #d6004a" >
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">ADMIN <strong class="text-uppercase" style="color: #fff !important"> {{Auth::user()->name}}!</strong></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+         
+          <ul class="nav navbar-nav navbar-right">
+          	<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ventas <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{route('ventas.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">ABM</li>
+                <li><a href="{{route('ventas.create')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Punto de Venta</a></li>              
+              </ul>
+            </li>
+           <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Compras <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{route('ventas.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">ABM</li>
+                <li><a href="{{route('ventas.create')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Punto de Venta</a></li>              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caja <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{route('ventas.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">ABM</li>
+                <li><a href="{{route('ventas.create')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Punto de Venta</a></li>              
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{route('productos.index')}}"><i class="fa fa-cube" aria-hidden="true"></i>  Listar Productos</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">ABM</li>
+                <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li> 
+                <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li> 
+                <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>   
+                <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>            
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{url('banners')}}"> <i class="fa fa-picture-o" aria-hidden="true"></i> Listado Banners</a></li>
+                <li><a href="{{route('ventas.create')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> General</a></li>              
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
 
 		@endif
 

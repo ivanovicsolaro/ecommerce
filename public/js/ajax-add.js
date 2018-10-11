@@ -42,7 +42,7 @@ function ajax_add($url,$type,$formData,$boton)
                   text: data['msj'],
                   type: 'success',
                   showConfirmButton: false,
-            timer: 1500
+            timer: 2000
               });
 
               $('#cargar-imagen').attr('disabled',false);
@@ -58,6 +58,12 @@ function ajax_add($url,$type,$formData,$boton)
                   $($boton).attr('disabled',false);;
                 }, 
             100);
+
+            if(data['redirect']){
+              setTimeout(function() {
+                  window.location.href = data['redirect'];
+              }, 1000);
+            }
         },
         error: function (data) {
             var lista_errores='';

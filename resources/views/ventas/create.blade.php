@@ -173,7 +173,8 @@
 
         	url = "{{route('ventas.store')}}";
  			
- 			ajax_add(url,'POST',formData,'#btn_procesar');
+ 			  ajax_add(url,'POST',formData,'#btn_procesar');
+        
         }
 
        

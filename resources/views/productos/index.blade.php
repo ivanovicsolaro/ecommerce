@@ -26,6 +26,42 @@
         </div>
     </div>                                
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">IMPRESION DE CODIGO DE BARRAS</h4>
+      </div>
+       <form action="{{route('productos.tikets')}}">
+      <div class="modal-body">
+      <div class="row">
+        <div class="form-group col-sm-6">
+        
+            <label class="control-label mb-10">Ingrese la cantidad a imprimir </label>
+
+           <input type="number" class='form-control text-left' name="cantidad" placeholder="Ingrese la cantidad de etiquetas">
+            <input type="hidden" name="idProducto" id="idProducto">
+       
+        </div>
+        
+      
+       
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="primary-btn">Imprimir etiquetas</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+
+
 <!-- PAGE CONTENT WRAPPER --> 
 @endsection
 
@@ -39,8 +75,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
         }); 
-    </script> 
-    <script type="text/javascript">
+
         function eliminar(hash,identificador){
 
             var box = $("#mb-remove-row");
@@ -57,6 +92,12 @@
             });
             
         }
+
+        function showModalTikets(id) {
+            $('#idProducto').val(id);
+            $('#myModal').modal('show');
+        }
+
     </script>
 
 

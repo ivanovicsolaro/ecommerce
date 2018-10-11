@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             'categories',
             'subcategories',
             'products',
-            'tipos_movimientos'          
+            'tipos_movimientos',
+            'clients'         
         ]);
         
         $this->call(CountriesTableSeeder::class);
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SubcategoriesTableSeeder::class);
         $this->call(ProductsSeeder::class);
         $this->call(TiposMovimientosSeeder::class);
+        $this->call(ClientTableSeeder::class);
     }
     
     protected function trucateTables(array $tables){

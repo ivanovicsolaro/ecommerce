@@ -46,7 +46,7 @@
                                     <tr>
                                         <th class="empty" colspan="3"></th>
                                         <th>TOTAL</th>
-                                        <th colspan="2" class="total" id="labelTotal">{{number_format($total_real + 70,2) }}</th>
+                                        <th colspan="2" class="total" id="labelTotal">{{number_format($total_real,2) }}</th>
                                     </tr>
                                 </tfoot>
                             </table>

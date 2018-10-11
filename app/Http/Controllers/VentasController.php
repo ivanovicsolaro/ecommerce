@@ -15,6 +15,8 @@ use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Order\Models\Order;
 
+use Redirect;
+
 class VentasController extends Controller
 {
     /**
@@ -98,22 +100,31 @@ class VentasController extends Controller
             $movimientos = Movimiento::all();
             $ultimoRegistro = $movimientos->last();
 
-            $ultimoRegistro->saldo + $mtototal;
+            $saldo = $ultimoRegistro->saldo + $mtototal;
 
-            if($data['formaPago'] == 2){
+            if($data['formaPago'] != 1){
                 $mtototal = 0;
                 $saldo = $ultimoRegistro->saldo;
             }
 
             Movimiento::create([
                 'tipo_movimiento_id' => $data['tipoMovimiento'],
+                'ingresos' => HelpersController::getUserId(),
                 'description' => 'Movimiento Automático',
                 'comprobante_id' => $nro_pedido,
                 'ingresos' => $mtototal,
                 'saldo' => $saldo
             ]);
             
-           
+            Cart::clear();
+
+            $urlRedirect = asset('ventas');
+            
+           return new JsonResponse([
+                    'type' => 'success',
+                    'msj' => 'Venta generada exitosamente', 
+                    'redirect' => $urlRedirect
+            ]);       
             
         }else{
             return new JsonResponse([

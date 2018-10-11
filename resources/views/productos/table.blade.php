@@ -27,10 +27,15 @@
                         </a>
 
                         <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($producto->id)}}',{{$producto->id}})" id="btn_{{$producto->id}}" data-toggle="tooltip" data-original-title="Eliminar">
+                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm"   onclick="showModalTikets({{$producto->id}})" alt="Imprimir Codigo Barras"><i class="fa fa-barcode" aria-hidden="true"></i>
+                            </button>
+                        </a> 
+
+                         <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($producto->id)}}',{{$producto->id}})" id="btn_{{$producto->id}}" data-toggle="tooltip" data-original-title="Eliminar">
                             <button type="button" class="btn btn-danger btn-icon-anim btn-square btn-sm">
                              <i class="fa fa-trash"></i>
                             </button>
-                        </a>                            
+                        </a>                           
                     </div> 
                 </td>
             </tr>

@@ -16,6 +16,7 @@ use DB;
 use Illuminate\Support\Facades\Crypt;
 use Intervention\Image\ImageManager;
 use Image;
+use PDF;
 use App\ProductsImages;
 
 class ProductoController extends Controller
@@ -311,6 +312,20 @@ class ProductoController extends Controller
         $categorias = Categoria::pluck('descripcion','id')->all();
 
         return view('productos.fields-massive', compact('subcategorias', 'categorias'));
+    }
+
+    public function imprimirTikets(Request $request){
+        $cantidad = $request->get('cantidad');
+        $idProducto = $request->get('idProducto');
+        
+        $producto = Product::findOrFail($idProducto);
+
+        
+        $view =  \View::make('productos.pdf.codigoBarras', compact('producto', 'cantidad'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+
+        return $pdf->stream('codigos');
     }
 
 

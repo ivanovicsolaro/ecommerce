@@ -39,7 +39,25 @@
                                            {{$order->status}}
                                         </td>
                                         <td class="qty text-center">
-                                            {{$order->payment}}
+                                            @switch($order->payment)
+                                                @case(1)
+                                                    Contado Efectivo
+                                                    @break
+
+                                                @case(2)
+                                                    Tarjeta Credito
+                                                    @break
+
+                                                @case(3)
+                                                    Cuenta Corriente
+                                                    @break
+
+                                                @case(4)
+                                                    Contra Reembolso
+                                                    @break
+                                               
+                                            @endswitch
+                                           
                                         </td>
 
                                         <td class="qty text-center">
@@ -50,9 +68,6 @@
                                         <td class="total text-center">
                                             {{number_format($order->total_amount, 2)}}
                                         </td>
-
-                                        
-
                                     </tr>
                                     @endforeach
                                 </tbody>                    
