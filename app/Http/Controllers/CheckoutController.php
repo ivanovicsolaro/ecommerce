@@ -9,13 +9,14 @@ use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Order\Models\Order;
 
-use Auth;
 use DB;
 use Redirect;
+use Auth;
 
 use App\Product;
 use App\Address;
 
+use App\Http\Controllers\HelpersController;
 
 use App\Http\Requests\CheckOutRequest;
 
@@ -53,7 +54,7 @@ class CheckoutController extends Controller
           }
             
             $result = DB::table('customer_users')
-                        ->where('user_id', $this->getUserId())
+                        ->where('user_id', HelpersController::getUserId())
                         ->select('customer_id')
                         ->first();
             
@@ -78,14 +79,14 @@ class CheckoutController extends Controller
             return redirect('/shop')->with('error', 'No posees productos en tu carrito');;
         }
 
-        $stock = $this->validarStock();
+        $stock = HelpersController::validarStock();
         
         if($stock['stock']){
             
-           $s = $this->reducirStock();
+           $s = HelpersController::reducirStock();
            //$mp = ;
            $result = DB::table('customer_users')
-                            ->where('user_id', $this->getUserId())
+                            ->where('user_id', HelpersController::getUserId())
                             ->select('customer_id')
                             ->first();
 
@@ -142,11 +143,11 @@ class CheckoutController extends Controller
             $mtototal = str_replace(",","",$mtototal);
 
             /* genero el pedido en estado pendiente */
-            $nro_pedido = $this->getUserId().strftime("%d%m%g%H%M");
+            $nro_pedido = HelpersController::getUserId().strftime("%d%m%g%H%M");
 
             $order = Order::create([
                 'number' => $nro_pedido,
-                'user_id' => $this->getUserId(),
+                'user_id' => HelpersController::getUserId(),
                 'shipping_address_id' =>  $idAddress,
                 'costo_envio' => '70.00',
                 'plazo_envio' => '1 dia',
@@ -281,33 +282,6 @@ class CheckoutController extends Controller
         //
     }
 
-    private function getUserId(){
-        return Auth::id(); 
-    }
 
-     private function validarStock(){
-        $stock = true;
-        $producto = [];
-        foreach(Cart::model()->items->all() as $item){
-            
-            $product = Product::find($item->product->id);
-            
-            if($item->quantity > $product->stock){
-                $stock = false;
-                array_push($producto, $product->name);
-            }
-        }
-        return ['stock' => $stock, 'producto' => $producto];
-    }
-
-     private function reducirStock(){
-        foreach(Cart::model()->items->all() as $item){
-            
-            $p = Product::find($item->product->id);
-            $p->stock -= $item->quantity;
-            $p->save();
-            
-        }
-        return 1;
-    }
+    
 }

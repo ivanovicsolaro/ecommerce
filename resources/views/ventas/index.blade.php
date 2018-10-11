@@ -18,7 +18,45 @@
          <!-- START DEFAULT DATATABLE -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    
+                    <table class="shopping-cart-table table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Estado</th>
+                                        <th class="text-center">Forma de Pago</th>
+                                        <th class="text-center">Fecha</th>
+                                        <th class="text-center">Total</th>
+                          
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($ordenes as $order)
+                                    <tr>
+                                        <td class="thumb">
+                                            {{$order->number}}
+                                        </td>
+                                        <td class="details">
+                                           {{$order->status}}
+                                        </td>
+                                        <td class="qty text-center">
+                                            {{$order->payment}}
+                                        </td>
+
+                                        <td class="qty text-center">
+                                            {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y h:i:s')}}
+                                          
+                                        </td>
+
+                                        <td class="total text-center">
+                                            {{number_format($order->total_amount, 2)}}
+                                        </td>
+
+                                        
+
+                                    </tr>
+                                    @endforeach
+                                </tbody>                    
+                            </table>
                 </div>
             </div>
             <!-- END DEFAULT DATATABLE -->

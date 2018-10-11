@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+
+use App\Http\Controllers\HelpersController;
 
 use App\Movimiento;
 use App\TiposMovimiento;
+use App\Product;
 
-use Vanilo\Framework\Models\Customer;
+use Vanilo\Cart\Contracts\CartItem;
+use Vanilo\Cart\Facades\Cart;
+use Vanilo\Order\Models\Order;
 
 class VentasController extends Controller
 {
@@ -18,8 +24,9 @@ class VentasController extends Controller
      */
     public function index()
     {
-           $movimientos = Movimiento::paginate(12);
-           return view('ventas.index',compact('movimientos'));
+           $ordenes = Order::orderBy('id', 'DESC')
+                    ->get();
+           return view('ventas.index',compact('ordenes'));
     }
 
     /**
@@ -41,7 +48,83 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+
+            $data = $request->all();
+
+            if(Cart::isEmpty()){
+                return new JsonResponse([
+                    'type' => 'error',
+                    'msj' => 'No existen productos en su carrito'
+                ]);
+            }
+
+        $stock = HelpersController::validarStock();
+
+        if($stock['stock']){
+
+            $s = HelpersController::reducirStock();
+            $monto = str_replace(',','', $data['total']);
+           
+              $mtototal = $monto;
+         
+
+            /* genero el pedido en estado pendiente */
+            $nro_pedido = HelpersController::getUserId().strftime("%d%m%g%H%M");
+
+            $order = Order::create([
+                'number' => $nro_pedido,
+                'status' => 'completed',
+                'user_venta_id' => HelpersController::getUserId(),
+                'payment' => $data['formaPago'],
+                'total_amount' => $mtototal,
+                'client_id'     => $data['cliente']
+            ]);
+
+            /*agrego los productos al pedido*/
+            foreach(Cart::model()->items->all() as $item){
+
+                $product = Product::find($item->product->id);
+
+                $order->items()->create([
+                    'product_type' => 'product',
+                    'product_id'   => $product->id,
+                    'price'        => $product->price,
+                    'name'         => $product->name,
+                    'quantity'     => $item->quantity
+                ]);
+            }
+
+            $movimientos = Movimiento::all();
+            $ultimoRegistro = $movimientos->last();
+
+            $ultimoRegistro->saldo + $mtototal;
+
+            if($data['formaPago'] == 2){
+                $mtototal = 0;
+                $saldo = $ultimoRegistro->saldo;
+            }
+
+            Movimiento::create([
+                'tipo_movimiento_id' => $data['tipoMovimiento'],
+                'description' => 'Movimiento Automático',
+                'comprobante_id' => $nro_pedido,
+                'ingresos' => $mtototal,
+                'saldo' => $saldo
+            ]);
+            
+           
+            
+        }else{
+            return new JsonResponse([
+                    'type' => 'error',
+                    'msj' => 'No existe suficiente stock del producto '.$stock['producto'][0]
+                ]);
+        }
+
+
+
+        }
     }
 
     /**

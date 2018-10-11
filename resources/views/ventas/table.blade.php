@@ -23,6 +23,7 @@
                                             <a href="{{asset('producto/'.$item->product->slug)}}">{{$item->product->name}}</a>
                                             <ul>
                                                 <li><span>Código: {{$item->product->sku}}</span></li>
+                                                <li><span>Stock: {{$item->product->stock}}</span></li>
                                             </ul>
                                         </td>
                                         <td class="qty text-center"><strong><input class="input" type="text" id="precio{{$item->product->id}}" value="{{number_format($item->price_real,2)}}"></strong></td>
@@ -44,13 +45,8 @@
                                     </tr>
                                     <tr>
                                         <th class="empty" colspan="3"></th>
-                                        <th>Envío</th>
-                                        <td colspan="2">Tarifa Reducida ($70.00)</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="empty" colspan="3"></th>
                                         <th>TOTAL</th>
-                                        <th colspan="2" class="total">{{number_format($total_real + 70,2) }}</th>
+                                        <th colspan="2" class="total" id="labelTotal">{{number_format($total_real + 70,2) }}</th>
                                     </tr>
                                 </tfoot>
                             </table>

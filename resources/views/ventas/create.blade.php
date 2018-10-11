@@ -27,14 +27,14 @@
 				    	<div class="input-group">
 				     		  {!! Form::text('sku', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'cadena']) !!}
 				      			<span class="input-group-btn">
-				        			<button class="btn primary-btn" id="boton-find" type="submit">Buscar</button>
+				        			<button class="btn primary-btn" id="boton-find" type="submit">Agregar</button>
 				      			</span>
 				    	</div><!-- /input-group -->
 				    	{!! Form::close() !!}
 				    	</div>
 
 				    	<div class="form-group col-sm-6" id="div-price">
-				           {!! Form::label('price', 'Tipo de Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
+				           {!! Form::label('price', 'Forma de Pago: *',['class' => 'control-label mb-10 text-left']) !!}
 				          	<select name="formaPago" id="formaPago" class="form-control">
 				          		<option value="1">Contado Efectivo</option>
 				          		<option value="2">Tarjeta Crédito</option>
@@ -42,6 +42,14 @@
 				          		<option value="4">Contra Reembolso</option>
 				          	</select>
 				    	</div>
+
+
+              <div>
+                
+
+
+
+              </div>
 
                 	</div>
                 
@@ -155,43 +163,18 @@
         	$('#clientList').fadeOut();        	        		
         };
 
-        function checkout(e){
-        	e.preventDefault();
+        function checkout(e){        	
         	cliente = $('#id_cliente').val();
         	tipoMovimiento =  $('#tipoMovimiento').val();    
         	formaPago = $('#formaPago').val();
+          total = $('#labelTotal').text();
 
-        	$boton = '#btn_procesar';
-      		$.ajax({
-		        url: "",
-		        type:'post',
-		        data: {sku: cadena, cantidad: 1},
-		        beforeSend: function() {
-		         	$($boton).buttonLoader('start');
-		        },
-		        success: function(data) {
-		          if(data['validate'] == 1){
-		          	 $('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
-		             $($boton).buttonLoader('stop');
-		          }else{
-		              swal({
-						  type: 'error',
-						  title: 'Oops...  :(',
-						  text: data['msg']
-						});
-		              $($boton).buttonLoader('stop');
-		          }
-		        },
-		        error: function (data) {
-		           swal({
-						  type: 'error',
-						  title: 'Oops...  :(',
-						  text: 'No existen productos con este código'
-						});
-		              $($boton).buttonLoader('stop');
-		        }
-		    });	
-        };
+        	formData = {cliente:cliente, tipoMovimiento:tipoMovimiento, formaPago:formaPago, total:total};
+
+        	url = "{{route('ventas.store')}}";
+ 			
+ 			ajax_add(url,'POST',formData,'#btn_procesar');
+        }
 
        
 

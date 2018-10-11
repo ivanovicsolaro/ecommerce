@@ -41,12 +41,12 @@
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>Envío</th>
-										<td colspan="2">Tarifa Reducida ($70.00)</td>
+										<td colspan="2" id="labelEnvio">Tarifa Reducida ($70.00)</td>
 									</tr>
 									<tr>
 										<th class="empty" colspan="3"></th>
 										<th>TOTAL</th>
-										<th colspan="2" class="total">{{number_format(Cart::total() + 70,2) }}</th>
+										<th colspan="2" class="total" id="labelTotal">{{number_format(Cart::total() + 70,2) }}</th>
 									</tr>
 								</tfoot>
 							</table>

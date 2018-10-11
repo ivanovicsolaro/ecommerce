@@ -13,8 +13,17 @@ function ajax_add($url,$type,$formData,$boton)
            $($boton).addClass('opacity-7');
            $($boton).attr('disabled','disabled');
         },
-        success:function(data){ 
-            $('input[type!="submit"]').each(function(i, e) {
+        success:function(data){            
+            if(data['type'] == 'error')
+            {
+              swal({
+                title: 'Error!',
+                text: data['msj'],
+                type: 'error',
+                confirmButtonText: 'Continuar'
+              })
+            }else{
+              $('input[type!="submit"]').each(function(i, e) {
                 if (e.type == 'text'){
                     e.value = '';
                 }
@@ -24,16 +33,8 @@ function ajax_add($url,$type,$formData,$boton)
                 if (e.type == 'number'){
                     e.value = '';
                 }
-            })
-            if(data['type'] == 'error')
-            {
-              swal({
-                title: 'Error!',
-                text: 'Intente nuevamente',
-                type: 'error',
-                confirmButtonText: 'Continuar'
               })
-            }else{
+
               $('div').removeClass('has-error has-danger');
 
               swal({
