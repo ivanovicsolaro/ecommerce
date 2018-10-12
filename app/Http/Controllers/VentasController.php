@@ -16,6 +16,7 @@ use Vanilo\Cart\Facades\Cart;
 use Vanilo\Order\Models\Order;
 
 use Redirect;
+use Crypt;
 
 class VentasController extends Controller
 {
@@ -146,7 +147,9 @@ class VentasController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::find(Crypt::decrypt($id));
+        $tiposMovimientos = TiposMovimiento::pluck('description', 'id')->all();
+        return view('ventas.view', compact('tiposMovimientos'));
     }
 
     /**

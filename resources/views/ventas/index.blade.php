@@ -26,6 +26,7 @@
                                         <th class="text-center">Forma de Pago</th>
                                         <th class="text-center">Fecha</th>
                                         <th class="text-center">Total</th>
+                                        <th class="text-center">Acción</th>
                           
                                     </tr>
                                 </thead>
@@ -67,6 +68,16 @@
 
                                         <td class="total text-center">
                                             {{number_format($order->total_amount, 2)}}
+                                        </td>
+
+                                        <td class="total text-center">
+                                            <div class='btn-group'>
+                                                <a href="{!! route('ventas.show', [Crypt::encrypt($order->id)]) !!}"  data-toggle="tooltip" data-original-title="Editar">
+                                                    <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm">
+                                                         <i class="fa fa-eye" aria-hidden="true" alt="Nota de Crédito"></i>
+                                                    </button>
+                                                </a>
+                                            </div> 
                                         </td>
                                     </tr>
                                     @endforeach
