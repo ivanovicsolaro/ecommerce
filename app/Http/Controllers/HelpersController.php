@@ -42,4 +42,13 @@ class HelpersController extends Controller
     public static function getUserId(){
         return Auth::id(); 
     }
+
+    public static function restaurarStockByProducto($idProducto, $cantidad){
+
+            $p = Product::find($idProducto);
+            $p->stock += $cantidad;
+            $p->save();
+
+        return 1;
+    }
 }

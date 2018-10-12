@@ -1,11 +1,63 @@
 @extends('layouts.app') @section('contenido')
 
 @section('title')
-    Listado de Ventas
+
 @stop
 
 <!-- PAGE CONTENT WRAPPER -->
-<div class="page-content-wrap">                
+<div class="page-content-wrap">  
+<div class="container">
+<div class="row placeholders">
+          <div class="col-md-3">
+                
+                <!-- START WIDGET CLOCK -->
+                <div class="widget widget-info widget-padding-sm">
+                    <div class="widget-big-int plugin-clock">{{$cVentas}}</div>                            
+                    <div class="widget-subtitle plugin-date">Cantidad de Ventas</div>
+                </div>                        
+                <!-- END WIDGET CLOCK -->
+                
+            </div>
+
+            <div class="col-md-3">
+                
+                <!-- START WIDGET CLOCK -->
+                <div class="widget widget-warning widget-padding-sm">
+                    <div class="widget-big-int plugin-clock">$ {{number_format($cVentasTarjeta,2)}}</div>                            
+                    <div class="widget-subtitle plugin-date">Total C/Tarjeta</div>
+                </div>                        
+                <!-- END WIDGET CLOCK -->
+                
+            </div>
+
+            <div class="col-md-3">
+                
+                <!-- START WIDGET CLOCK -->
+                <div class="widget widget-success widget-padding-sm">
+                    <div class="widget-big-int plugin-clock">$ {{$tCaja}}</div>                            
+                    <div class="widget-subtitle plugin-date">Total en caja</div>
+                </div>                        
+                <!-- END WIDGET CLOCK -->
+                
+            </div>
+
+            <div class="col-md-3">
+                
+                <!-- START WIDGET CLOCK -->
+                <div class="widget widget-danger widget-padding-sm">
+                    <div class="widget-big-int plugin-clock">{{$enviosPendientes}}</div>                            
+                    <div class="widget-subtitle plugin-date">Envios Pendientes</div>
+                </div>                        
+                <!-- END WIDGET CLOCK -->
+                
+            </div>
+          
+        
+          
+        
+
+</div>
+
 
     <div class="row">
          <div class="col-md-12">
@@ -18,6 +70,7 @@
          <!-- START DEFAULT DATATABLE -->
             <div class="panel panel-default">
                 <div class="panel-body">
+                      <div class="table-responsive">
                     <table class="shopping-cart-table table">
                                 <thead>
                                     <tr>
@@ -83,12 +136,14 @@
                                     @endforeach
                                 </tbody>                    
                             </table>
+                        </div>
                 </div>
             </div>
             <!-- END DEFAULT DATATABLE -->
         </div>
     </div>                                
 </div>
+
 <!-- PAGE CONTENT WRAPPER --> 
 @endsection
 

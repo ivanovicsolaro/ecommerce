@@ -18,9 +18,9 @@ class AddColumnsOrders extends Migration
             $table->string('plazo_envio')->after('costo_envio')->nullable();
             $table->integer('payment')->after('plazo_envio')->nullable();
             $table->integer('shipping')->after('billpayer_id')->nullable();
-            $table->integer('client_id')->unsigned()->nullable()->after('billpayer_id');
-            $table->foreign('client_id')->references('id')->on('clients');
-            $table->integer('user_venta_id')->unsigned()->nullable()->after('client_id');
+            $table->integer('customer_id')->unsigned()->nullable()->after('billpayer_id');
+            $table->foreign('customer_id')->references('id')->on('customers');
+            $table->integer('user_venta_id')->unsigned()->nullable()->after('customer_id');
             $table->foreign('user_venta_id')->references('id')->on('users');
             $table->float('total_amount')->after('payment');
         });
@@ -38,6 +38,9 @@ class AddColumnsOrders extends Migration
             $table->dropColumn('plazo_envio');
             $table->dropColumn('payment');
             $table->dropColumn('shipping');
+            $table->dropColumn('customer_id');
+            $table->dropColumn('user_venta_id');
+            $table->dropColumn('total_amount');
         });
     }
 }

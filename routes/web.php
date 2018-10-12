@@ -71,6 +71,8 @@ Route::post('/finalizar-pedido', 'CheckoutController@finalizarPedido');
 
 Route::resource('ventas', 'VentasController');
 Route::get('ver-tabla-venta', ['uses' => 'CartController@viewTableVenta', 'as' => 'carrito.viewTableVenta']);
+Route::get('ventas-cancelar/{id}', ['uses' => 'VentasController@destroy', 'as' => 'ventas.cancelar']);
+
 
 //Clientes
-Route::get('buscar-cliente', ['uses' => 'ClientsController@find', 'as' => 'client.find']);
+Route::get('buscar-cliente', ['uses' => 'CustomerController@find', 'as' => 'client.find']);

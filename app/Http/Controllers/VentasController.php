@@ -10,16 +10,24 @@ use App\Http\Controllers\HelpersController;
 use App\Movimiento;
 use App\TiposMovimiento;
 use App\Product;
+use App\CuentaCorriente;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 use Vanilo\Order\Models\Order;
+use Vanilo\Framework\Models\Customer;
+use Vanilo\Order\Models\OrderItem;
 
 use Redirect;
 use Crypt;
+use DB;
+use Carbon\Carbon;
 
 class VentasController extends Controller
 {
+    public function __construct(){
+         $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +37,16 @@ class VentasController extends Controller
     {
            $ordenes = Order::orderBy('id', 'DESC')
                     ->get();
-           return view('ventas.index',compact('ordenes'));
+
+           $ultimoRegistroCaja = Movimiento::getUltimoMovimiento();
+           $tCaja = $ultimoRegistroCaja[0]->saldo;
+           $cVentas = Order::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->count();
+           $cVentasTarjeta = Order::where('payment', 2)
+                    ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->sum('total_amount');
+           $enviosPendientes = Order::where('status', 'pending')
+                                ->whereNotNull('shipping')->count();
+
+           return view('ventas.index',compact('ordenes', 'cVentas', 'cVentasTarjeta', 'tCaja', 'enviosPendientes'));
     }
 
     /**
@@ -69,7 +86,7 @@ class VentasController extends Controller
             $s = HelpersController::reducirStock();
             $monto = str_replace(',','', $data['total']);
            
-              $mtototal = $monto;
+            $mtototal = $monto;
          
 
             /* genero el pedido en estado pendiente */
@@ -77,19 +94,18 @@ class VentasController extends Controller
 
             $order = Order::create([
                 'number' => $nro_pedido,
-                'status' => 'completed',
+                'status' => 'pending',
+                'customer_id' => $data['cliente'],
                 'user_venta_id' => HelpersController::getUserId(),
-                'payment' => $data['formaPago'],
-                'total_amount' => $mtototal,
-                'client_id'     => $data['cliente']
+                'total_amount' => $mtototal
             ]);
 
             /*agrego los productos al pedido*/
             foreach(Cart::model()->items->all() as $item){
 
-                $product = Product::find($item->product->id);
+            $product = Product::find($item->product->id);
 
-                $order->items()->create([
+            $order->items()->create([
                     'product_type' => 'product',
                     'product_id'   => $product->id,
                     'price'        => $product->price,
@@ -98,10 +114,9 @@ class VentasController extends Controller
                 ]);
             }
 
-            $movimientos = Movimiento::all();
-            $ultimoRegistro = $movimientos->last();
-
-            $saldo = $ultimoRegistro->saldo + $mtototal;
+/*
+            $ultimoRegistro = Movimiento::getUltimoMovimiento();
+            $saldo = $ultimoRegistro[0]->saldo + $mtototal;
 
             if($data['formaPago'] != 1){
                 $mtototal = 0;
@@ -110,16 +125,29 @@ class VentasController extends Controller
 
             Movimiento::create([
                 'tipo_movimiento_id' => $data['tipoMovimiento'],
-                'ingresos' => HelpersController::getUserId(),
+                'user_responsable_id' => HelpersController::getUserId(),
                 'description' => 'Movimiento Automático',
                 'comprobante_id' => $nro_pedido,
                 'ingresos' => $mtototal,
                 'saldo' => $saldo
             ]);
+
+            if($data['cliente'] != 1){
+                $ultimoRegistro = CuentaCorriente::getUltimoRegistro($data['cliente']);
+                CuentaCorriente::create([
+                    'tipo_movimiento_id' => $data['tipoMovimiento'],
+                    'customer_id' => $data['cliente'],
+                    'description' => 'Venta Caja',
+                    'comprobante_id' => $nro_pedido,
+                    'ingresos' => $mtototal,
+                    'saldo' => $ultimoRegistro[0]->saldo + $mtototal
+                ]);
+            }
+            */
             
             Cart::clear();
 
-            $urlRedirect = asset('ventas');
+            $urlRedirect = asset('ventas/'.Crypt::encrypt($order->id));
             
            return new JsonResponse([
                     'type' => 'success',
@@ -148,8 +176,9 @@ class VentasController extends Controller
     public function show($id)
     {
         $order = Order::find(Crypt::decrypt($id));
+        $customer = Customer::find($order->customer_id);
         $tiposMovimientos = TiposMovimiento::pluck('description', 'id')->all();
-        return view('ventas.view', compact('tiposMovimientos'));
+        return view('ventas.view', compact('order', 'tiposMovimientos', 'customer'));
     }
 
     /**
@@ -183,6 +212,19 @@ class VentasController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $order = Order::find(Crypt::decrypt($id));
+
+        $orderItems = DB::table('order_items')
+                    ->where('order_id',  $order->id)->get();
+
+        foreach ($orderItems as $item) {
+            $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
+        }
+
+        $order->status = 'cancelled';
+        $order->save();
+
+        return redirect('ventas');
     }
 }

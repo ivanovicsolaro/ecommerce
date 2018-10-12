@@ -1821,3 +1821,60 @@ textarea.input {
   display: none;
   text-decoration: none;
 }
+
+.widget.widget-success {
+    background: #1BC98E !important;
+}
+
+.widget.widget-danger {
+    background: #E64759 !important;
+}
+
+.widget.widget-warning {
+    background: #9F86FF !important;
+}
+
+.widget.widget-info {
+    background: #17a2b8 !important;
+}
+
+.widget.widget-padding-sm, .widget.widget-item-icon {
+    padding: 10px 0px 5px;
+}
+.widget {
+    width: 100%;
+    float: left;
+    margin: 0px;
+    list-style: none;
+    text-decoration: none;
+    -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+    color: #FFF;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+    min-height: 120px;
+    position: relative;
+}
+
+.widget .widget-big-int {
+    font-size: 52px;
+    line-height: 65px;
+    font-weight: 300;
+}
+.widget .widget-title, .widget .widget-subtitle, .widget .widget-int, .widget .widget-big-int {
+    width: 100%;
+    float: left;
+    text-align: center;
+}
+
+.widget .widget-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    line-height: 35px;
+    color: #EEE;
+}

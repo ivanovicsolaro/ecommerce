@@ -69,13 +69,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {   
-        $customer = Customer::create([
+        $customer = Customer::where('email', $data['email'])->first();
+        
+        if(!$customer){
+            $customer = Customer::create([
             'firstname' => $data['name'],
             'lastname'  => $data['lastname'],
             'type'      => CustomerType::INDIVIDUAL,
             'phone' => $data['phone'],
             'email' => $data['email']
-        ]);
+            ]);
+        }
+       
 
         $user = User::create([
             'name' => $data['name'],
