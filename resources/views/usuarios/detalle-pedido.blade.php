@@ -28,12 +28,15 @@
                                     <p><strong>Estado: </strong>
                                         @switch($order->status)
                                             @case('Pending')
-                                                <span style="color:#ff5100;">Pendiente</span>
+                                                <em style="color: orange"><b>Pendiente</b></em>
+                                                @break
+                                            @case('Cancelled')
+                                                <em style="color: red"><b>Cancelado</b></em>
                                                 @break
                                             @case('Completed')
-                                                Completada
+                                                <em style="color: green"><b>Completada</b></em>
                                                 @break
-                                        @endswitch  
+                                        @endswitch    
                                     </p>
                                 </div>
                     </div>

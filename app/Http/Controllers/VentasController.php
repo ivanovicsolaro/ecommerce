@@ -35,14 +35,23 @@ class VentasController extends Controller
      */
     public function index()
     {
-           $ordenes = Order::orderBy('id', 'DESC')
-                    ->get();
+
+              
+        $inicio = new Carbon('last sunday');                    
+        
+        $fin = new Carbon('next sunday');
+
+        $ordenes = Order::orderBy('id', 'DESC')
+                    ->whereBetween('created_at', [$inicio, $fin])->get();
 
            $ultimoRegistroCaja = Movimiento::getUltimoMovimiento();
            $tCaja = $ultimoRegistroCaja[0]->saldo;
-           $cVentas = Order::whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->count();
+           $cVentas = Order::where('status', 'Completed')
+                    ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->count();
+
            $cVentasTarjeta = Order::where('payment', 2)
                     ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->sum('total_amount');
+
            $enviosPendientes = Order::where('status', 'pending')
                                 ->whereNotNull('shipping')->count();
 

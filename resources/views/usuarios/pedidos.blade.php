@@ -45,10 +45,13 @@
                                     <td>
                                         @switch($o->status)
                                             @case('Pending')
-                                                <em>Pendiente</em>
+                                                <em style="color: orange">Pendiente</em>
+                                                @break
+                                            @case('Cancelled')
+                                                <em style="color: red">Cancelado</em>
                                                 @break
                                             @case('Completed')
-                                                <em>Completada</em>
+                                                <em style="color: green">Completada</em>
                                                 @break
                                         @endswitch    
                                     </td>

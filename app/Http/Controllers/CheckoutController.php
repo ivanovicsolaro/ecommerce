@@ -148,6 +148,7 @@ class CheckoutController extends Controller
             $order = Order::create([
                 'number' => $nro_pedido,
                 'user_id' => HelpersController::getUserId(),
+                'customer_id' => $result->customer_id,
                 'shipping_address_id' =>  $idAddress,
                 'costo_envio' => '70.00',
                 'plazo_envio' => '1 dia',

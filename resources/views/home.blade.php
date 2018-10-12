@@ -43,14 +43,17 @@
                                     <td><span class="nobr"></span>{{ $o->updated_at->format('d-m-Y') }}</td>
                                     <td><span class="price">${{ $o->total() }}</span></td>
                                     <td>
-                                        @switch($o->status)
+                                       @switch($o->status)
                                             @case('Pending')
-                                                <em>Pendiente</em>
+                                                <em style="color: orange"><b>Pendiente</b></em>
+                                                @break
+                                            @case('Cancelled')
+                                                <em style="color: red"><b>Cancelado</b></em>
                                                 @break
                                             @case('Completed')
-                                                <em>Completada</em>
+                                                <em style="color: green"><b>Completada</b></em>
                                                 @break
-                                        @endswitch    
+                                        @endswitch        
                                     </td>
                                     <td class="a-center last"><span class="nobr"> <a href="pedido/{{ $o->number }}">Ver Pedido</a></span>
                                     </td>

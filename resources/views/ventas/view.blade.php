@@ -4,10 +4,21 @@
     <section>
         <div class="container">
         	<div class="pull-left">
-        		<h2>Estado: <i>{{$order->status}}</i></h2>
+        		<h2>Estado: <i> @switch($order->status)
+                                            @case('Pending')
+                                                <em style="color: orange"><b>Pendiente</b></em>
+                                                @break
+                                            @case('Cancelled')
+                                                <em style="color: red"><b>Cancelado</b></em>
+                                                @break
+                                            @case('Completed')
+                                                <em style="color: green"><b>Completada</b></em>
+                                                @break
+                                        @endswitch </i>
+                 </h2>
         	</div>
 
-        	@if($order->status != 'Cancelled')
+        	@if($order->status == 'Pending')
         	  <div class="pull-right">
 					<a href="{{route('ventas.cancelar', [Crypt::encrypt($order->id)])}}"><button class="btn  btn-danger" id="btn_procesar" onclick="checkout()"><i class="fa fa-close" aria-hidden="true"></i></button></a>
 				</div>
@@ -51,7 +62,7 @@
 				          
 				    	</div>
 
-				    	@if($order->status != 'Cancelled')
+				    	@if($order->status == 'Pending')
 
 				    	<div class="form-group col-sm-6" id="div-price">
 				           {!! Form::label('price', 'Tipo de Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
@@ -72,13 +83,20 @@
 				          	</select>
 				    	</div>
 
-				    	 <div class="form-group col-sm-6" id="div-price">
-				           {!! Form::label('monto', 'Monto: *',['class' => 'control-label mb-10 text-left']) !!}
-				           {!! Form::number('monto', null, ['class' => 'form-control', 'id' => 'client', 'min'=>'1', 'placeholder' => 'Ingrese el importe a abonar']) !!}
+				    		{!! Form::open(['route' => 'carrito.addItem', 'action'=>'post', 'id' => 'find-productos']) !!}
+						<div class="form-group col-sm-6" id="div-stock_minimo">
+				  			{!! Form::label('monto', 'Monto: *',['class' => 'control-label mb-10 text-left']) !!}
 
-				           <input type="hidden" id="id_cliente" name="id_cliente" value="{{$customer->id}}">
-				          
+				    	<div class="input-group">
+				     		 {!! Form::number('monto', null, ['class' => 'form-control', 'id' => 'client', 'min'=>'1', 'placeholder' => 'Ingrese el importe a abonar', 'id' => 'montoParcial']) !!}
+				      			<span class="input-group-btn">
+				        			<button class="btn primary-btn" id="boton-find" type="submit">Agregar</button>
+				      			</span>
+				    	</div><!-- /input-group -->
+				    	{!! Form::close() !!}
 				    	</div>
+
+				    	<input type="hidden" id="id_cliente" name="id_cliente" value="{{$customer->id}}">
 
 				    	@endif
 
@@ -90,8 +108,8 @@
          
             </div>
            
-      @if($order->status != 'Cancelled')
-            <div class="pull-right">
+      @if($order->status == 'Pending')
+            <div class="pull-left">
 					<button class="primary-btn" id="btn_procesar" onclick="checkout()">Procesar</button>
 				</div>
 				@endif
