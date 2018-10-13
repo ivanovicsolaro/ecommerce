@@ -49,58 +49,22 @@
                                     <tr>
                                         <th class="empty" colspan="1"></th>
                                         <th>TOTAL</th>
-                                        <th colspan="2" class="total" id="labelTotal">{{number_format($order->total_amount,2) }}</th>
+                                        <th colspan="2" class="total" id="total">{{number_format($order->total_amount,2) }}</th>
                                     </tr>
                                 </tfoot>
 					  </table>
 					</div>
-                   
+                    
+                    
                         <div class="form-group col-sm-6" id="div-price">
 				           {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
 				           {!! Form::text('cliente', $customer->firstname.' '.$customer->lastname.' '.$customer->registration_nr, ['class' => 'form-control', 'id' => 'client', 'min'=>'1', 'readonly' => 'true']) !!}
 				           <input type="hidden" id="id_cliente" name="id_cliente" value="{{$customer->id}}">
 				          
 				    	</div>
+                          @include('ventas.table-pagos')
 
-				    	@if($order->status == 'Pending')
-
-				    	<div class="form-group col-sm-6" id="div-price">
-				           {!! Form::label('price', 'Tipo de Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
-				          	<select name="tipo_movimiento" id="tipo_movimiento" class="form-control">
-				          		<option value="1" selected="">Boleta</option>
-				          		<option value="2">Factura</option>
-				          		<option value="3">Nota de Débito</option>
-				          	</select>
-				    	</div>
-				 		
-				    	<div class="form-group col-sm-6" id="div-price">
-				           {!! Form::label('price', 'Forma de Pago: *',['class' => 'control-label mb-10 text-left']) !!}
-				          	<select name="formaPago" id="formaPago" class="form-control">
-				          		<option value="1">Contado Efectivo</option>
-				          		<option value="2">Tarjeta Crédito</option>
-				          		<option value="3">Cuenta Corriente</option>
-				          		<option value="4">Contra Reembolso</option>
-				          	</select>
-				    	</div>
-
-				    		{!! Form::open(['route' => 'carrito.addItem', 'action'=>'post', 'id' => 'find-productos']) !!}
-						<div class="form-group col-sm-6" id="div-stock_minimo">
-				  			{!! Form::label('monto', 'Monto: *',['class' => 'control-label mb-10 text-left']) !!}
-
-				    	<div class="input-group">
-				     		 {!! Form::number('monto', null, ['class' => 'form-control', 'id' => 'client', 'min'=>'1', 'placeholder' => 'Ingrese el importe a abonar', 'id' => 'montoParcial']) !!}
-				      			<span class="input-group-btn">
-				        			<button class="btn primary-btn" id="boton-find" type="submit">Agregar</button>
-				      			</span>
-				    	</div><!-- /input-group -->
-				    	{!! Form::close() !!}
-				    	</div>
-
-				    	<input type="hidden" id="id_cliente" name="id_cliente" value="{{$customer->id}}">
-
-				    	@endif
-
-
+                        
                 	</div>
                 
                 </div>
@@ -110,11 +74,110 @@
            
       @if($order->status == 'Pending')
             <div class="pull-left">
-					<button class="primary-btn" id="btn_procesar" onclick="checkout()">Procesar</button>
+					<button class="primary-btn" id="btn_procesar" onclick="sendPagos()">Procesar</button>
 				</div>
 				@endif
+
+               
         </div>
     </section>
 
 
 @endsection
+
+
+
+@section('js')
+    @parent
+    <script src="{{ asset('js/ajax-add.js') }}"></script>
+
+    <script type='text/javascript'>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });  
+    
+    $(document).ready(function() { 
+
+    $("#add-pago").on('click', agregar);  
+
+    $("#datatable-pagos").on('click', ".btn-danger", eliminarFila);
+
+    function eliminarFila(){
+       $(this).parent().parent().fadeOut("slow", function(){$(this).remove(); });
+    }
+
+    cont = 1;
+    function agregar(){
+
+        idTpoMovimiento = parseInt($('#tipo_movimiento').val());
+
+        idFormaPago = parseInt($('#formasPago').val());
+        montoParcial = parseFloat($('#montoParcial').val());
+        
+        if ($("#fila"+idFormaPago).length){
+            swal({
+                title: 'La forma de pago ya está cargada',
+                text: 'Eliminelá y vuelva a generar una.',
+                type: 'error',
+                confirmButtonText: 'Continuar'
+              })
+        }else{
+             if(montoParcial <= 0){
+                swal({
+                title: 'El monto no es correto',
+                html: 'Ingrese un monto mayor que 0',
+                type: 'error',
+                confirmButtonText: 'Continuar'
+              })
+            }else{ 
+
+            $.get( "{{route('payment.find')}}", { idFormaPago: idFormaPago, idTipoMovimiento:idTpoMovimiento, monto:montoParcial } )
+                .done(function( data ) {
+                   var fila = '<tr id="fila'+idFormaPago+'">'+
+                                '<td>'+data.desFP+'</td><input type="hidden" name="idFP['+cont+']" value="'+data.idFP+'">'+
+                                '<td>'+data.desTM+'</td><input type="hidden" name="idTM['+cont+']" value="'+data.idTM+'">'+
+                                '<td>'+data.monto+'</td>'+
+                                '<td>'+data.montoInteres+'</td>'+
+                                '<td class="text-center"><div class="btn btn-danger">Eliminar</div></td>'+                                
+                                '</tr>';
+                $('#datatable-pagos').append(fila);
+               
+            cont++;  
+
+              $('#montoParcial').val(0);
+              });
+              
+        }
+        }     
+
+    }
+
+
+    
+
+    });
+
+
+        function sendPagos(){
+        
+     
+            var formData = $("#datatable-pagos :input").serialize();
+            var url = "{{route('ventas.add-pagos')}}";
+            var urlRedirect = "" ;
+
+        
+            
+            ajax_add(url,'POST',formData,'#btn_procesar', urlRedirect);
+        };
+      
+     
+
+
+</script>
+
+
+
+@endsection 

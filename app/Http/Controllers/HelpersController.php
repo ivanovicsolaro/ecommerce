@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use Auth;
+use Crypt;
+use DB;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
 
 use App\Product;
+use App\PaymentType;
 
 class HelpersController extends Controller
 {
@@ -50,5 +54,21 @@ class HelpersController extends Controller
             $p->save();
 
         return 1;
+    }
+
+    public function findPayment(request $request){
+        
+        $formaPago = PaymentType::find($request->get('idFormaPago'));
+        $tipoMovimiento = DB::table('tipos_movimientos')->where('id', $request->get('idTipoMovimiento'))->get();
+        $montoInteres = number_format($request->get('monto') * $formaPago['interes'],2);
+
+        return new JsonResponse([
+            'idFP' => $formaPago['id'],
+            'desFP' => $formaPago['description'],
+            'idTM' => $tipoMovimiento[0]->id,
+            'desTM' => $tipoMovimiento[0]->description,
+            'montoInteres' => $montoInteres,
+            'monto' => number_format($request->get('monto'),2)
+        ]);
     }
 }

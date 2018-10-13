@@ -11,6 +11,7 @@ use App\Movimiento;
 use App\TiposMovimiento;
 use App\Product;
 use App\CuentaCorriente;
+use App\PaymentType;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
@@ -187,7 +188,8 @@ class VentasController extends Controller
         $order = Order::find(Crypt::decrypt($id));
         $customer = Customer::find($order->customer_id);
         $tiposMovimientos = TiposMovimiento::pluck('description', 'id')->all();
-        return view('ventas.view', compact('order', 'tiposMovimientos', 'customer'));
+        $formasPago = PaymentType::pluck('description', 'id')->all();
+        return view('ventas.view', compact('order', 'tiposMovimientos', 'customer', 'formasPago'));
     }
 
     /**
