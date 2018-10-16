@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use Vanilo\Framework\Models\Customer;
+use App\CuentaCorriente;
 
 use DB;
+use Crypt;
 
 class CustomerController extends Controller
 {
@@ -24,7 +27,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.create');   
     }
 
     /**
@@ -35,7 +38,27 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            
+            $data = $request->all();
+
+            Customer::create([
+                'firstname' => $data['name'],
+                'lastname' => $data['apellido'],
+                'registration_nr' => $data['cuit'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'company_name' => $data['company_name'],
+                'type' => $data['tipo'],
+                'tax_nr' => $data['tax_nr'],
+                'is_active' => $data['is_active']
+            ]);
+
+            return new JsonResponse([
+                'msj' => 'Usuario Creado Correctamente',
+                'type' => 'success'
+            ]);
+        }
     }
 
     /**
@@ -57,7 +80,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Customer::findOrFail(Crypt::decrypt($id));
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
@@ -69,7 +93,29 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+
+            $data = $request->all();
+            $cliente = Customer::findOrFail(Crypt::decrypt($id));
+            $cliente->firstname = $data['name'];
+            $cliente->lastname = $data['apellido'];
+            $cliente->registration_nr = $data['cuit'];
+            $cliente->email = $data['email'];
+            $cliente->phone = $data['phone'];
+            $cliente->company_name = $data['company_name'];
+            $cliente->type = $data['tipo'];
+            $cliente->tax_nr = $data['tax_nr'];
+            $cliente->is_active = $data['is_active'];
+
+            $cliente->save();
+
+            return new JsonResponse([
+                'msj' => 'Usuario Editado Correctamente',
+                'type' => 'success'
+            ]);
+
+        }
+       
     }
 
     /**
@@ -101,5 +147,16 @@ class CustomerController extends Controller
             echo $output;   
         }
          
+    }
+
+    public function viewCuentaCorriente($id){
+
+        $registros = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->orderBy('id', 'DESC')->paginate(15);
+
+        $ingreso = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->sum('ingresos');
+
+        $egreso = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->sum('egresos');
+
+        return view('clientes.cuenta-corriente', compact('registros', 'ingreso', 'egreso'));
     }   
 }

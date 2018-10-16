@@ -24,9 +24,9 @@
                             </button>
                         </a>
 
-                         <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($cliente->id)}}',{{$cliente->id}})" id="btn_{{$cliente->id}}" data-toggle="tooltip" data-original-title="Eliminar">
-                            <button type="button" class="btn btn-danger btn-icon-anim btn-square btn-sm">
-                             <i class="fa fa-trash"></i>
+                         <a title="Ver Cuenta Corriente" href="{!! route('clientes.cuenta_corriente', [Crypt::encrypt($cliente->id)]) !!}" data-toggle="tooltip" data-original-title="Eliminar">
+                            <button type="button" class="btn btn-info btn-icon-anim btn-square btn-sm">
+                             <i class="fa fa-bar-chart" aria-hidden="true"></i>
                             </button>
                         </a>                           
                     </div> 

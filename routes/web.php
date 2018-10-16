@@ -78,6 +78,7 @@ Route::post('ventas-agregarPago/{id}', ['uses' => 'VentasController@agregarPagos
 //Customers
 Route::get('buscar-cliente', ['uses' => 'CustomerController@find', 'as' => 'client.find']);
 Route::resource('clientes', 'CustomerController');
+Route::get('clientes/cuenta-corriente/{id}', ['uses' => 'CustomerController@viewCuentaCorriente', 'as' => 'clientes.cuenta_corriente']);
 
 
 //Payments
