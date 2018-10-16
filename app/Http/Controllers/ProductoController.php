@@ -328,6 +328,10 @@ class ProductoController extends Controller
         return $pdf->stream('codigos');
     }
 
+    public function indexDevoluciones(){
+        return view('productos.devoluciones');
+    }
+
 
 
 

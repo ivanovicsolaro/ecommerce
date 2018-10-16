@@ -94,7 +94,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Caja <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{route('ventas.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Movimientos</a></li>
+                <li><a href="{{route('movimientos.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Movimientos</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">ABM</li>
                 <li><a href="{{route('ventas.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Mov.</a></li>              
@@ -104,6 +104,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{route('productos.index')}}"><i class="fa fa-cube" aria-hidden="true"></i>  Listar Productos</a></li>
+                 <li><a href="{{route('productos.index-devoluciones')}}"><i class="fa fa-reply" aria-hidden="true"></i> Devoluciones</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">ABM</li>
                 <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li> 
