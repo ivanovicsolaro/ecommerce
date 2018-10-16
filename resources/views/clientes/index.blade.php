@@ -10,7 +10,7 @@
     <div class="row">
          <div class="col-md-12">
             <div class="header-btns-icon text-right">
-                <a class="primary-btn" href="{{route('productos.create')}}"> <i class="fa fa-plus"></i> Listado de Clientes</a>
+                <a class="primary-btn" href="{{route('clientes.create')}}"> <i class="fa fa-plus"></i> Agregar Cliente</a>
                               
             </div>
          </div>
