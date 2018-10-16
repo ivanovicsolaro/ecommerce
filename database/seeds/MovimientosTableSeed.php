@@ -14,6 +14,7 @@ class MovimientosTableSeed extends Seeder
     {
         Movimiento::create([
         	'tipo_movimiento_id' => 1,
+            'payment_type_id' => 1,
            	'ingresos' => 10,
            	'saldo' => 10           
         ]);

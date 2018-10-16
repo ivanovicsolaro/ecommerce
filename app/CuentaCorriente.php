@@ -9,7 +9,7 @@ class CuentaCorriente extends Model
 {
     protected $table = 'cuentas_corrientes';
 
-    protected $fillable = ['tipo_movimiento_id', 'customer_id', 'description', 'comprobante_id', 'ingresos', 'egresos', 'saldo', 'observaciones'];   
+    protected $fillable = ['payment_type_id', 'customer_id', 'description', 'comprobante_id', 'ingresos', 'egresos', 'observaciones'];   
 
     public function Client(){
     	return $this->hasOne(Client::class);

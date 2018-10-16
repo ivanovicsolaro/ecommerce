@@ -15,6 +15,7 @@ use Auth;
 
 use App\Product;
 use App\Address;
+use App\CuentaCorriente;
 
 use App\Http\Controllers\HelpersController;
 
@@ -170,6 +171,16 @@ class CheckoutController extends Controller
                     'quantity'     => $item->quantity,
                 ]);
             }
+
+            $ultimoRegistro = CuentaCorriente::getUltimoRegistro($result->customer_id);
+            CuentaCorriente::create([
+                'payment_type_id' => NULL,
+                'customer_id' => $result->customer_id,
+                'description' => 'Venta Web',
+                'comprobante_id' => $nro_pedido,
+                'egresos' =>  $mtototal
+            ]);
+            
             
             switch($request->medio_pago){
                   /*  case('todopago'):

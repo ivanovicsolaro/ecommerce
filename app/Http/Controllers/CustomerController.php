@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 
 use Vanilo\Framework\Models\Customer;
 
+use DB;
+
 class CustomerController extends Controller
 {
     public function index()
     {
-        $clientes = Customer::all();
+        $clientes = DB::table('customers')->paginate(15);
+
         return view('clientes.index', compact('clientes'));
     }
 

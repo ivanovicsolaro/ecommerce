@@ -16,15 +16,13 @@ class CreateCuentasCorrientesTable extends Migration
         Schema::create('cuentas_corrientes', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->integer('tipo_movimiento_id')->unsigned();
-            $table->foreign('tipo_movimiento_id')->references('id')->on('tipos_movimientos');
+            $table->integer('payment_type_id')->nullable();
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->string('description')->nullable();
             $table->string('comprobante_id')->nullable();
             $table->decimal('ingresos', 15, 2);
             $table->decimal('egresos', 15, 2);
-            $table->decimal('saldo', 15, 2);
             $table->string('observaciones')->nullable();
             $table->timestamps();
         });

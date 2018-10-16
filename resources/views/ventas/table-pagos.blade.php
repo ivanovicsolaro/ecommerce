@@ -47,6 +47,18 @@
 
 
                         <tbody>
-                             
+                             <input type="hidden" id="id_cliente" name="id_cliente" value="{{$customer->id}}">
+
+                             	@if($order->status == 'Completed')
+                             	@foreach($pagos as $pago)
+                             	<tr>
+	                                <td>{{$pago->dFP}}</td>
+	                                <td>{{$pago->description}}</td>
+	                                <td>{{number_format($pago->monto,2)}}</td>
+	                                <td>{{number_format($pago->monto * $pago->interes,2)}}</td>
+	                                <td class="text-center"></td>
+                            	</tr>
+                             	@endforeach
+                             	@endif
                         </tbody>
                     </table>

@@ -13,27 +13,27 @@ class PaymentsTypesSeeder extends Seeder
     {
         DB::table('payments_types')->insert([
         	 'description' => 'Contado Efectivo',
-        	 'interes' => 0
+        	 'interes' => 1
         	]);
 
         DB::table('payments_types')->insert([
         	 'description' => 'Debito',
-        	 'interes' => 0
+        	 'interes' => 1
         	]);
 
         DB::table('payments_types')->insert([
         	 'description' => 'Tarjeta 1 Pago',
-        	 'interes' => 0
+        	 'interes' => 1
         	]);
 
         DB::table('payments_types')->insert([
         	 'description' => 'Tarjeta 3 a 12 Pagos',
-        	 'interes' => 0.25
+        	 'interes' => 1.25
         	]);
 
         DB::table('payments_types')->insert([
         	 'description' => 'Cuenta Corriente',
-        	 'interes' => 0
+        	 'interes' => 1
         	]);
     }
 }

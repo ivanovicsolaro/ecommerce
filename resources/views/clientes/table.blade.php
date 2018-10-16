@@ -2,36 +2,29 @@
 <table class="table datatable">
     <thead>
         <tr>
-            <th class="text-center">#   </th>
             <th class="text-center">Nombre</th>
-            <th class="text-center">Código</th>
-            <th class="text-center">Stock</th>
-            <th class="text-center">Precio</th>
+            <th class="text-center">CUIT / DNI</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Teléfono</th>
             <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($productos as $producto)
-            <tr id='trow_{{$producto->id}}'>
-                <td class="thumb text-center"><img width="70px" src="{{asset($producto->image)}}" alt=""></td>
-                <td class="text-center">{!! $producto->name !!}</td>
-                <td class="text-center">{!! $producto->sku !!}</td>
-                <td class="text-center" >{!! $producto->stock !!}</td>
-                <td class="text-center">{!! $producto->price !!}</td>
+        @foreach($clientes as $cliente)
+            <tr id='trow_{{$cliente->id}}'>
+                <td class="text-center">{!! $cliente->lastname !!}, {!! $cliente->firstname !!}</td>
+                <td class="text-center">{!! $cliente->registration_nr !!}</td>
+                <td class="text-center" ><b>@if($cliente->is_active == 1) <p style="color: green">Activo</p> @else <p style="color: red">Inactivo</p> @endif</b></td>
+                <td class="text-center">{!! $cliente->phone !!}</td>
                 <td class="text-center" style="width: 200px;" >
                     <div class='btn-group'>
-                        <a href="{!! route('productos.edit', [Crypt::encrypt($producto->id)]) !!}"  data-toggle="tooltip" data-original-title="Editar">
+                        <a href="{!! route('clientes.edit', [Crypt::encrypt($cliente->id)]) !!}"  data-toggle="tooltip" data-original-title="Editar">
                             <button type="button" class="btn btn-success btn-icon-anim btn-square btn-sm">
                              <i class="fa fa-pencil"></i>
                             </button>
                         </a>
 
-                        <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($producto->id)}}',{{$producto->id}})" id="btn_{{$producto->id}}" data-toggle="tooltip" data-original-title="Eliminar">
-                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm"   onclick="showModalTikets({{$producto->id}})" alt="Imprimir Codigo Barras"><i class="fa fa-barcode" aria-hidden="true"></i>
-                            </button>
-                        </a> 
-
-                         <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($producto->id)}}',{{$producto->id}})" id="btn_{{$producto->id}}" data-toggle="tooltip" data-original-title="Eliminar">
+                         <a href="javascript:;"  onclick="eliminar('{{Crypt::encrypt($cliente->id)}}',{{$cliente->id}})" id="btn_{{$cliente->id}}" data-toggle="tooltip" data-original-title="Eliminar">
                             <button type="button" class="btn btn-danger btn-icon-anim btn-square btn-sm">
                              <i class="fa fa-trash"></i>
                             </button>
@@ -43,6 +36,6 @@
     </tbody>
 </table>
  <div class="pull-right">
-                            {{ $productos->onEachSide(1)->links() }}
+                        {{ $clientes->onEachSide(1)->links() }}     
                         </div>
 </div>

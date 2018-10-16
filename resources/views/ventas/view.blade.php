@@ -109,7 +109,7 @@
        $(this).parent().parent().fadeOut("slow", function(){$(this).remove(); });
     }
 
-    cont = 1;
+    cont = 0;
     function agregar(){
 
         idTpoMovimiento = parseInt($('#tipo_movimiento').val());
@@ -137,17 +137,17 @@
             $.get( "{{route('payment.find')}}", { idFormaPago: idFormaPago, idTipoMovimiento:idTpoMovimiento, monto:montoParcial } )
                 .done(function( data ) {
                    var fila = '<tr id="fila'+idFormaPago+'">'+
-                                '<td>'+data.desFP+'</td><input type="hidden" name="idFP['+cont+']" value="'+data.idFP+'">'+
-                                '<td>'+data.desTM+'</td><input type="hidden" name="idTM['+cont+']" value="'+data.idTM+'">'+
-                                '<td>'+data.monto+'</td>'+
-                                '<td>'+data.montoInteres+'</td>'+
+                                '<td>'+data.desFP+'</td><input type="hidden" name="array['+cont+'][idFP]" value="'+data.idFP+'">'+
+                                '<td>'+data.desTM+'</td><input type="hidden" name="array['+cont+'][idTM]" value="'+data.idTM+'">'+
+                                '<td>'+data.monto+'</td><input type="hidden" name="array['+cont+'][monto]" value="'+data.monto+'">'+
+                                '<td>'+data.montoInteres+'</td><input type="hidden" name="array['+cont+'][montoInteres]" value="'+data.montoInteres+'">'+
                                 '<td class="text-center"><div class="btn btn-danger">Eliminar</div></td>'+                                
                                 '</tr>';
                 $('#datatable-pagos').append(fila);
                
             cont++;  
 
-              $('#montoParcial').val(0);
+              $('#montoParcial').val('');
               });
               
         }
@@ -165,11 +165,9 @@
         
      
             var formData = $("#datatable-pagos :input").serialize();
-            var url = "{{route('ventas.add-pagos')}}";
-            var urlRedirect = "" ;
+            var url = "{{route('ventas.add-pagos', Crypt::encrypt($order->id))}}";
+            var urlRedirect = "{{route('ventas.show', Crypt::encrypt($order->id))}}" ;
 
-        
-            
             ajax_add(url,'POST',formData,'#btn_procesar', urlRedirect);
         };
       

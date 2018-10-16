@@ -12,6 +12,7 @@ use App\TiposMovimiento;
 use App\Product;
 use App\CuentaCorriente;
 use App\PaymentType;
+use App\Payment;
 
 use Vanilo\Cart\Contracts\CartItem;
 use Vanilo\Cart\Facades\Cart;
@@ -47,11 +48,13 @@ class VentasController extends Controller
 
            $ultimoRegistroCaja = Movimiento::getUltimoMovimiento();
            $tCaja = $ultimoRegistroCaja[0]->saldo;
-           $cVentas = Order::where('status', 'Completed')
+           $cVentas = Order::where('status', 'completed')
                     ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->count();
 
-           $cVentasTarjeta = Order::where('payment', 2)
-                    ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->sum('total_amount');
+           $cVentasTarjeta = Payment::where('payment_type_id', 2)
+                            ->orWhere('payment_type_id', 2)
+                            ->orWhere('payment_type_id', 4)
+                            ->whereDate('created_at', '=', Carbon::now()->format('Y-m-d'))->sum('monto');
 
            $enviosPendientes = Order::where('status', 'pending')
                                 ->whereNotNull('shipping')->count();
@@ -118,42 +121,22 @@ class VentasController extends Controller
             $order->items()->create([
                     'product_type' => 'product',
                     'product_id'   => $product->id,
-                    'price'        => $product->price,
+                    'price'        => $product->price_real,
                     'name'         => $product->name,
                     'quantity'     => $item->quantity
                 ]);
             }
 
-/*
-            $ultimoRegistro = Movimiento::getUltimoMovimiento();
-            $saldo = $ultimoRegistro[0]->saldo + $mtototal;
-
-            if($data['formaPago'] != 1){
-                $mtototal = 0;
-                $saldo = $ultimoRegistro->saldo;
-            }
-
-            Movimiento::create([
-                'tipo_movimiento_id' => $data['tipoMovimiento'],
-                'user_responsable_id' => HelpersController::getUserId(),
-                'description' => 'Movimiento Automático',
-                'comprobante_id' => $nro_pedido,
-                'ingresos' => $mtototal,
-                'saldo' => $saldo
-            ]);
-
             if($data['cliente'] != 1){
                 $ultimoRegistro = CuentaCorriente::getUltimoRegistro($data['cliente']);
                 CuentaCorriente::create([
-                    'tipo_movimiento_id' => $data['tipoMovimiento'],
+                    'payment_type_id' => NULL,
                     'customer_id' => $data['cliente'],
                     'description' => 'Venta Caja',
                     'comprobante_id' => $nro_pedido,
-                    'ingresos' => $mtototal,
-                    'saldo' => $ultimoRegistro[0]->saldo + $mtototal
+                    'egresos' =>  $mtototal
                 ]);
             }
-            */
             
             Cart::clear();
 
@@ -189,7 +172,14 @@ class VentasController extends Controller
         $customer = Customer::find($order->customer_id);
         $tiposMovimientos = TiposMovimiento::pluck('description', 'id')->all();
         $formasPago = PaymentType::pluck('description', 'id')->all();
-        return view('ventas.view', compact('order', 'tiposMovimientos', 'customer', 'formasPago'));
+        $pagos = DB::table('payments')
+            ->select('*', 'payments_types.description as dFP')
+                ->join('payments_types', 'payments.payment_type_id', '=', 'payments_types.id')
+                ->join('tipos_movimientos', 'payments.tipo_movimiento_id', '=', 'tipos_movimientos.id')
+                ->where('order_id', Crypt::decrypt($id))
+                ->get();
+
+        return view('ventas.view', compact('order', 'tiposMovimientos', 'customer', 'formasPago', 'pagos'));
     }
 
     /**
@@ -236,6 +226,93 @@ class VentasController extends Controller
         $order->status = 'cancelled';
         $order->save();
 
+        if($order->customer_id != 1){
+            CuentaCorriente::create([
+                'payment_type_id' => NULL,
+                'customer_id' => $order->customer_id,
+                'description' => 'Cancelación de Pedido',
+                'comprobante_id' => $order->number,
+                'ingresos' =>  $order->total_amount
+            ]);
+        }
+
         return redirect('ventas');
+    }
+
+    public function agregarPagos(Request $request, $id){
+        if($request->ajax()){
+            $data = $request->all();
+
+            if(!isset($data['array'])){
+                return new JsonResponse(['type' => 'error', 'msj' => 'Ingrese una forma de pago']);
+            }
+
+            $total = 0;
+            foreach ($data['array'] as $datos){
+                $total = $total + $datos['monto'];
+            }
+
+            
+            $order = Order::find(Crypt::decrypt($id));
+
+
+            if($order->total_amount != $total){
+                return new JsonResponse(['type' => 'error', 'msj' => 'El monto de la orden ($'.number_format($order->total_amount,2).') no es igual al monto ingresado ($'.number_format($total,2).')']);
+            }
+
+            foreach ($data['array'] as $datos){
+                Payment::create([
+                  'order_id' => $order->id,
+                  'tipo_movimiento_id' => $datos['idTM'],
+                  'payment_type_id' => $datos['idFP'],
+                  'monto' => $datos['montoInteres']  
+                ]);
+            }
+
+            $order->status = 'completed';
+            $order->save();
+
+            foreach ($data['array'] as $datos){
+
+                if($data['id_cliente'] != 1 && $datos['idFP'] != 5){
+                    $ultimoRegistro = CuentaCorriente::getUltimoRegistro($data['id_cliente']);
+                    CuentaCorriente::create([
+                        'payment_type_id' => $datos['idFP'],
+                        'customer_id' => $data['id_cliente'],
+                        'description' => 'Pago',
+                        'comprobante_id' => $order->number,
+                        'ingresos' =>  $datos['monto']
+                    ]);
+                }
+          
+                $ultimoRegistro = Movimiento::getUltimoMovimiento();
+                $saldo = $ultimoRegistro[0]->saldo + $datos['monto'];
+
+                if($datos['idFP'] != 1){
+                    $datos['monto'] = 0;
+                    $saldo = $ultimoRegistro[0]->saldo;
+                }
+
+                Movimiento::create([
+                    'tipo_movimiento_id' => $datos['idTM'],
+                    'payment_type_id' => $datos['idFP'],
+                    'user_responsable_id' => HelpersController::getUserId(),
+                    'description' => 'Movimiento Automático',
+                    'comprobante_id' => $order->number,
+                    'ingresos' => $datos['monto'],
+                    'saldo' => $saldo
+                ]);  
+
+            }
+
+           $urlRedirect = asset('ventas');
+            
+           return new JsonResponse([
+                    'type' => 'success',
+                    'msj' => 'Pagos agregados correctamente', 
+                    'redirect' => $urlRedirect
+            ]);   
+            
+        }
     }
 }

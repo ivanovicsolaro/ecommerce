@@ -17,6 +17,8 @@ class CreateMovimientosTable extends Migration
             $table->increments('id');
             $table->integer('tipo_movimiento_id')->unsigned();
             $table->foreign('tipo_movimiento_id')->references('id')->on('tipos_movimientos');
+            $table->integer('payment_type_id')->unsigned();
+            $table->foreign('payment_type_id')->references('id')->on('payments_types');
             $table->integer('user_responsable_id')->unsigned()->nullable();
             $table->foreign('user_responsable_id')->references('id')->on('users');
             $table->string('description');

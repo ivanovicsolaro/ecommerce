@@ -76,7 +76,7 @@
           	<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{route('ventas.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
+                <li><a href="{{route('clientes.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">ABM</li>
                 <li><a href="{{route('ventas.create')}}"><i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li>              

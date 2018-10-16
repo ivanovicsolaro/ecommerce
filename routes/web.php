@@ -72,11 +72,12 @@ Route::post('/finalizar-pedido', 'CheckoutController@finalizarPedido');
 Route::resource('ventas', 'VentasController');
 Route::get('ver-tabla-venta', ['uses' => 'CartController@viewTableVenta', 'as' => 'carrito.viewTableVenta']);
 Route::get('ventas-cancelar/{id}', ['uses' => 'VentasController@destroy', 'as' => 'ventas.cancelar']);
-Route::get('ventas-agregarPago', ['uses' => 'VentasController@agregarPagos', 'as' => 'ventas.add-pagos']);
+Route::post('ventas-agregarPago/{id}', ['uses' => 'VentasController@agregarPagos', 'as' => 'ventas.add-pagos']);
 
 
 //Customers
 Route::get('buscar-cliente', ['uses' => 'CustomerController@find', 'as' => 'client.find']);
+Route::resource('clientes', 'CustomerController');
 
 
 //Payments

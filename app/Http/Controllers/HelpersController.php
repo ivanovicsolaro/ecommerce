@@ -68,7 +68,7 @@ class HelpersController extends Controller
             'idTM' => $tipoMovimiento[0]->id,
             'desTM' => $tipoMovimiento[0]->description,
             'montoInteres' => $montoInteres,
-            'monto' => number_format($request->get('monto'),2)
+            'monto' => $request->get('monto')
         ]);
     }
 }

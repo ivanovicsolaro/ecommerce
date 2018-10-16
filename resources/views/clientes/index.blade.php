@@ -19,7 +19,7 @@
          <!-- START DEFAULT DATATABLE -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @include('productos.table')
+                    @include('clientes.table')
                 </div>
             </div>
             <!-- END DEFAULT DATATABLE -->
