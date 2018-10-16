@@ -7,17 +7,11 @@
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
                    
-                        <div class="form-group col-sm-6" id="div-price">
-				           {!! Form::label('cliente', 'Cliente: *',['class' => 'control-label mb-10 text-left']) !!}
-				           {!! Form::text('cliente', isset($producto)? $producto->price_real : 'CONSUMIDOR FINAL', ['class' => 'form-control', 'id' => 'client', 'min'=>'1']) !!}
-				           <div id="clientList"></div>
-				           <input type="hidden" id="id_cliente" name="id_cliente" value="1">
-				          
-				    	</div>
+
 				  
 				 		
 				 		{!! Form::open(['route' => 'carrito.addItem', 'action'=>'post', 'id' => 'find-productos']) !!}
-						<div class="form-group col-sm-6" id="div-stock_minimo">
+						<div class="form-group col-sm-12 col-md-6" id="div-stock_minimo">
 				  			{!! Form::label('producto', 'Ingrese Código o Nombre del Producto: *',['class' => 'control-label mb-10 text-left']) !!}
 
 				    	<div class="input-group">
@@ -28,12 +22,26 @@
 				    	</div><!-- /input-group -->
 				    	{!! Form::close() !!}
 				    	</div>
-              <div>
-                
 
-
-
+             <div class="form-group col-sm-12 col-md-6" id="div-price"> 
+                   {!! Form::label('motivo', 'Motivo: *',['class' => 'control-label mb-10 text-left']) !!}
+                    {!! Form::textarea('motivo', null, ['class' => 'form-control', 'rows'=>3, 'cols' => 20, 'autofocus'=>'autofocus', 'id' => 'motivo']) !!}
               </div>
+
+              <div class="form-group col-sm-4 text-right" id="div-price">
+                    {!! Form::label('cliente', 'Regresa/n a stock?',['class' => 'control-label mb-10 ']) !!}
+                  </div>
+                   <div class="form-group col-sm-2" id="div-price">
+                           {!! Form::radio('regresa_stock', 1, true , ['class' => 'control-label mb-10 text-left', 'id' => 'regresa_stock1']) !!}
+                   {!! Form::label('cliente', 'Si',['class' => 'control-label mb-10 text-left']) !!}&nbsp;&nbsp;
+                     {!! Form::radio('regresa_stock', 0, false , ['class' => 'control-label mb-10 text-left', 'id' => 'regresa_stock2']) !!}
+                         {!! Form::label('cliente', 'No',['class' => 'control-label mb-10 text-left']) !!}
+               
+                  
+                  
+              </div>
+
+             
 
                 	</div>
                 
@@ -48,7 +56,7 @@
                 
             </div>
             <div class="pull-right">
-					<button class="primary-btn" id="btn_procesar" onclick="checkout()">Procesar</button>
+					<button class="primary-btn" id="btn_procesar" onclick="devolver()">Procesar</button>
 				</div>
         </div>
     </section>
@@ -71,27 +79,12 @@
 
     $(document).ready(function(){
        		$('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
-
-       		$('#client').keyup(function(){
-       			var query = $(this).val();
-       			if(query != ''){
-       				$.ajax({
-       					url: "{{ route('client.find')}}",
-       					method: 'get',
-       					data: {query:query},
-       					success:function(data){
-       						$('#clientList').fadeIn();
-       						$('#clientList').html(data);
-       					}
-       				})
-       			}
-       		});
 		});
 
 
       
 
-        $("#find-productos").submit(function(e){
+    $("#find-productos").submit(function(e){
         	e.preventDefault();
         	var cadena = $("#cadena").val();
         	$boton = '#boton-find';
@@ -141,23 +134,14 @@
             });
         }
 
-        function seleccionar(id){
-        	$('#client').val($('#list'+id).text());
-        	$('#id_cliente').val(id);
-        	$('#clientList').fadeOut();        	        		
-        };
+        function devolver(e){    
+          regresa_stock = $('input:radio[name=regresa_stock]:checked').val();    	
+          motivo = $('#motivo').val();
+        	formData = {regresa_stock:regresa_stock, motivo:motivo};
 
-        function checkout(e){        	
-        	cliente = $('#id_cliente').val();
-        	tipoMovimiento =  $('#tipoMovimiento').val();    
-        	formaPago = $('#formaPago').val();
-          total = $('#labelTotal').text();
-
-        	formData = {cliente:cliente, tipoMovimiento:tipoMovimiento, formaPago:formaPago, total:total};
-
-        	url = "{{route('ventas.store')}}";
+        	url = "{{route('productos.gestionar-devolucion')}}";
  			
- 			  ajax_add(url,'POST',formData,'#btn_procesar');
+ 			    ajax_add(url,'POST',formData,'#btn_procesar');
         
         }
 

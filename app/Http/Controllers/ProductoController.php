@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Filesystem\Filesystem;
 use DB;
 use Illuminate\Support\Facades\Crypt;
+
 use Intervention\Image\ImageManager;
+use Vanilo\Cart\Facades\Cart;
+
 use Image;
 use PDF;
 use App\ProductsImages;
@@ -329,8 +332,28 @@ class ProductoController extends Controller
     }
 
     public function indexDevoluciones(){
-        
         return view('productos.devoluciones');
+    }
+
+    public function gestionarDevolucion(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+
+        if($data['regresa_stock'] == 1){
+            foreach(Cart::model()->items->all() as $item){
+                $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
+            }
+        }else{
+            dd($request['regresa_stock']);
+        }
+        
+
+        return new JsonResponse([
+            'msj' => 'Devolucion realizada correctamente',
+            'type' => 'success'
+        ]);
+
+        }
     }
 
 
