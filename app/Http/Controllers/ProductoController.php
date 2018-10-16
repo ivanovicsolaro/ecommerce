@@ -329,6 +329,7 @@ class ProductoController extends Controller
     }
 
     public function indexDevoluciones(){
+        
         return view('productos.devoluciones');
     }
 
