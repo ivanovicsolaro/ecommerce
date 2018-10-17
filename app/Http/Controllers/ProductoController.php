@@ -337,15 +337,20 @@ class ProductoController extends Controller
 
     public function gestionarDevolucion(Request $request){
         if($request->ajax()){
+           
             $data = $request->all();
 
-        if($data['regresa_stock'] == 1){
-            foreach(Cart::model()->items->all() as $item){
-                $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
+            DB::table('devoluciones')
+                ->insert(
+    ['email' => 'john@example.com', 'votes' => 0]
+);
+            if($data['regresa_stock'] == 1){
+                foreach(Cart::model()->items->all() as $item){
+                    $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
+                }
+            }else{
+                
             }
-        }else{
-            dd($request['regresa_stock']);
-        }
         
 
         return new JsonResponse([

@@ -16,9 +16,9 @@ class CreateDevolucionesItemsTable extends Migration
         Schema::create('devoluciones_items', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('devolucion_id')->unsigned();
-            $table->foreign('devolucion_id')->refereces('id')->on('devoluciones');
+            $table->foreign('devolucion_id')->references('id')->on('devoluciones');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->refereces('id')->on('products');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->integer('quantity');
             $table->timestamps();
         });

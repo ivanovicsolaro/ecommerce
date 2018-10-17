@@ -124,6 +124,7 @@
 		              $($boton).buttonLoader('stop');
 		        }
 		    });
+          $("#cadena").val('');
 		})
 
 		function removeCartVenta(id, cantidad)
