@@ -32,7 +32,7 @@
                     {!! Form::label('cliente', 'Regresa/n a stock?',['class' => 'control-label mb-10 ']) !!}
                   </div>
                    <div class="form-group col-sm-2" id="div-price">
-                           {!! Form::radio('regresa_stock', 1, true , ['class' => 'control-label mb-10 text-left', 'id' => 'regresa_stock1']) !!}
+                           {!! Form::radio('regresa_stock', 1, false , ['class' => 'control-label mb-10 text-left', 'id' => 'regresa_stock1']) !!}
                    {!! Form::label('cliente', 'Si',['class' => 'control-label mb-10 text-left']) !!}&nbsp;&nbsp;
                      {!! Form::radio('regresa_stock', 0, false , ['class' => 'control-label mb-10 text-left', 'id' => 'regresa_stock2']) !!}
                          {!! Form::label('cliente', 'No',['class' => 'control-label mb-10 text-left']) !!}

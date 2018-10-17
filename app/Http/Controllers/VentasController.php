@@ -265,7 +265,7 @@ class VentasController extends Controller
                   'order_id' => $order->id,
                   'tipo_movimiento_id' => $datos['idTM'],
                   'payment_type_id' => $datos['idFP'],
-                  'monto' => $datos['montoInteres']  
+                  'monto' => $datos['monto']  
                 ]);
             }
 

@@ -22,6 +22,8 @@ use Image;
 use PDF;
 use App\ProductsImages;
 
+use Carbon\Carbon;
+
 class ProductoController extends Controller
 {
 
@@ -340,23 +342,32 @@ class ProductoController extends Controller
            
             $data = $request->all();
 
-            DB::table('devoluciones')
-                ->insert(
-    ['email' => 'john@example.com', 'votes' => 0]
-);
+            $devolucion = DB::table('devoluciones')->insertGetId(['motivo' => $data['motivo'], 'created_at' => Carbon::now()]);
+
+            foreach(Cart::model()->items->all() as $item){
+                    DB::table('devoluciones_items')
+                    ->insert([
+                        'devolucion_id' =>  $devolucion, 
+                        'product_id' => $item->product_id,
+                        'quantity' => $item->quantity
+                    ]);
+            }       
+            
+
             if($data['regresa_stock'] == 1){
                 foreach(Cart::model()->items->all() as $item){
                     $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
                 }
-            }else{
-                
             }
         
-
-        return new JsonResponse([
-            'msj' => 'Devolucion realizada correctamente',
-            'type' => 'success'
-        ]);
+            
+            $urlRedirect = asset('productos');
+            
+            return new JsonResponse([
+                    'type' => 'success',
+                    'msj' => 'Venta generada exitosamente', 
+                    'redirect' => $urlRedirect
+            ]);
 
         }
     }

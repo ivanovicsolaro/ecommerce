@@ -20,7 +20,6 @@ class CreateDevolucionesItemsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->integer('quantity');
-            $table->timestamps();
         });
     }
 

@@ -60,7 +60,7 @@ class HelpersController extends Controller
         
         $formaPago = PaymentType::find($request->get('idFormaPago'));
         $tipoMovimiento = DB::table('tipos_movimientos')->where('id', $request->get('idTipoMovimiento'))->get();
-        $montoInteres = number_format($request->get('monto') * $formaPago['interes'],2);
+        $montoInteres = $request->get('monto') * $formaPago['interes'];
 
         return new JsonResponse([
             'idFP' => $formaPago['id'],
