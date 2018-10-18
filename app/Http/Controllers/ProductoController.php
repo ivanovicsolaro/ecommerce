@@ -359,6 +359,8 @@ class ProductoController extends Controller
                     $s = HelpersController::restaurarStockByProducto($item->product_id, $item->quantity);
                 }
             }
+
+            Cart::clear();
         
             
             $urlRedirect = asset('productos');

@@ -24,6 +24,7 @@ class MovimientosController extends Controller
                         ->join('payments_types', 'movimientos.payment_type_id', '=', 'payments_types.id')
                         ->join('tipos_movimientos', 'tipos_movimientos.id', '=', 'movimientos.tipo_movimiento_id')
                         ->join('users', 'movimientos.user_responsable_id', '=', 'users.id')
+                        ->orderBy('id', 'DESC')
                         ->paginate(15);
 
         return view('caja.index', compact('movimientos'));

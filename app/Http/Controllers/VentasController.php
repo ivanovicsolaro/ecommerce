@@ -289,7 +289,6 @@ class VentasController extends Controller
                 $saldo = $ultimoRegistro[0]->saldo + $datos['monto'];
 
                 if($datos['idFP'] != 1){
-                    $datos['monto'] = 0;
                     $saldo = $ultimoRegistro[0]->saldo;
                 }
 
