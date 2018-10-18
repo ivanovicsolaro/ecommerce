@@ -22,7 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('payment_type_id')->unsigned();
             $table->foreign('payment_type_id')->references('id')->on('payments_types');
             $table->string('datos_adicionales_pago');
-            $table->decimal('monto', 15, 2);
+            $table->decimal('monto', 10, 2);
             $table->timestamps();
         });
     }

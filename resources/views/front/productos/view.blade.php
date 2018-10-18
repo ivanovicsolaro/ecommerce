@@ -49,12 +49,17 @@
 					</div>
 					<div class="col-md-6">
 						<div class="product-body">
-							<div class="product-label">
-								<span>New</span>
-								<span class="sale">-20%</span>
-							</div>
+							 <div class="product-label">
+                                            @if($producto->created_at->diffInDays() >= 1)
+                                            <span>
+                                                    Nuevo
+                                                  
+                                            </span>
+                                              @endif
+                                            <span class="sale">- {{number_format(100 - (($producto->price * 100)/$producto->price_real),0)}} %</span>
+                                        </div>
 							<h2 class="product-name">{{$producto->name}}</h2>
-							<h3 class="product-price">{{$producto->price}} <del class="product-old-price">$45.00</del></h3>
+							<h3 class="product-price">{{number_format($producto->price,2)}} <del class="product-old-price">${{number_format($producto->price_real,2)}}</del></h3>
 							<div>
 								<div class="product-rating">
 									<i class="fa fa-star"></i>
@@ -66,24 +71,7 @@
 								<a href="#">3 Review(s) / Add Review</a>
 							</div>
 							<p><strong>Disponibilidad:</strong> In Stock</p>
-							<p><strong>Marca:</strong> {{$subcategoria[0]->descripcion}}</p>
-							<p>{{$producto->description}}</p>
-							<div class="product-options">
-								<ul class="size-option">
-									<li><span class="text-uppercase">Size:</span></li>
-									<li class="active"><a href="#">S</a></li>
-									<li><a href="#">XL</a></li>
-									<li><a href="#">SL</a></li>
-								</ul>
-								<ul class="color-option">
-									<li><span class="text-uppercase">Color:</span></li>
-									<li class="active"><a href="#" style="background-color:#475984;"></a></li>
-									<li><a href="#" style="background-color:#8A2454;"></a></li>
-									<li><a href="#" style="background-color:#BF6989;"></a></li>
-									<li><a href="#" style="background-color:#9A54D8;"></a></li>
-								</ul>
-							</div>
-
+							<p><strong>Marca:</strong> {{$subcategoria[0]->descripcion}}</p>			
 							<div class="product-btns">
 								<div class="qty-input">
 									<span class="text-uppercase">QTY: </span>
@@ -102,13 +90,12 @@
 						<div class="product-tab">
 							<ul class="tab-nav">
 								<li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-								<li><a data-toggle="tab" href="#tab1">Details</a></li>
+								
 								<li><a data-toggle="tab" href="#tab2">Reviews (3)</a></li>
 							</ul>
 							<div class="tab-content">
 								<div id="tab1" class="tab-pane fade in active">
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-										irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+									<p>{{$producto->description}}</p>
 								</div>
 								<div id="tab2" class="tab-pane fade in">
 

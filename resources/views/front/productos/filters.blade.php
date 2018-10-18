@@ -111,20 +111,25 @@
                             <!-- Product Single -->
                                <div class="product product-single">
                                     <div class="product-thumb">
-                                        <div class="product-label">
-                                            <span>Nuevo</span>
-                                            <span class="sale">-30%</span>
-                                        </div>
+                                       <div class="product-label">
+                               
+                                            <span>
+                                              Oferta
+                                                  
+                                            </span>
+                           
+                                            <span class="sale">- {{number_format(100 - (($r->price * 100)/$r->price_real),0)}} %</span>
+                                       </div>                                       
                                         <a href="{{asset('producto/'.$ranking[$i]->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
-                                         @if(!isset($ranking[$i]->image))
+                                         @if(!isset($r->image))
                                           <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
                                          @else
-                                          <img  src="{{asset('img/products/'.$ranking[$i]->id.'/'.$ranking[$i]->image)}}" alt="">
+                                          <img  src="{{asset('img/products/'.$r->id.'/'.$r->image)}}" alt="">
                                           @endif
                                        
                                     </div>
                                     <div class="product-body">
-                                        <h3 class="product-price">{{$ranking[$i]->price}} <del class="product-old-price">{{$ranking[$i]->price*1.5}}</del></h3>
+                                        <h3 class="product-price">{{number_format($r->price,2)}} <del class="product-old-price">{{number_format($r->price_real,2)}}</del></h3>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -132,11 +137,11 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star-o empty"></i>
                                         </div>
-                                        <h2 class="product-name"><a href="#">{{$ranking[$i]->name}}</a></h2>
+                                        <h2 class="product-name"><a href="#">{{$r->name}}</a></h2>
                                         <div class="product-btns">
                                             <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                             <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                            <button class="primary-btn add-to-cart" id="btn-addcart-{{$ranking[0]->id}}" onclick="addCart({{$ranking[$i]->id}}, 1)" ><i class="fa fa-shopping-cart" ></i> Agregar al carrito</button>
+                                            <button class="primary-btn add-to-cart" id="btn-addcart-{{$r->id}}" onclick="addCart({{$r->id}}, 1)" ><i class="fa fa-shopping-cart" ></i> Agregar al carrito</button>
                                         </div>
                                     </div>
                                 </div>
