@@ -276,42 +276,6 @@ class ProductoController extends Controller
     }
 
 
-    public function detalleProducto($slug){
-
-        $producto = Product::findBySlug($slug);
-
-        $categoria = Categoria::where('id', $producto->categorie_id)->get();
-
-        $subcategoria = Subcategoria::where('id', $producto->subcategorie_id)->get();
-
-        $relacionados = $this->getProductosRelacionados($producto->categorie_id, $producto->subcategorie_id);
-
-        $imagenes = DB::table('products_images')->where('product_id', $producto->id)->get();
-       
-        $imagenes = json_encode($imagenes);
-
-
-     
-        $producto = array_add($producto, 'imagenes', $imagenes);
-       
-        return view('front.productos.view', [
-            'producto' => $producto,
-            'relacionados' => $relacionados,
-            'categoria' => $categoria,
-            'subcategoria' => $subcategoria
-        ]);
-    }
-
-    private function getProductosRelacionados($categoria_id, $subcategoria_id ){
-        return DB::table('products_images')
-                        ->select('products_images.name as imageName', 'products.*')
-                        ->join('products', 'products_images.product_id', '=', 'products.id')
-                        ->groupBy('products_images.product_id')
-                        ->where('categorie_id', $categoria_id)
-                        ->where('subcategorie_id', $subcategoria_id)
-                        ->limit(4)->get();
-    }
-
     public function createCargaMasiva(){
         $subcategorias = Subcategoria::pluck('descripcion','id')->all();
         $categorias = Categoria::pluck('descripcion','id')->all();
@@ -334,10 +298,16 @@ class ProductoController extends Controller
     }
 
     public function indexDevoluciones(){
-        return view('productos.devoluciones');
+        $devoluciones = DB::table('devoluciones')
+                        ->orderBy('id', 'DESC')->paginate(15);
+        return view('productos.devoluciones.index',compact('devoluciones'));
     }
 
-    public function gestionarDevolucion(Request $request){
+    public function createDevolucion(){
+        return view('productos.devoluciones.create');
+    }
+
+    public function storeDevolucion(Request $request){
         if($request->ajax()){
            
             $data = $request->all();
@@ -367,208 +337,31 @@ class ProductoController extends Controller
             
             return new JsonResponse([
                     'type' => 'success',
-                    'msj' => 'Venta generada exitosamente', 
+                    'msj' => 'Devolución generada exitosamente', 
                     'redirect' => $urlRedirect
             ]);
 
         }
     }
 
+    public function getProductosDevolucion(Request $request){
+        $productos = DB::table('devoluciones_items')
+                    ->join('products', 'devoluciones_items.product_id', '=', 'products.id')        
+                    ->where('devoluciones_items.devolucion_id', $request->get('id'))
+                    ->select('*', 'products.name as nombre')
+                    ->get();
+
+
+        return new JsonResponse([
+            'productos' => $productos
+        ]);
+    }
+
 
 
 
     /**
-    use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-
-use Vanilo\Product\Models\Product;
-use Vanilo\Framework\Models\Customer;
-use Konekt\Address\Models\Address;
-
-use App\Galeria;
-use App\ProductoGaleria;
-use App\ProductoCategoria;
-use App\Categoria;
-use App\Products;
-use App\Promotion;
-
-use Crypt;
-use Oca;
-use Search;
-use Log;
-
-
-use Vanilo\Contracts\Buyable;
-
-class ProductoController extends Controller
-{
-    
-    public function listarCategoria(Request $request, $categoria){
-        
-        //Me traigo el id de la cat
-        $cat = Categoria::where('slug', $categoria)->first();
-        
-        if($request->get('filtro')){
-            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
-        }else{
-            $productos = $this->getProductos($cat->id);
-        }
-        
-        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.bodega', '<>', "")
-                            ->select('products.bodega')
-                            ->groupBy('products.bodega')
-                            ->get();
-        
-        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.pais', '<>', "")
-                            ->select('products.pais')
-                            ->groupBy('products.pais')
-                            ->get();
-        
-        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.marca', '<>', "")
-                            ->select('products.marca')
-                            ->groupBy('products.marca')
-                            ->get();
-        
-        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.region', '<>', "")
-                            ->select('products.region')
-                            ->groupBy('products.region')
-                            ->get();
-        
-        if($categoria == 'bazar' || $categoria == 'gourmet' || $categoria == 'merchandising'){
-            $filtro = 'objetos';
-        }else{
-            $filtro = 'bebidas';
-        }
-        
-        return view('front.productos.index', [
-            'categoria' => $categoria,
-            'productos' => $productos,
-            'bodega' => $bodega,
-            'pais' => $pais,
-            'marca' => $marca,
-            'region' => $region,
-            'filtro' => $filtro
-        ]); 
-    }
-    
-    public function listarSubcategoria(Request $request, $subcategoria){
-        $cat = Categoria::where('slug', $subcategoria)->first();
-        
-        if($request->get('filtro')){
-            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
-        }else{
-            $productos = $this->getProductos($cat->id);
-        }
-        
-        $padre = Categoria::find($cat->subcategory_id);
-        
-        $categoria = $padre->slug;
-        
-        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.bodega', '<>', "")
-                            ->select('products.bodega')
-                            ->groupBy('products.bodega')
-                            ->get();
-        
-        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.pais', '<>', "")
-                            ->select('products.pais')
-                            ->groupBy('products.pais')
-                            ->get();
-        
-        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.marca', '<>', "")
-                            ->select('products.marca')
-                            ->groupBy('products.marca')
-                            ->get();
-        
-        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.region', '<>', "")
-                            ->select('products.region')
-                            ->groupBy('products.region')
-                            ->get();
-        
-        if($categoria == 'bazar' || $categoria == 'gourmet' || $categoria == 'merchandising'){
-            $filtro = 'objetos';
-        }else{
-            $filtro = 'bebidas';
-        }
-        
-        return view('front.productos.index', [
-            'categoria' => $categoria,
-            'productos' => $productos,
-            'bodega' => $bodega,
-            'pais' => $pais,
-            'marca' => $marca,
-            'region' => $region,
-            'filtro' => $filtro
-        ]); 
-    }
-    
-    public function listarSubcategoriaVinos(Request $request, $subcategoria){
-        $cat = Categoria::where('slug', $subcategoria)->first();
-
-        if($request->get('filtro')){
-            $productos = $this->getProductosFiltrados($request->all(), $cat->id);    
-        }else{
-            $productos = $this->getProductos($cat->id);
-        }
-        
-        $categoria = "vinos";
-        
-        $bodega = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.bodega', '<>', "")
-                            ->select('products.bodega')
-                            ->groupBy('products.bodega')
-                            ->get();
-        
-        $pais = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.pais', '<>', "")
-                            ->select('products.pais')
-                            ->groupBy('products.pais')
-                            ->get();
-        
-        $marca = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.marca', '<>', "")
-                            ->select('products.marca')
-                            ->groupBy('products.marca')
-                            ->get();
-        
-        $region = Product::join('product_categories', 'products.id', 'product_categories.product_id')
-                            ->where('product_categories.category_id', $cat->id)
-                            ->where('products.region', '<>', "")
-                            ->select('products.region')
-                            ->groupBy('products.region')
-                            ->get();
-        
-        $filtro = 'bebidas';
-        
-        return view('front.productos.index', [
-            'categoria' => $categoria,
-            'productos' => $productos,
-            'bodega' => $bodega,
-            'pais' => $pais,
-            'marca' => $marca,
-            'region' => $region,
-            'filtro' => $filtro
-        ]);
-    }
+   
     
     public function detalleProducto($slug){
         
@@ -602,17 +395,7 @@ class ProductoController extends Controller
         ]);
     }
     
-    public function search(Request $request){
-        $termino = $request->termino;
-        
-        $rta = Products::search($termino)->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
-                                         ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
-                                         ->where('products.state', 'active')
-                                         ->select('products.*', 'galeria.ruta')->paginate(5);
-        
-        return view('front.productos.search', ['rta' => $rta]);
-    }
-    
+     
     public function calcularEnvio(Request $request){
 
          if ($request->ajax()) {
@@ -718,40 +501,6 @@ class ProductoController extends Controller
         }
         // otherwise, assume already in decimal notation and return
         else return $float_str;
-    }
-    
-    private function getProductos($categoria_id){
-        return Products::join('product_categories', 'products.id', 'product_categories.product_id')
-                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
-                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
-                              ->where('products.state', 'active')
-                              ->where('product_categories.category_id', $categoria_id)
-                              ->orderBy('products.priority', 'desc')
-                              ->select('products.*', 'galeria.ruta')
-                              ->paginate(16); 
-    }
-    
-    private function getProductosFiltrados($data, $categoria_id){
-        return Products::join('product_categories', 'products.id', 'product_categories.product_id')
-                              ->join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
-                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
-                              ->where(['products.state' => 'active', 'product_categories.category_id' => $categoria_id])
-                              ->Bodega($data['bodega'])
-                              ->Region($data['region'])
-                              //->Marca($data['marca'])
-                              ->Pais($data['pais'])
-                              ->Precio($data['precio'])
-                              ->orderBy('products.id', 'desc')
-                              ->select('products.*', 'galeria.ruta')
-                              ->paginate(16);
-    }
-    
-    private function getProductoDetalle($slug){
-        return Product::join('producto_galeria', 'products.id', 'producto_galeria.producto_id')
-                              ->join('galeria', 'galeria.id', 'producto_galeria.galeria_id')
-                              ->where('products.slug', $slug)
-                              ->select('products.*', 'galeria.ruta')
-                              ->first();
     }
     
     

@@ -119,8 +119,6 @@ class MiCuentaController extends Controller
     }
      
     public function postCambiarPassword(UpdatePasswordRequest $request){   
-        
-       
             $idCliente = Auth::id();
             User::where('users.id', '=', $idCliente)->update(['password' => bcrypt($request->password)]);
              return new JsonResponse([

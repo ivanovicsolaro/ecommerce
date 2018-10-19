@@ -31,7 +31,9 @@
                                 <tr class="first last">
                                     <th>Pedido # </th>
                                     <th>Fecha</th>
-                                    <th><span class="nobr">Importe Total</span></th>
+                                    <th>Importe</th>
+                                    <th>Envío</th>
+                                    <th><span class="nobr">Total</span></th>
                                     <th>Estado</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -41,19 +43,21 @@
                                 <tr class="even">
                                     <td>{{ $o->number }}</td>
                                     <td><span class="nobr"></span>{{ $o->updated_at->format('d-m-Y') }}</td>
-                                    <td><span class="price">${{ $o->total() }}</span></td>
+                                    <td><span class="price">${{ number_format($o->total_amount,2) }}</span></td>
+                                     <td><span class="price">${{ number_format($o->costo_envio,2) }}</span></td>
+                                    <td><span class="price">${{ number_format($o->total_amount + $o->costo_envio,2) }}</span></td>
                                     <td>
-                                        @switch($o->status)
+                                      @switch($o->status)
                                             @case('Pending')
-                                                <em style="color: orange">Pendiente</em>
+                                                <em style="color: orange"><b>Pendiente</b></em>
                                                 @break
                                             @case('Cancelled')
-                                                <em style="color: red">Cancelado</em>
+                                                <em style="color: red"><b>Cancelado</b></em>
                                                 @break
                                             @case('Completed')
-                                                <em style="color: green">Completada</em>
+                                                <em style="color: green"><b>Completada</b></em>
                                                 @break
-                                        @endswitch    
+                                        @endswitch           
                                     </td>
                                     <td class="a-center last"><span class="nobr"> <a href="pedido/{{ $o->number }}">Ver Pedido</a></span>
                                     </td>

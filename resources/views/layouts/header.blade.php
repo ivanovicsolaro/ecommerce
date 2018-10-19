@@ -55,6 +55,7 @@
 
 <body>
 	@if(\Auth::check())
+	@role('admin')
 	<!-- HEADER -->
 	<header>
 		
@@ -126,7 +127,7 @@
     </nav>
 
 
-
+ @endrole
 		@endif
 
 		<!-- header -->

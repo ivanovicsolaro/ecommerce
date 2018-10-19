@@ -140,7 +140,7 @@
           motivo = $('#motivo').val();
         	formData = {regresa_stock:regresa_stock, motivo:motivo};
 
-        	url = "{{route('productos.gestionar-devolucion')}}";
+        	url = "{{route('productos.store-devolucion')}}";
  			
  			    ajax_add(url,'POST',formData,'#btn_procesar');
         

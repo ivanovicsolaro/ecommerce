@@ -150,7 +150,7 @@
 								</div>
 							</div>
 							<div class="input-checkbox">
-								<input type="radio" name="envio" value="2" id="shipping" onclick="checkEnvio(2)">
+								<input type="radio" name="envio" value="2" id="shipping" onclick="checkEnvio(2)"> 
 								<label for="shipping-2">Área Metropolitana - $70.00</label>
 								<div class="caption">
 									<p>Envío el pedido a domicilio.<br/>Esta opción es válida para la ciudad de Colonia Avellaneda, Paraná, Oro Verde y San Benito.

@@ -56,4 +56,40 @@ class FrontController extends Controller
   
      return view('front.productos.shop', compact('productos', 'categorias', 'subcategorias', 'ranking'));
     }
+
+    public function detalleProducto($slug){
+
+        $producto = Product::findBySlug($slug);
+
+        $categoria = Categoria::where('id', $producto->categorie_id)->get();
+
+        $subcategoria = Subcategoria::where('id', $producto->subcategorie_id)->get();
+
+        $relacionados = $this->getProductosRelacionados($producto->categorie_id, $producto->subcategorie_id);
+
+        $imagenes = DB::table('products_images')->where('product_id', $producto->id)->get();
+       
+        $imagenes = json_encode($imagenes);
+
+
+     
+        $producto = array_add($producto, 'imagenes', $imagenes);
+       
+        return view('front.productos.view', [
+            'producto' => $producto,
+            'relacionados' => $relacionados,
+            'categoria' => $categoria,
+            'subcategoria' => $subcategoria
+        ]);
+    }
+
+    private function getProductosRelacionados($categoria_id, $subcategoria_id ){
+        return DB::table('products_images')
+                        ->select('products_images.name as imageName', 'products.*')
+                        ->join('products', 'products_images.product_id', '=', 'products.id')
+                        ->groupBy('products_images.product_id')
+                        ->where('categorie_id', $categoria_id)
+                        ->where('subcategorie_id', $subcategoria_id)
+                        ->limit(4)->get();
+    }
 }

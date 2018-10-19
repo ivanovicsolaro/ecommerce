@@ -229,14 +229,23 @@
 
 
 
-                                @foreach($relacionados as $productoRelacionado)
+                @foreach($relacionados as $productoRelacionado)
 
 				<!-- Product Single -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="product product-single">
 						<div class="product-thumb">
 							<a href="{{asset('producto/'.$productoRelacionado->slug)}}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Ver Detalle</a>
-							<img src="{{asset('img/products/'.$productoRelacionado->id.'/'.$productoRelacionado->imageName)}}" alt="">
+
+
+  								@if(!isset($productoRelacionado->imageName))
+                                          <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
+                                         @else
+                                          	<img src="{{asset('img/products/'.$productoRelacionado->id.'/'.$productoRelacionado->imageName)}}" alt="">
+                                          @endif
+
+
+						
 						</div>
 						<div class="product-body">
 							<h3 class="product-price">{{$productoRelacionado->price}} <del class="product-old-price">{{$productoRelacionado->price*1.5}}</del></h3>

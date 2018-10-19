@@ -95,19 +95,15 @@
                                         <td class="qty text-center">
                                             @switch($order->payment)
                                                 @case(1)
-                                                    Contado Efectivo
+                                                    Contado Efectivo (contra reembolso)
                                                     @break
 
                                                 @case(2)
-                                                    Tarjeta Credito
+                                                    Transferencia Bancaria
                                                     @break
 
                                                 @case(3)
-                                                    Cuenta Corriente
-                                                    @break
-
-                                                @case(4)
-                                                    Contra Reembolso
+                                                    Todo Pago
                                                     @break
                                                
                                             @endswitch

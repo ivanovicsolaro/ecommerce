@@ -41,9 +41,17 @@ Route::get('productos/load-images/{id}', 'ProductoController@indexUploadImage');
 Route::post('productos/upload-images/{id}', ['uses' => 'ProductoController@uploadImageProducts', 'as' => 'upload.images']);
 Route::post('productos/remove-images', ['uses' => 'ProductoController@removeImageProducts', 'as' => 'remove.images']);
 Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getServerImages', 'as' => 'server.images' ]);
-Route::get('devolucion', ['uses' => 'ProductoController@indexDevoluciones', 'as' => 'productos.index-devoluciones' ]);
-Route::post('gestionar-devolucion', ['uses' => 'ProductoController@gestionarDevolucion', 'as' => 'productos.gestionar-devolucion']);
 Route::get('tikets', ['uses' => 'ProductoController@imprimirTikets', 'as' => 'productos.tikets' ]);
+
+ //devoluciones
+Route::get('index-devoluciones', ['uses' => 'ProductoController@indexDevoluciones', 'as' => 'productos.index-devoluciones' ]);
+Route::get('create-devolucion', ['uses' => 'ProductoController@createDevolucion', 'as' => 'productos.create-devolucion' ]);
+Route::post('store-devolucion', ['uses' => 'ProductoController@storeDevolucion', 'as' => 'productos.store-devolucion']);
+Route::get('productos-devolucion', ['uses' => 'ProductoController@getProductosDevolucion', 'as' => 'productos.get-productos-devolucion' ]);
+
+//fin devoluciones
+
+
 
 
 //Banner
@@ -55,7 +63,7 @@ Route::post('update-banners',['uses' => 'ConfigController@updateBanner', 'as' =>
 
 /**Rutas del front */
 Route::get('/shop', ['uses' => 'FrontController@indexShop', 'as' => 'shop.index']);
-Route::get('/producto/{slug}', 'ProductoController@detalleProducto');
+Route::get('/producto/{slug}', 'FrontController@detalleProducto');
 
 Route::post('agregar-carrito', ['uses' => 'CartController@addItem', 'as' => 'carrito.addItem']);
 Route::post('remover-carrito', ['uses' => 'CartController@removeItem', 'as' => 'carrito.removeItem']);
