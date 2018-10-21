@@ -1,12 +1,12 @@
- <div class="row">
+<div class="row">
  <div class="col-sm-12 col-md-6">
 
     <div class="form-group col-sm-6" id="div-name">
         {!! Form::label('tipo_movimiento_id', 'Tipo Movimiento: *',['class' => 'control-label mb-10 text-left']) !!}
         <select name="tipo_movimiento_id" class="form-control">
-          <option value="">Seleccióne una opción</option>
-          <option value="3">Nota de Crédito</option>
-          <option value="4">Nota de Débito</option>
+        	<option value="">Seleccióne una opción</option>
+        	<option value="3">Nota de Crédito</option>
+        	<option value="4">Nota de Débito</option>
 
         </select>
     </div>

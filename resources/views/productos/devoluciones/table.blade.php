@@ -16,7 +16,7 @@
                 <td class="text-center">{!! $devolucion->created_at !!}</td>
                 <td class="text-center">
                       <a>
-                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm"   onclick="showModalProductos({{$devolucion->id}})" alt="Imprimir Codigo Barras"><i class="fa fa-barcode" aria-hidden="true"></i>
+                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm"   onclick="showModalProductos({{$devolucion->id}})" alt="Imprimir Codigo Barras"><i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
                         </a> 
                 </td>

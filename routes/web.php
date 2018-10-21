@@ -49,17 +49,9 @@ Route::get('create-devolucion', ['uses' => 'ProductoController@createDevolucion'
 Route::post('store-devolucion', ['uses' => 'ProductoController@storeDevolucion', 'as' => 'productos.store-devolucion']);
 Route::get('productos-devolucion', ['uses' => 'ProductoController@getProductosDevolucion', 'as' => 'productos.get-productos-devolucion' ]);
 
-//fin devoluciones
-
-
-
-
 //Banner
 Route::get('banners', 'ConfigController@indexBanner');
 Route::post('update-banners',['uses' => 'ConfigController@updateBanner', 'as' => 'update.banner']);
-
-
-
 
 /**Rutas del front */
 Route::get('/shop', ['uses' => 'FrontController@indexShop', 'as' => 'shop.index']);
@@ -89,7 +81,8 @@ Route::post('ventas-agregarPago/{id}', ['uses' => 'VentasController@agregarPagos
 Route::get('buscar-cliente', ['uses' => 'CustomerController@find', 'as' => 'client.find']);
 Route::resource('clientes', 'CustomerController');
 Route::get('clientes/cuenta-corriente/{id}', ['uses' => 'CustomerController@viewCuentaCorriente', 'as' => 'clientes.cuenta_corriente']);
-
+Route::get('clientes/cuenta-corriente/crear-nota/{id}', ['uses' => 'CustomerController@createNota', 'as' => 'clientes.create-nota']);
+Route::post('clientes/cuenta-corriente/guardar-nota', ['uses' => 'CustomerController@storeNota', 'as' => 'clientes.store-nota']);
 
 //Payments
 

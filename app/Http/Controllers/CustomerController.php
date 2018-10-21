@@ -150,13 +150,64 @@ class CustomerController extends Controller
     }
 
     public function viewCuentaCorriente($id){
+        $id = Crypt::decrypt($id);
 
-        $registros = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->orderBy('id', 'DESC')->paginate(15);
+        $registros = CuentaCorriente::where('customer_id', $id)->orderBy('id', 'DESC')->paginate(25);
 
-        $ingreso = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->sum('ingresos');
+        $ingreso = CuentaCorriente::where('customer_id', $id)->sum('ingresos');
 
-        $egreso = CuentaCorriente::where('customer_id', Crypt::decrypt($id))->sum('egresos');
+        $egreso = CuentaCorriente::where('customer_id', $id)->sum('egresos');
 
-        return view('clientes.cuenta-corriente', compact('registros', 'ingreso', 'egreso'));
+        return view('clientes.cuenta-corriente.index', compact('id', 'registros', 'ingreso', 'egreso'));
     }   
+
+    public function createNota($id){
+
+        return view('clientes.cuenta-corriente.create-nota', compact('id'));
+
+    }
+
+    public function storeNota(Request $request){
+
+        if($request->ajax()){
+            
+            $data = $request->all();
+
+            switch ($data['tipo_movimiento_id']) {
+                case 3:
+                    $ingresos = $data['monto'];
+                    $egresos = 0;
+                    $detalle = 'Nota de Credito';
+                    break;
+
+                case 4:
+                    $ingresos = 0;
+                    $egresos = $data['monto'];
+                    $detalle = 'Nota de Debito';
+                    break; 
+            }
+
+            CuentaCorriente::create([
+                    'payment_type_id' => NULL,
+                    'customer_id' => $data['id_cliente'],
+                    'description' => $detalle.' - '.$data['motivo'],
+                    'comprobante_id' => $data['nro_comprobante'],
+                    'egresos' =>  $egresos,
+                    'ingresos' => $ingresos
+                ]);
+
+            $urlRedirect = asset('clientes/cuenta-corriente/'.Crypt::encrypt($data['id_cliente']));
+
+            return new JsonResponse([
+                'msj' => 'Nota creada correctamente',
+                'type' => 'success',
+                'redirect' => $urlRedirect
+            ]);
+
+
+
+        }
+
+    
+    }
 }

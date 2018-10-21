@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('contenido')
 
 @section('title')
-    Agregar Movimiento de Caja
+    Crear Nota Crédito / Débito
 @stop
 
     <!--=================== About Content Section ===================-->
@@ -10,9 +10,10 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                     {!! Form::open(['route' => 'clientes.store', 'action'=>'post', 'id' => 'form-clientes']) !!}
+                     {!! Form::open(['route' => 'clientes.store-nota', 'action'=>'post', 'id' => 'form-nota']) !!}
                     {{ csrf_field() }}
-                        @include('caja.fields')
+                        <input type="hidden" name="id_cliente" value="{{$id}}">
+                        @include('clientes.cuenta-corriente.fields')
 
                     {!! Form::close() !!}
                 </div>
@@ -61,7 +62,7 @@
             $('#clientList').fadeOut();                         
         };
 
-        var data_form = $("#form-clientes");
+        var data_form = $("#form-nota");
 
         data_form.submit(function(e){
             e.preventDefault();
