@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 use App\Movimiento;
 use App\TiposMovimiento;
 use App\PaymentType;
+use App\Http\Controllers\HelpersController;
 
 use DB;
 
@@ -51,7 +53,48 @@ class MovimientosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            
+            $data = $request->all();
+
+            $ultimoRegistro = Movimiento::getUltimoMovimiento();
+
+            if(in_array($data['tipo_movimiento_id'], array(1,2,8,10,11,13,14))){
+                    $ingresos = 0;
+                    $egresos =  $data['monto'];
+                    $saldo = $ultimoRegistro[0]->saldo - $data['monto'];
+            }else{
+                 $ingresos =  $data['monto'];
+                 $egresos = 0;
+                 $saldo = $ultimoRegistro[0]->saldo + $data['monto'];
+            }
+
+           
+           
+
+            Movimiento::create([
+                    'tipo_movimiento_id' => $data['tipo_movimiento_id'],
+                    'payment_type_id' => 1,
+                    'user_responsable_id' => HelpersController::getUserId(),
+                    'description' => $data['motivo'],
+                    'comprobante_id' => $data['nro_comprobante'],
+                    'ingresos' => $ingresos,
+                    'egresos' =>  $egresos,
+                    'saldo' => $saldo
+                    
+                ]);
+
+            $urlRedirect = asset('movimientos');
+
+            return new JsonResponse([
+                'msj' => 'Movimiento registrado correctamente',
+                'type' => 'success',
+                'redirect' => $urlRedirect
+            ]);
+
+
+
+        }
     }
 
     /**

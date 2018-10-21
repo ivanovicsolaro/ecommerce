@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                     {!! Form::open(['route' => 'clientes.store', 'action'=>'post', 'id' => 'form-clientes']) !!}
+                     {!! Form::open(['route' => 'movimientos.store', 'action'=>'post', 'id' => 'form-movimientos']) !!}
                     {{ csrf_field() }}
                         @include('caja.fields')
 
@@ -37,37 +37,13 @@
                     }
         }); 
 
-         $(document).ready(function(){
-
-            $('#client').keyup(function(){
-                var query = $(this).val();
-                if(query != ''){
-                    $.ajax({
-                        url: "{{ route('client.find')}}",
-                        method: 'get',
-                        data: {query:query},
-                        success:function(data){
-                            $('#clientList').fadeIn();
-                            $('#clientList').html(data);
-                        }
-                    })
-                }
-            });
-        });
-
-        function seleccionar(id){
-            $('#client').val($('#list'+id).text());
-            $('#id_cliente').val(id);
-            $('#clientList').fadeOut();                         
-        };
-
-        var data_form = $("#form-clientes");
+        var data_form = $("#form-movimientos");
 
         data_form.submit(function(e){
             e.preventDefault();
             var formData = data_form.serialize();
             var url = $(this).attr('action');
-            ajax_add(url,'POST',formData,'#add-cliente') 
+            ajax_add(url,'POST',formData,'#add-movimiento') 
         });
     </script> 
     

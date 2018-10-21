@@ -55,5 +55,17 @@ class TiposMovimientosSeeder extends Seeder
         TiposMovimiento::insert([
         	'description' => 'Pago Alquiler'
         ]);
+
+        TiposMovimiento::insert([
+            'description' => 'Reparación'
+        ]);
+
+        TiposMovimiento::insert([
+            'description' => 'Pago Impuestos Varios'
+        ]);
+
+        TiposMovimiento::insert([
+            'description' => 'Devolución de dinero por garantía/ajuste'
+        ]);
     }
 }
