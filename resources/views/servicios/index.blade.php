@@ -1,7 +1,7 @@
 @extends('layouts.app') @section('contenido')
 
 @section('title')
-    Listado de Clientes
+    Listado de Servicios
 @stop
 
 <!-- PAGE CONTENT WRAPPER -->
@@ -10,7 +10,7 @@
     <div class="row">
          <div class="col-md-12">
             <div class="header-btns-icon text-right">
-                <a class="primary-btn" href="{{route('clientes.create')}}"> <i class="fa fa-plus"></i> Agregar Cliente</a>
+                <a class="primary-btn" href="{{route('servicios.create')}}"> <i class="fa fa-plus"></i> Agregar Servicio</a>
                               
             </div>
          </div>
@@ -19,7 +19,7 @@
          <!-- START DEFAULT DATATABLE -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    @include('clientes.table')
+                    @include('servicios.table')
                 </div>
             </div>
             <!-- END DEFAULT DATATABLE -->

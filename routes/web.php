@@ -88,6 +88,9 @@ Route::get('clientes/cuenta-corriente/{id}', ['uses' => 'CustomerController@view
 Route::get('clientes/cuenta-corriente/crear-nota/{id}', ['uses' => 'CustomerController@createNota', 'as' => 'clientes.create-nota']);
 Route::post('clientes/cuenta-corriente/guardar-nota', ['uses' => 'CustomerController@storeNota', 'as' => 'clientes.store-nota']);
 
+//Servicios
+Route::resource('servicios', 'ServiciosController');
+
 //Payments
 
 Route::get('buscar-pago', ['uses' => 'HelpersController@findPayment', 'as' => 'payment.find']);

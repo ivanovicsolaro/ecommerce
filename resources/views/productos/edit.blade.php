@@ -87,6 +87,7 @@
                             var mockFile = { name: value.name, size: value.size };
                             myDropzone.options.addedfile.call(myDropzone, mockFile);
                             myDropzone.options.thumbnail.call(myDropzone, mockFile, urlArchivos+value.name);
+                            myDropzone.emit("complete", mockFile);
                         });
                     });
                 });
@@ -97,7 +98,7 @@
                 });
                 
                 this.on("complete", function(file) {
-                   
+                  
                 });
  
                 this.on("success", 

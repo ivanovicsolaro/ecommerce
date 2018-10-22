@@ -78,9 +78,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{route('clientes.index')}}"><i class="fa fa-list" aria-hidden="true"></i> Listar</a></li>
+                <li><a href="{{route('servicios.index')}}"><i class="fa fa-wrench" aria-hidden="true"></i> Listar Servicios</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">ABM</li>
-                <li><a href="{{route('clientes.create')}}"><i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li>              
+                <li><a href="{{route('clientes.create')}}"><i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li>
+                <li><a href="{{route('servicios.create')}}">+<i class="fa fa-wrench" aria-hidden="true"></i>  Nuevo Servicio</a></li>              
               </ul>
             </li>
           	<li class="dropdown">
