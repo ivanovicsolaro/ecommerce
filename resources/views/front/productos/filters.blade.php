@@ -124,7 +124,7 @@
                                          @if(!isset($r->image))
                                           <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
                                          @else
-                                          <img  src="{{asset('img/products/'.$r->id.'/'.$r->image)}}" alt="">
+                                          <img  src="{{asset('img/products/'.$r->path_image.'/'.$r->image)}}" alt="">
                                           @endif
                                        
                                     </div>

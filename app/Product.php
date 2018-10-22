@@ -26,7 +26,7 @@ class Product extends Model implements Buyable
     protected $table = "products";
     
     protected $fillable = [
-        'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state', 'categorie_id', 'subcategorie_id', 'price_real', 'destacado', 'if_dolar', 'min', 'max'
+        'id', 'name', 'slug', 'sku', 'stock', 'description', 'price', 'excerpt', 'state', 'categorie_id', 'subcategorie_id', 'price_real', 'destacado', 'if_dolar', 'min', 'max', 'path_image'
     ];
 
     public function sluggable()

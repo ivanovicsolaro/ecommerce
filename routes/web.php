@@ -37,11 +37,13 @@ Route::post('actualizar-contrasena', ['uses' => 'MiCuentaController@postCambiarP
 //Productos
 Route::resource('productos', 'ProductoController');
 Route::get('productos-create-massive', 'ProductoController@createCargaMasiva');
+Route::post('productos-store-massive', ['uses' => 'ProductoController@storeCargaMasiva', 'as' => 'productos.store-massive']);
 Route::get('productos/load-images/{id}', 'ProductoController@indexUploadImage');
 Route::post('productos/upload-images/{id}', ['uses' => 'ProductoController@uploadImageProducts', 'as' => 'upload.images']);
 Route::post('productos/remove-images', ['uses' => 'ProductoController@removeImageProducts', 'as' => 'remove.images']);
 Route::get('productos/server-images/{id}', ['uses' => 'ProductoController@getServerImages', 'as' => 'server.images' ]);
 Route::get('tikets', ['uses' => 'ProductoController@imprimirTikets', 'as' => 'productos.tikets' ]);
+Route::get('buscar-producto', ['uses' => 'ProductoController@find', 'as' => 'product.find']);
 
  //devoluciones
 Route::get('index-devoluciones', ['uses' => 'ProductoController@indexDevoluciones', 'as' => 'productos.index-devoluciones' ]);

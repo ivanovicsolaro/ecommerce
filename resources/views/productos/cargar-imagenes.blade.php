@@ -54,7 +54,7 @@
                 myDropzone = this;
                 myDropzone.processQueue();
                 url = '{{asset('productos/server-images/'.$producto->id)}}';
-                urlArchivos = '{{asset('img/products/'.$producto->id).'/thumbnails/'}}';
+                urlArchivos = '{{asset('img/products/'.$producto->path_image).'/thumbnails/'}}';
 
                 $.get(url, function(data) {
 
@@ -89,7 +89,7 @@
                 $.ajax({
                     type: 'POST',
                     headers: {'X-CSRF-Token': token},
-                    url: '{{route('remove.images', $producto->id)}}',
+                    url: '{{route('remove.images')}}',
                     data: {id: {{$producto->id}}, name: name},
                     dataType: 'html'
                 });

@@ -61,16 +61,13 @@ class CartController extends Controller
                 $path = $request->root();
                 $i = 0;
 
-	            foreach($producto->productImages as $images){
-	            	if($i == 0){
-	            		$urlImagen = $path.'/img/products/'.$producto->id.'/'.$images->name;
-	            	}
-	            	$i++;
-	            }
-
-              if(!isset($urlImagen)){
-                  $urlImagen = $path.'/img/products/sin-imagen.jpg';
-              }
+                 
+                $imagen = DB::table('products_images')->where('path_image', $producto->path_image)->first();
+                if(!$imagen){
+                    $urlImagen = asset('/img/products/sin-imagen.jpg');
+                }else{
+                    $urlImagen =  asset('/img/products/'.$producto->path_image.'/thumbnails/'.$imagen->name);
+                }
 
                return new JsonResponse([
                         'validate' => 1,
@@ -171,9 +168,9 @@ class CartController extends Controller
 
         	foreach ($items as $item) {
       
-        	$imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+        	$imagen = DB::table('products_images')->where('path_image', $item->product->path_image)->first();
             if(isset($imagen)){
-          		  $item->product->imagen =  '/img/products/'.$item->product->id.'/'.$imagen->name;
+          		  $item->product->imagen =  '/img/products/'.$item->product->path_image.'/'.$imagen->name;
             }
         	}
 
@@ -189,11 +186,11 @@ class CartController extends Controller
           $items = Cart::model()->items->all();
 
           foreach ($items as $item) {
-              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first(); 
+              $imagen = DB::table('products_images')->where('path_image', $item->product->path_image)->first(); 
               if(!$imagen){
                   $item->product->imagen = '/img/products/sin-imagen.jpg';
               }else{
-                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+                  $item->product->imagen =  '/img/products/'.$item->product->path_image.'/thumbnails/'.$imagen->name;
               }
               
           }
@@ -208,11 +205,11 @@ class CartController extends Controller
           $items = Cart::model()->items->all();
 
           foreach ($items as $item) {
-              $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+              $imagen = DB::table('products_images')->where('path_image', $item->product->path_image)->first();
               if(!$imagen){
                   $item->product->imagen = '/img/products/sin-imagen.jpg';
               }else{
-                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+                  $item->product->imagen =  '/img/products/'.$item->product->path_image.'/thumbnails/'.$imagen->name;
               }
               
           }

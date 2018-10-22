@@ -21,9 +21,9 @@
 
                     {!! Form::open(['route'=> ['upload.images',$producto->id], 'method' => 'POST', 'files'=>'true', 'id' => 'my-dropzone' , 'class' => 'dropzone']) !!}
                     <div class="dz-message" style="height:200px;">
-                        Drop your files here
+                        Arrastra tus archivos aquí
                     </div>
-                    <div class="dropzone-previews"></div>
+                    <div class="dz-preview dz-file-preview"></div>
                     <input type="hidden" name="idProducto" value="{{$producto->id}}">
                     {!! Form::close() !!}
                 </div>
@@ -78,7 +78,7 @@
                 myDropzone = this;
                 myDropzone.processQueue();
                 url = '{{asset('productos/server-images/'.$producto->id)}}';
-                urlArchivos = '{{asset('img/products/'.$producto->id).'/thumbnails/'}}';
+                urlArchivos = '{{asset('img/products/'.$producto->path_image).'/thumbnails/'}}';
 
                 $.get(url, function(data) {
 
@@ -97,7 +97,7 @@
                 });
                 
                 this.on("complete", function(file) {
-                    myDropzone.removefile(file);
+                   
                 });
  
                 this.on("success", 
@@ -108,12 +108,11 @@
             removedfile: function(file) {
                 var name = file.name;  
                 var token = $('[name=_token').val();
-
-                console.log(file.name);      
+  
                 $.ajax({
                     type: 'POST',
                     headers: {'X-CSRF-Token': token},
-                    url: '{{route('remove.images', $producto->id)}}',
+                    url: '{{route('remove.images')}}',
                     data: {id: {{$producto->id}}, name: name},
                     dataType: 'html'
                 });

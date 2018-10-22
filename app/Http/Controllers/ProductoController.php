@@ -20,6 +20,7 @@ use Vanilo\Cart\Facades\Cart;
 
 use Image;
 use PDF;
+use Redirect;
 use App\ProductsImages;
 
 use Carbon\Carbon;
@@ -41,9 +42,9 @@ class ProductoController extends Controller
 
         
         foreach ($productos as $producto) {
-            $imagen = DB::table('products_images')->where('product_id', $producto->id)->first();
+            $imagen = DB::table('products_images')->where('path_image', $producto->path_image)->first();
             if(isset($imagen)){
-                $producto->image =  '/img/products/'.$producto->id.'/thumbnails/'.$imagen->name;
+                $producto->image =  '/img/products/'.$producto->path_image.'/thumbnails/'.$imagen->name;
             }else{
                 $producto->image =  '/img/products/sin-imagen.jpg';
             }       
@@ -78,7 +79,7 @@ class ProductoController extends Controller
             $data = $request->all();
 
             if($data['sku'] == ''){
-                 $data['sku'] = $data['categoria_id'].$data['subcategoria_id'].strftime("%d%m%g%H%M");
+                 $data['sku'] = $data['categoria_id'].$data['subcategoria_id'].uniqid();
             }
 
             if(!isset($data['destacado'])){
@@ -101,7 +102,8 @@ class ProductoController extends Controller
                 'destacado' => $data['destacado'],
                 'price' => $data['price'],
                 'price_real' => $data['price_real'],
-                'description' => $data['description']
+                'description' => $data['description'],
+                'path_image' => uniqid()
             ]);
 
              return new JsonResponse([
@@ -206,7 +208,8 @@ class ProductoController extends Controller
 
     public function uploadImageProducts(Request $request){
         
-        $id = $request->id;
+        $product = Product::find($request->id);
+        $id = $product->path_image;
 
         $path = public_path('/img/products/'.$id.'/');
         $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
@@ -228,7 +231,7 @@ class ProductoController extends Controller
                 $img->save(public_path('img/products/'.$id.'/thumbnails/'.$fileName));
 
                 DB::table('products_images')
-                ->insert(['product_id' => $id, 'name' => $fileName, 'destacada' => 0]);
+                ->insert(['path_image' => $id, 'name' => $fileName, 'destacada' => 0]);
             }     
             
         }
@@ -237,27 +240,32 @@ class ProductoController extends Controller
     }
 
     public function removeImageProducts(Request $request){
-        $id = $request->id;
-        $directory = public_path('/img/products/'.$id.'/');
+        
+        $product = Product::find($request->id);
+        $id = $product->path_image;
+
         $path = public_path('/img/products/'.$id.'/');
         $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
         
         if(file_exists($path.$request->name)){
            
             DB::table('products_images')
-            ->where('product_id', '=', $id)
+            ->where('path_image', '=', $id)
             ->where('name', '=', $request->name)
             ->delete();
             File::delete($path.$request->name);
-                File::delete($pathIcon.$request->name);
-            
+            File::delete($pathIcon.$request->name);
         }
     }
 
     public function getServerImages($id){
+        
+        $product = Product::find($id);
+        $id = $product->path_image;
+
         $images = DB::table('products_images')
                     ->select('*')
-                    ->where('product_id', '=', $id)
+                    ->where('path_image', '=', $id)
                     ->get();
 
         $imageAnswer = [];
@@ -283,6 +291,74 @@ class ProductoController extends Controller
         return view('productos.fields-massive', compact('subcategorias', 'categorias'));
     }
 
+    public function storeCargaMasiva(Request $request){
+
+        $data = $request->all();
+
+        
+        $id = uniqid();
+
+        $path = public_path('/img/products/'.$id.'/');
+        $pathIcon = public_path('/img/products/'.$id.'/thumbnails/');
+
+        if(!is_dir($path)) mkdir($path,0777);
+        if(!is_dir($pathIcon)) mkdir($pathIcon,0777);
+
+        $files = $request->file('imagenes');
+
+        foreach($files as $file){
+            $fileName = $file->getClientOriginalName();
+            if (file_exists(public_path('img/products/'.$id.'/'.$fileName))) {
+                //  return new JsonResponse(['error' => 400]);
+            }else{
+                $file->move($path, $fileName); 
+                $img = Image::make(public_path('img/products/'.$id.'/'.$fileName))->resize(140, 140);
+                $img->save(public_path('img/products/'.$id.'/thumbnails/'.$fileName));
+
+                DB::table('products_images')
+                    ->insert(['path_image' => $id, 'name' => $fileName, 'destacada' => 0]);
+            }     
+        }   
+
+         foreach ($data['producto'] as $p) {
+
+            if($p['sku'] == ''){
+                 $p['sku'] = $data['categoria_id'].$data['subcategoria_id'].uniqid();
+            }
+
+            if(!isset($data['destacado'])){
+                $data['destacado'] = 0;
+            }
+
+            if(!isset($data['dolar'])){
+                $data['dolar'] = 0;
+            }
+
+            $product = Product::create([
+                'name' => $p['name'],
+                'categorie_id' => $data['categoria_id'],
+                'subcategorie_id' => $data['subcategoria_id'],
+                'sku'  => $p['sku'],
+                'stock' => $p['stock'],
+                'if_dolar' => $data['dolar'],
+                'min' => $p['min'],
+                'max' => $p['max'],
+                'destacado' => $data['destacado'],
+                'price' => $data['price'],
+                'price_real' => $data['price_real'],
+                'description' => $p['description'],
+                'path_image' => $id
+            ]);
+            
+         }
+
+            
+               
+
+        return redirect('/productos');
+        
+    }
+
     public function imprimirTikets(Request $request){
         $cantidad = $request->get('cantidad');
         $idProducto = $request->get('idProducto');
@@ -304,6 +380,7 @@ class ProductoController extends Controller
     }
 
     public function createDevolucion(){
+        Cart::clear();
         return view('productos.devoluciones.create');
     }
 
@@ -355,6 +432,23 @@ class ProductoController extends Controller
         return new JsonResponse([
             'productos' => $productos
         ]);
+    }
+
+    public function find(Request $request){
+        $producto = Product::where('name', 'LIKE', '%' . $request->get('query') . '%')->get();
+
+        if(count($producto)>0){
+            $output = '<ul class="dropdown-menu" style="display:block; position:absolute">';
+
+            foreach ($producto as $p) {
+               $output .= '<li id="list'.$p->id.'" onClick="seleccionarProducto(\''.$p->sku.'\')"><a>'.$p->name.' ('.$p->sku.')</a></li>';
+            }
+
+            $output .= '</ul>';
+
+            echo $output;   
+        }
+         
     }
 
 

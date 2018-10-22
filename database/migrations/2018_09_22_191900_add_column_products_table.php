@@ -23,7 +23,8 @@ class AddColumnProductsTable extends Migration
             $table->integer('max')->after('min')->nullable();
             $table->decimal('price_real', 15, 2)->after('price');
             $table->boolean('if_dolar')->after('stock'); 
-            $table->boolean('destacado')->after('price');  
+            $table->boolean('destacado')->after('price'); 
+            $table->string('path_image')->after('state');   
         });
     }
 
@@ -43,6 +44,7 @@ class AddColumnProductsTable extends Migration
             $table->dropColumn('price_real');
             $table->dropColumn('if_dolar');
             $table->dropColumn('destacado');
+            $table->dropColumn('path_image');
         });
     }
 }

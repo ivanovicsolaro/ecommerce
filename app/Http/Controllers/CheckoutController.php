@@ -46,11 +46,11 @@ class CheckoutController extends Controller
           $items = Cart::model()->items->all();
 
           foreach ($items as $item) {
-            $imagen = DB::table('products_images')->where('product_id', $item->product->id)->first();
+            $imagen = DB::table('products_images')->where('path_image', $item->product->path_image)->first();
              if(!$imagen){
                   $item->product->imagen = '/img/products/sin-imagen.jpg';
               }else{
-                  $item->product->imagen =  '/img/products/'.$item->product->id.'/thumbnails/'.$imagen->name;
+                  $item->product->imagen =  '/img/products/'.$item->product->path_image.'/thumbnails/'.$imagen->name;
               }
           }
             

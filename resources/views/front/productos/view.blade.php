@@ -27,9 +27,9 @@
 						<div id="product-main-view">
 							   <?php $i = 0; ?> 
                                     @foreach (json_decode($producto->imagenes, true) as $img)
-                                        @if(file_exists('img/products/'.$producto->id.'/'.$img['name']))
+                                        @if(file_exists('img/products/'.$producto->path_image.'/'.$img['name']))
                                             <div class="product-view" @if($i == 0) active @endif">
-                                                <img src="{{url('img/products/'.$producto->id.'/'.$img['name'])}}">
+                                                <img src="{{url('img/products/'.$producto->path_image.'/'.$img['name'])}}">
                                             </div>
                                         @endif
                                         <?php $i++;?>
@@ -38,9 +38,9 @@
 						<div id="product-view">
  								<?php $i = 0; ?> 
                                     @foreach (json_decode($producto->imagenes, true) as $img)
-                                        @if(file_exists('img/products/'.$producto->id.'/thumbnails/'.$img['name']))
+                                        @if(file_exists('img/products/'.$producto->path_image.'/thumbnails/'.$img['name']))
                                             <div class="product-view" @if($i == 0) active @endif">
-                                                <img src="{{url('img/products/'.$producto->id.'/thumbnails/'.$img['name'])}}">
+                                                <img src="{{url('img/products/'.$producto->path_image.'/thumbnails/'.$img['name'])}}">
                                             </div>
                                         @endif
                                         <?php $i++;?>
@@ -241,7 +241,7 @@
   								@if(!isset($productoRelacionado->imageName))
                                           <img  src="{{asset('img/products/sin-imagen.jpg')}}" alt="">
                                          @else
-                                          	<img src="{{asset('img/products/'.$productoRelacionado->id.'/'.$productoRelacionado->imageName)}}" alt="">
+                                          	<img src="{{asset('img/products/'.$productoRelacionado->path_image.'/'.$productoRelacionado->imageName)}}" alt="">
                                           @endif
 
 
@@ -260,7 +260,7 @@
 							<div class="product-btns">
 								<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
 								<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-								<button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+								<button class="primary-btn add-to-cart" onclick="addCart({{$productoRelacionado->id}}, 1)"><i class="fa fa-shopping-cart"></i> Agregar al Carrito</button>
 							</div>
 						</div>
 					</div>

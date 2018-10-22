@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-xs-12 mt20">
                     <div class="dashboard">
-                     {!! Form::open(['route' => 'productos.store', 'action'=>'post', 'id' => 'form-productos']) !!}
+                     {!! Form::open(['route' => 'productos.store-massive', 'action'=>'post', 'id' => 'form-productos', 'files' => 'true']) !!}
                     {{ csrf_field() }}
                       
 						<div class="row">
@@ -27,14 +27,14 @@
 						    </div>
 
 						  <div class="form-group col-sm-6" id="div-price">
-						            {!! Form::label('price', 'Imagen 1 (destacada): *',['class' => 'control-label mb-10 text-left']) !!}
+						            {!! Form::label('imagen1', 'Imagen 1 (destacada): *',['class' => 'control-label mb-10 text-left']) !!}
 						             {!! Form::file('imagenes[]', null , ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true']) !!}
 						        </div>
 
 						  
 
 						       <div class="form-group col-sm-6" id="div-price">
-						            {!! Form::label('price', 'Imagen 2: *',['class' => 'control-label mb-10 text-left']) !!}
+						            {!! Form::label('imagen2', 'Imagen 2: *',['class' => 'control-label mb-10 text-left']) !!}
 						             {!! Form::file('imagenes[]', null , ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true']) !!}
 						        </div>
 
@@ -60,12 +60,12 @@
 						        </div>
 
 						         <div class="form-group col-sm-6" id="div-price">
-						            {!! Form::label('price', 'Imagen 3: *',['class' => 'control-label mb-10 text-left']) !!}
+						            {!! Form::label('imagen3', 'Imagen 3: *',['class' => 'control-label mb-10 text-left']) !!}
 						           {!! Form::file('imagenes[]', null , ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true']) !!}
 						        </div>
 
 						         <div class="form-group col-sm-6" id="div-price">
-						            {!! Form::label('price', 'Imagen 4: *',['class' => 'control-label mb-10 text-left']) !!}
+						            {!! Form::label('imagen4', 'Imagen 4: *',['class' => 'control-label mb-10 text-left']) !!}
 						             {!! Form::file('imagenes[]', null , ['class' => 'form-control','autofocus'=>'autofocus', 'required' => 'true']) !!}
 						        </div>
 
@@ -92,29 +92,7 @@
 						<div id="dinamicDiv">
 							<div class="row">
 								<div class="col-sm-12 col-md-12">
-		  							<div class="form-group col-sm-4" id="div-name">
-								        {!! Form::label('name', 'Nombre: *',['class' => 'control-label mb-10 text-left']) !!}
-								        {!! Form::text('name', isset($producto)? $producto->name : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
-								    </div>
-
-								       <div class="form-group col-sm-2" id="div-stock">
-								        {!! Form::label('stock', 'Stock: *',['class' => 'control-label mb-10 text-left']) !!}
-								        {!! Form::text('stock', isset($producto)? $producto->stock : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
-								    </div>
-
-
-								    <div class="form-group col-sm-2" id="div-sku">
-								        {!! Form::label('sku', 'Código: *',['class' => 'control-label mb-10 text-left']) !!}
-								        {!! Form::text('sku', isset($producto)? $producto->sku : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
-								    </div>
-
-								     <div class="form-group col-sm-3" id="div-description">
-								        {!! Form::label('description', 'Descripción: *',['class' => 'control-label mb-10 text-left']) !!}
-								        {!! Form::textarea('description', isset($producto)? $producto->description : null, ['class' => 'form-control', 'rows'=>5, 'cols' => 20, 'autofocus'=>'autofocus']) !!}
-								    </div>
-								    <div class="form-group col-sm-1" id="div-description">
-								     
-								    </div>
+		  					
 								</div>
 							</div>
 						</div>
@@ -155,46 +133,41 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
         }); 
-
-         $(document).ready(function(){
-           $("#cargar-imagen").attr('disabled','disabled');
-           $("#cargar-imagen").attr('style','pointer-events: none');
-        });
-
-        var data_form = $("#form-productos");
-
-        data_form.submit(function(e){
-            e.preventDefault();
-            var formData = data_form.serialize();
-            var url = $(this).attr('action');
-            ajax_add(url,'POST',formData,'#add-producto') 
-        });
-
        
-
+        cont = 0;
         function addFila(){
         	 dinamicDiv = $('#dinamicDiv');
         	$('<div class="row">'+
 								'<div class="col-sm-12 col-md-12">'+
-		  							'<div class="form-group col-sm-4" id="div-name">'+
+		  							'<div class="form-group col-sm-3" id="div-name">'+
 								        '<label for="name" class="control-label mb-10 text-left">Nombre: +*</label>'+
-								        '<input class="form-control" autofocus="autofocus" maxlength="30" name="producto[name]" type="text" id="name">'+
+								        '<input class="form-control" autofocus="autofocus" maxlength="30" name="producto['+cont+'][name]" type="text" id="name">'+
 								    '</div>'+
 
-								       '<div class="form-group col-sm-2" id="div-stock">'+
+								       '<div class="form-group col-sm-1" id="div-stock">'+
 								        '<label for="stock" class="control-label mb-10 text-left">Stock: *</label>'+
-								        '<input class="form-control" autofocus="autofocus" name="producto[stock]" type="text" id="stock">'+
+								        '<input class="form-control" autofocus="autofocus" name="producto['+cont+'][stock]" type="text" id="stock">'+
+								   '</div>'+
+
+								    '<div class="form-group col-sm-1" id="div-stock">'+
+								        '<label for="min" class="control-label mb-10 text-left">Min: *</label>'+
+								        '<input class="form-control" autofocus="autofocus" name="producto['+cont+'][min]" type="text" id="min">'+
+								   '</div>'+
+
+								    '<div class="form-group col-sm-1" id="div-stock">'+
+								        '<label for="max" class="control-label mb-10 text-left">Max: *</label>'+
+								        '<input class="form-control" autofocus="autofocus" name="producto['+cont+'][max]" type="text" id="max">'+
 								   '</div>'+
 
 
 								    '<div class="form-group col-sm-2" id="div-sku">'+
 								        '<label for="sku" class="control-label mb-10 text-left">C&oacute;digo: *</label>'+
-								        '<input class="form-control" autofocus="autofocus" name="sku" type="text" id="sku">'+
+								        '<input class="form-control" autofocus="autofocus" name="producto['+cont+'][sku]" type="text" id="sku">'+
 								    '</div>'+
 
 								     '<div class="form-group col-sm-3" id="div-description">'+
 								        '<label for="description" class="control-label mb-10 text-left">Descripci&oacute;n: *</label>'+
-								        '<textarea class="form-control" rows="5" cols="20" autofocus="autofocus" name="description" id="description"></textarea>'+
+								        '<textarea class="form-control" rows="5" cols="20" autofocus="autofocus" name="producto['+cont+'][description]" id="description"></textarea>'+
 								    '</div>'+
 
 								    '<div class="form-group col-sm-1" id="div-description">'+
@@ -202,7 +175,10 @@
 								    '</div>'+
 								'</div>'+
 							'</div>').appendTo(dinamicDiv);
+
+        	cont++;  
         }
+
         $("#dinamicDiv").on('click', ".header-btns-icon", eliminarFila);
 
         function eliminarFila(){

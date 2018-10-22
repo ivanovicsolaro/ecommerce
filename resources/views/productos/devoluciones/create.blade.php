@@ -13,6 +13,7 @@
 				 		{!! Form::open(['route' => 'carrito.addItem', 'action'=>'post', 'id' => 'find-productos']) !!}
 						<div class="form-group col-sm-12 col-md-6" id="div-stock_minimo">
 				  			{!! Form::label('producto', 'Ingrese Código o Nombre del Producto: *',['class' => 'control-label mb-10 text-left']) !!}
+                <div id="productList"></div>
 
 				    	<div class="input-group">
 				     		  {!! Form::text('sku', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'cadena']) !!}
@@ -79,6 +80,21 @@
 
     $(document).ready(function(){
        		$('#table-punto-venta').load('{{route("carrito.viewTableVenta")}}');
+
+          $('#cadena').keyup(function(){
+            var query = $(this).val();
+            if(query != ''){
+              $.ajax({
+                url: "{{ route('product.find')}}",
+                method: 'get',
+                data: {query:query},
+                success:function(data){
+                  $('#productList').fadeIn();
+                  $('#productList').html(data);
+                }
+              })
+            }
+          });
 		});
 
 
@@ -145,6 +161,11 @@
  			    ajax_add(url,'POST',formData,'#btn_procesar');
         
         }
+
+        function seleccionarProducto(sku){
+          $("#cadena").val(sku);
+          $('#productList').fadeOut();                     
+        };
 
        
 

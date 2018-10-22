@@ -22,6 +22,7 @@
 
 				    	<div class="input-group">
 				     		  {!! Form::text('sku', isset($producto)? $producto->min : null, ['class' => 'form-control','autofocus'=>'autofocus', 'id' => 'cadena']) !!}
+                   <div id="productList"></div>
 				      			<span class="input-group-btn">
 				        			<button class="btn primary-btn" id="boton-find" type="submit">Agregar</button>
 				      			</span>
@@ -86,6 +87,22 @@
        				})
        			}
        		});
+
+          $('#cadena').keyup(function(){
+            var query = $(this).val();
+            if(query != ''){
+              $.ajax({
+                url: "{{ route('product.find')}}",
+                method: 'get',
+                data: {query:query},
+                success:function(data){
+                  $('#productList').fadeIn();
+                  $('#productList').html(data);
+                }
+              })
+            }
+          });
+
 		});
 
 
@@ -161,6 +178,11 @@
  			  ajax_add(url,'POST',formData,'#btn_procesar');
         
         }
+
+        function seleccionarProducto(sku){
+          $("#cadena").val(sku);
+          $('#productList').fadeOut();                     
+        };
 
        
 

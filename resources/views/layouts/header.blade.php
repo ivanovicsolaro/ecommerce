@@ -108,7 +108,7 @@
                  <li><a href="{{route('productos.index-devoluciones')}}"><i class="fa fa-reply" aria-hidden="true"></i> Devoluciones</a></li>
                 <li role="separator" class="divider"></li>
                 <li class="dropdown-header">ABM</li>
-                <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li> 
+                <li><a href="{{route('productos.create')}}">  <i class="fa fa-plus" aria-hidden="true"></i>  Nuevo</a></li> 
                 <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Carga Masiva</a></li> 
                 <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Crear Combo</a></li>   
                 <li><a href="{{url('productos-create-massive')}}">  <i class="fa fa-cubes" aria-hidden="true"></i>  Oferta Limitada</a></li>            
