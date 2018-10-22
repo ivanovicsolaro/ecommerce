@@ -35,7 +35,7 @@
 
                    <div class="form-group col-sm-3" id="div-price">
                         {!! Form::label('estado', 'Estado: *',['class' => 'control-label mb-10 text-left']) !!}
-                            <select name="estado" id="estado" class="form-control">
+                            <select name="estado" id="estado" class="form-control" readonly>
                                 <option value="Ingresado" @if(isset($servicio) && $servicio->estado == 'Ingresado') selected @endif>Ingresado</option>
                                 <option value="En proceso de revision" @if(isset($servicio) && $servicio->estado == 'En proceso de revision') selected @endif>En proceso de revisión</option>
                                 <option value="Esperando aceptación presupuesto" @if(isset($servicio) && $servicio->estado == 'Esperando aceptación presupuesto') selected @endif>Esperando aceptación presupuesto</option>
@@ -60,7 +60,7 @@
 
                      <div class="form-group col-sm-3" id="div-precio_final">
                         {!! Form::label('precio_final', 'Precio final: *',['class' => 'control-label mb-10 text-left']) !!}
-                        {!! Form::number('precio_final', isset($servicio)? $servicio->precio_final : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30 ]) !!}
+                        {!! Form::number('precio_final', isset($servicio)? $servicio->precio_final : null, ['class' => 'form-control','autofocus'=>'autofocus', 'maxlength' => 30, 'readonly' ]) !!}
                     </div>
 
                  <div class="form-group col-sm-12" id="div-description">
@@ -70,20 +70,21 @@
 
                      <div class="form-group col-sm-12" id="div-diagnostico">
                         {!! Form::label('diagnostico', 'Diagnostico: *',['class' => 'control-label mb-10 text-left']) !!}
-                        {!! Form::textarea('diagnostico', isset($servicio)? $servicio->diagnostico : null, ['class' => 'form-control', 'rows'=>5, 'cols' => 20, 'autofocus'=>'autofocus']) !!}
+                        {!! Form::textarea('diagnostico', isset($servicio)? $servicio->diagnostico : null, ['class' => 'form-control', 'rows'=>5, 'cols' => 20, 'autofocus'=>'autofocus' , 'readonly']) !!}
                     </div>
 
                      <div class="form-group col-sm-12" id="div-mano_obra">
                         {!! Form::label('mano_obra', 'Detalle mano de obra: *',['class' => 'control-label mb-10 text-left']) !!}
-                        {!! Form::textarea('mano_obra', isset($servicio)? $servicio->detalle_mano_obra : null, ['class' => 'form-control', 'rows'=>5, 'cols' => 20, 'autofocus'=>'autofocus']) !!}
+                        {!! Form::textarea('mano_obra', isset($servicio)? $servicio->detalle_mano_obra : null, ['class' => 'form-control', 'rows'=>5, 'cols' => 20, 'autofocus'=>'autofocus' , 'readonly']) !!}
                     </div>
 
                 <div class="pull-right">
-                     <a href="{!! route('servicios.index') !!}" class="btn main-btn btn-anim">
+                	 <a href="{!! route('servicios.index') !!}" class="btn main-btn btn-anim">
         <i class="fa fa-reply"></i><span class="btn-text"> Listado</span>
     </a>
                     <button class="primary-btn" id="add-servicio">Procesar</button>
                 </div>
+
                     {!! Form::close() !!}
                 </div>
                 <div class="text-right col-md-12">
@@ -98,31 +99,3 @@
 
 
 @endsection
-
-@section('js')
-    @parent
-<script src="{{asset('libs/dropzone/dist/dropzone.js')}}"></script>
-    <script src="{{ asset('js/ajax-edit.js') }}"></script>
-<script>
-     $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-        }); 
-     $(document).ready(function(){
-           $("#cargar-imagen").attr('disabled','disabled');
-           $("#cargar-imagen").attr('style','pointer-events: none');
-        });
-
-        var data_form = $("#form-servicios");
-
-        data_form.submit(function(e){
-            e.preventDefault();
-            var formData = data_form.serialize();
-            var url = $(this).attr('action');
-            ajax_edit(url,'POST',formData,'#add-servicio') 
-        });
-</script>
-
-  
-@endsection 

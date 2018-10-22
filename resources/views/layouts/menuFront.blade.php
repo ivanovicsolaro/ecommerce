@@ -299,12 +299,13 @@
 							<a href="{{route('login')}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i> Login</a>
 							@endif
 						</li>
-						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Pages <i class="fa fa-caret-down"></i></a>
+						<li class="dropdown default-dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Páginas <i class="fa fa-caret-down"></i></a>
 							<ul class="custom-menu">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="products.html">Products</a></li>
-								<li><a href="product-page.html">Product Details</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
+								<li><a href="{{url('/contacto')}}">Contacto</a></li>
+								<li><a href="{{url('/sobre-nosotros')}}">Sobre Nosotros</a></li>
+								<li><a href="{{url('')}}">Envíos y devoluciones</a></li>
+								<li><a href="{{url('')}}">Guía de envíos</a></li>
+								<li><a href="{{url('')}}">Preguntas Frecuentes</a></li>
 							</ul>
 						</li>
 					</ul>

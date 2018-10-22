@@ -11,7 +11,7 @@
         {!! Form::text('apellido', isset($cliente)? $cliente->lastname : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
 
-     <div class="form-group col-sm-12" id="div-cuit">
+     <div class="form-group col-sm-6" id="div-cuit">
         {!! Form::label('cuit', 'DNI/CUIT: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('cuit', isset($cliente)? $cliente->registration_nr : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
@@ -24,6 +24,38 @@
     <div class="form-group col-sm-6" id="div-phone">
         {!! Form::label('phone', 'Teléfono: *',['class' => 'control-label mb-10 text-left']) !!}
         {!! Form::text('phone', isset($cliente)? $cliente->phone : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+    <div class="form-group col-sm-6" id="div-ciudad">
+        {!! Form::label('localidad', 'Ciudad: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('localidad', isset($address)? $address->city : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+       <div class="form-group col-sm-12" id="div-calle">
+        {!! Form::label('calle', 'Calle: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('calle', isset($address)? $address->address : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+
+    <div class="form-group col-sm-3" id="div-codigo_postal">
+        {!! Form::label('codigo_postal', 'CP: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('codigo_postal', isset($address)? $address->postalcode : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+ 
+    <div class="form-group col-sm-3" id="div-numero">
+        {!! Form::label('numero', 'Numero: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('numero', isset($address)? $address->number : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+    <div class="form-group col-sm-3" id="div-piso">
+        {!! Form::label('piso', 'Piso: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('piso', isset($address)? $address->piso : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+    </div>
+
+    <div class="form-group col-sm-3" id="div-depto">
+        {!! Form::label('depto', 'Depto: *',['class' => 'control-label mb-10 text-left']) !!}
+        {!! Form::text('depto', isset($address)? $address->depto : null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
     </div>
 </div>
 <div class="col-sm-12 col-md-6">

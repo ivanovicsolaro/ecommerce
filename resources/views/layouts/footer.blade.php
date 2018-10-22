@@ -16,17 +16,8 @@
 						</div>
 						<!-- /footer logo -->
 
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+						<p>Contactanos para unirte a la red de revendedores de accesorios de celular y repuestos, no pierda la oportunidad de hacer crecer tu negocio!</p>
 
-						<!-- footer social -->
-						<ul class="footer-social">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-						<!-- /footer social -->
 					</div>
 				</div>
 				<!-- /footer widget -->
@@ -34,13 +25,13 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">My Account</h3>
+						<h3 class="footer-header">Mi Cuenta</h3>
 						<ul class="list-links">
-							<li><a href="#">My Account</a></li>
-							<li><a href="#">My Wishlist</a></li>
-							<li><a href="#">Compare</a></li>
-							<li><a href="#">Checkout</a></li>
-							<li><a href="#">Login</a></li>
+							<li><a href="{{route('home')}}">Mi cuenta</a></li>
+							<li><a href="{{route('pedidos')}}">Mis pedidos</a></li>
+							<li><a href="{{route('perfil')}}">Mi perfil</a></li>
+							<li><a href="{{url('/checkout')}}">Finalizara compra</a></li>
+							<li><a href="{{route('login')}}">Login</a></li>
 						</ul>
 					</div>
 				</div>
@@ -51,12 +42,13 @@
 				<!-- footer widget -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Customer Service</h3>
+						<h3 class="footer-header">Seguridad de compra</h3>
 						<ul class="list-links">
-							<li><a href="#">About Us</a></li>
-							<li><a href="#">Shiping & Return</a></li>
-							<li><a href="#">Shiping Guide</a></li>
-							<li><a href="#">FAQ</a></li>
+							<li><a href="{{url('/contacto')}}">Contacto</a></li>
+								<li><a href="{{url('/sobre-nosotros')}}">Sobre Nosotros</a></li>
+								<li><a href="{{url('')}}">Envíos y devoluciones</a></li>
+								<li><a href="{{url('')}}">Guía de envíos</a></li>
+								<li><a href="{{url('')}}">Preguntas Frecuentes</a></li>
 						</ul>
 					</div>
 				</div>
@@ -65,13 +57,13 @@
 				<!-- footer subscribe -->
 				<div class="col-md-3 col-sm-6 col-xs-6">
 					<div class="footer">
-						<h3 class="footer-header">Stay Connected</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+						<h3 class="footer-header">Consultas</h3>
+						<p>Puedes encargarnos repuestos, productos, hacernos consultas técnicas, etc. Estemos en contacto!.</p>
 						<form>
 							<div class="form-group">
-								<input class="input" placeholder="Enter Email Address">
+								<input class="input" placeholder="Ingresa tu email">
 							</div>
-							<button class="primary-btn">Join Newslatter</button>
+							<button class="primary-btn">Quiero las novedades</button>
 						</form>
 					</div>
 				</div>

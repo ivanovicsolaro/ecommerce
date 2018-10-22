@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -32,7 +32,19 @@ class DatabaseSeeder extends Seeder
         $this->call(TiposMovimientosSeeder::class);
         $this->call(CustomerTableSeed::class);
         $this->call(PaymentsTypesSeeder::class); 
-        $this->call(MovimientosTableSeed::class);  
+        $this->call(MovimientosTableSeed::class);
+
+        DB::table('banners')
+            ->insert([
+                ['title_banner_1' => 1]] 
+            );
+
+        DB::table('settings')
+            ->insert([['id' => 'dolar', 'value' => 30]]);
+
+        DB::table('model_roles')
+            ->insert([['role_id' => 1, 'model_id' => 1,  'model_type' => 'App\User']]);
+
     }
     
     protected function trucateTables(array $tables){

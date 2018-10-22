@@ -99,3 +99,14 @@ Route::get('buscar-pago', ['uses' => 'HelpersController@findPayment', 'as' => 'p
 //caja
 Route::resource('movimientos', 'MovimientosController');
 
+
+//estaticas
+
+Route::get('/contacto', function(){
+    return view('front.estaticas.contacto'); 
+});
+
+Route::get('/sobre-nosotros', function(){
+    return view('front.estaticas.acerca'); 
+});
+

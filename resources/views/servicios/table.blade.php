@@ -23,8 +23,8 @@
                             </button>
                         </a>
 
-                      <a>
-                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm"   onclick="showModalProductos({{$servicio->id}})" alt="Imprimir Codigo Barras"><i class="fa fa-eye" aria-hidden="true"></i>
+                      <a href="{!! route('servicios.show', [Crypt::encrypt($servicio->id)]) !!}" >
+                            <button type="button" class="btn btn-default btn-icon-anim btn-square btn-sm" alt="Imprimir Codigo Barras"><i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
                         </a> 
                 </td>

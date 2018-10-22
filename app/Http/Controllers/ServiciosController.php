@@ -43,7 +43,12 @@ class ServiciosController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
+
             $data = $request->all();
+
+            if($data['id_cliente'] == 1){
+                return new JsonResponse(['type' => 'error', 'msj' => 'No ha seleccionado un cliente']);
+            }
 
             Servicio::create([
                 'customer_id' => $data['id_cliente'],
@@ -55,6 +60,14 @@ class ServiciosController extends Controller
                 'precio_presupuestado' => $data['precio_presupuestado']
             ]);
         }
+
+        $urlRedirect = asset('servicios/');
+
+        return new JsonResponse([
+            'type' => 'success',
+            'msj' => 'Servicio generado con éxito!',
+            'redirect' => $urlRedirect
+        ]);
     }
 
     /**
@@ -65,7 +78,9 @@ class ServiciosController extends Controller
      */
     public function show($id)
     {
-        //
+        $servicio = Servicio::find(Crypt::decrypt($id));
+        $nombre = $servicio->customer->lastname.', '.$servicio->customer->lastname;
+        return view('servicios.show', compact('servicio','nombre'));
     }
 
     /**
@@ -77,7 +92,8 @@ class ServiciosController extends Controller
     public function edit($id)
     {
         $servicio = Servicio::find(Crypt::decrypt($id));
-        return view('servicios.edit', compact('servicio'));
+        $nombre = $servicio->customer->lastname.', '.$servicio->customer->lastname;
+        return view('servicios.edit', compact('servicio','nombre'));
     }
 
     /**
@@ -89,7 +105,24 @@ class ServiciosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $data = $request->all();
+
+            $servicio = Servicio::findOrFail(Crypt::decrypt($id));
+
+            $servicio->estado = $data['estado'];
+            $servicio->precio_final = $data['precio_final'];
+            $servicio->diagnostico = $data['diagnostico'];
+            $servicio->detalle_mano_obra = $data['mano_obra'];
+
+            $servicio->save();
+
+            return new JsonResponse([
+                'type' => 'success',
+                'msj' => 'Servicio actualizado con éxito!',
+            ]);
+
+        }
     }
 
     /**

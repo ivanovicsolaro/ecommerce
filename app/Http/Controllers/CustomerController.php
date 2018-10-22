@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 
 use Vanilo\Framework\Models\Customer;
 use App\CuentaCorriente;
+use App\Address;
 
 use DB;
 use Crypt;
@@ -42,7 +43,7 @@ class CustomerController extends Controller
             
             $data = $request->all();
 
-            Customer::create([
+            $customer = Customer::create([
                 'firstname' => $data['name'],
                 'lastname' => $data['apellido'],
                 'registration_nr' => $data['cuit'],
@@ -54,11 +55,29 @@ class CustomerController extends Controller
                 'is_active' => $data['is_active']
             ]);
 
+
+            
+            $address = Address::create([
+                            'country_id' => 1, //HARDCODEADO
+                            'province_id' => 1, //HARDCODEADO
+                            'postalcode' => $data['codigo_postal'],
+                            'city' => $data['localidad'],
+                            'address' => $data['calle'],
+                            'number' => $data['numero'],
+                            'piso' => $data['piso'],
+                            'depto' => $data['depto']
+                        ]);
+
+                DB::table('customer_addresses')->insert(['customer_id' => $customer->id, 'address_id' => $address->id]);
+        
+        
             return new JsonResponse([
                 'msj' => 'Usuario Creado Correctamente',
                 'type' => 'success'
             ]);
         }
+
+
     }
 
     /**
@@ -81,7 +100,16 @@ class CustomerController extends Controller
     public function edit($id)
     {
         $cliente = Customer::findOrFail(Crypt::decrypt($id));
-        return view('clientes.edit', compact('cliente'));
+
+         $address = Customer::join('customer_addresses', 'customers.id', 'customer_addresses.customer_id')
+                            ->join('addresses', 'addresses.id', 'customer_addresses.address_id')
+                            ->join('countries', 'countries.id', 'addresses.country_id')
+                            ->where('customers.id', $cliente->id)
+                            ->select('addresses.*', 'countries.name as nombreCountry')
+                            ->first();
+
+
+        return view('clientes.edit', compact('cliente','address'));
     }
 
     /**
@@ -96,18 +124,52 @@ class CustomerController extends Controller
         if($request->ajax()){
 
             $data = $request->all();
-            $cliente = Customer::findOrFail(Crypt::decrypt($id));
-            $cliente->firstname = $data['name'];
-            $cliente->lastname = $data['apellido'];
-            $cliente->registration_nr = $data['cuit'];
-            $cliente->email = $data['email'];
-            $cliente->phone = $data['phone'];
-            $cliente->company_name = $data['company_name'];
-            $cliente->type = $data['tipo'];
-            $cliente->tax_nr = $data['tax_nr'];
-            $cliente->is_active = $data['is_active'];
+            $customer = Customer::findOrFail(Crypt::decrypt($id));
+            $customer->firstname = $data['name'];
+            $customer->lastname = $data['apellido'];
+            $customer->registration_nr = $data['cuit'];
+            $customer->email = $data['email'];
+            $customer->phone = $data['phone'];
+            $customer->company_name = $data['company_name'];
+            $customer->type = $data['tipo'];
+            $customer->tax_nr = $data['tax_nr'];
+            $customer->is_active = $data['is_active'];
 
-            $cliente->save();
+            $customer->save();
+        
+            $idAddress = Customer::join('customer_addresses', 'customers.id', 'customer_addresses.customer_id')
+                                ->join('addresses', 'addresses.id', 'customer_addresses.address_id')    
+                                ->select('addresses.id')
+                                ->where('customers.id', $customer->id)
+                                ->first();
+        
+            if($idAddress == null){
+            
+                $address = Address::create([
+                            'country_id' => 1, //HARDCODEADO
+                            'province_id' => 1, //HARDCODEADO
+                            'postalcode' => $data['codigo_postal'],
+                            'city' => $data['localidad'],
+                            'address' => $data['calle'],
+                            'number' => $data['numero'],
+                            'piso' => $data['piso'],
+                            'depto' => $data['depto']
+                        ]);
+
+                DB::table('customer_addresses')->insert(['customer_id' => $customer->id, 'address_id' => $address->id]);
+        
+            }else{
+                 $address = Address::findOrFail($idAddress);
+                 
+                 $address[0]->postalcode =  $request->codigo_postal;
+                 $address[0]->city = $request->localidad;
+                 $address[0]->address = $request->calle;
+                 $address[0]->number = $request->numero;
+                 $address[0]->piso = $request->piso;
+                 $address[0]->depto = $request->depto;
+                 $address[0]->save();
+            }
+        
 
             return new JsonResponse([
                 'msj' => 'Usuario Editado Correctamente',
