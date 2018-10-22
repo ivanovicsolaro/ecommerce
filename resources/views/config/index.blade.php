@@ -12,7 +12,18 @@
                     <div class="dashboard">
                      {!! Form::open(['route' => 'config.update', 'action'=>'post', 'id' => 'form-movimientos']) !!}
                     {{ csrf_field() }}
-                        @include('caja.fields')
+                        <div class="form-group col-sm-6" id="div-dolar">
+	       					 {!! Form::label('dolar', 'Dolar: *',['class' => 'control-label mb-10 text-left']) !!}
+	        				{!! Form::number('dolar', null, ['class' => 'form-control','autofocus'=>'autofocus']) !!}
+	   					 </div>
+
+	   					 <div class="form-group col-sm-12 col-xs-12">
+        <div class="text-right col-md-12">
+    {!! Form::button('<i class="fa fa-database"></i><span class="btn-text"> Guardar</span>', 
+                    ['type' => 'submit', 'class' => 'primary-btn btn-success btn-anim', 'id'=>'add-movimiento']) !!}
+    
+</div>
+</div>
 
                     {!! Form::close() !!}
                 </div>

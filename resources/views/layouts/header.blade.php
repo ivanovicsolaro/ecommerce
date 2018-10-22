@@ -118,7 +118,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Config <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="{{url('banners')}}"> <i class="fa fa-picture-o" aria-hidden="true"></i> Listado Banners</a></li>
-                <li><a href="{{route('ventas.create')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> General</a></li>              
+                <li><a href="{{url('listado-configuraciones')}}"><i class="fa fa-shopping-basket" aria-hidden="true"></i> General</a></li>              
               </ul>
             </li>
           </ul>

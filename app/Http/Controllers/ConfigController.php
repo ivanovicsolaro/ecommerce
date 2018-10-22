@@ -9,12 +9,21 @@ use Image;
 use File;
 use Redirect;
 use App\Banner;
+use App\Setting;
+use App\Product;
+
 use Illuminate\Support\Facades\Input;
+
+
 
 class ConfigController extends Controller
 {
     public function __construct(){
         $this->middleware('auth');
+    }
+
+    public function index(){
+        return view('config.index');
     }
     
     public function indexBanner(){
@@ -61,5 +70,32 @@ class ConfigController extends Controller
             
         return redirect('banners');
  	
+    }
+
+    public function update(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+            
+            $setting = Setting::find('dolar');
+
+            $productos_dolar = Product::where('if_dolar', 1)->get();
+
+            foreach ($productos_dolar as $p) {
+                $producto = Product::find($p->id);
+                $producto->price = ceil(($p->price/$setting->value)*$data['dolar']);
+                $producto->price_real = ceil(($p->price_real/$setting->value)*$data['dolar']);
+                $producto->save();
+            }
+
+            $setting = Setting::find('dolar');
+            $setting->value = $data['dolar'];
+            $setting->save();
+
+             return new JsonResponse([
+                    'type' => 'success',
+                    'msj' => 'Configuraciones actualizadas correctamente'
+             ]);
+        }
+       
     }
 }
