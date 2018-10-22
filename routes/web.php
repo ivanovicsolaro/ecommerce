@@ -54,6 +54,8 @@ Route::get('productos-devolucion', ['uses' => 'ProductoController@getProductosDe
 //Banner
 Route::get('banners', 'ConfigController@indexBanner');
 Route::post('update-banners',['uses' => 'ConfigController@updateBanner', 'as' => 'update.banner']);
+Route::get('listado-configuraciones', 'ConfigController@index');
+Route::post('update-configuracion',['uses' => 'ConfigController@updateConfig', 'as' => 'config.update']);
 
 /**Rutas del front */
 Route::get('/shop', ['uses' => 'FrontController@indexShop', 'as' => 'shop.index']);
