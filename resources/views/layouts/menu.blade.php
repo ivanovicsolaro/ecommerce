@@ -303,9 +303,9 @@
 							<ul class="custom-menu">
 								<li><a href="{{url('/contacto')}}">Contacto</a></li>
 								<li><a href="{{url('/sobre-nosotros')}}">Sobre Nosotros</a></li>
-								<li><a href="{{url('')}}">Envíos y devoluciones</a></li>
-								<li><a href="{{url('')}}">Guía de envíos</a></li>
-								<li><a href="{{url('')}}">Preguntas Frecuentes</a></li>
+								<li><a href="{{url('/envios-devoluciones')}}">Envíos y devoluciones</a></li>
+								<li><a href="{{url('/guia-envios')}}">Guía de envíos</a></li>
+								<li><a href="{{url('/faq')}}">Preguntas Frecuentes</a></li>
 							</ul>
 						</li>
 					</ul>

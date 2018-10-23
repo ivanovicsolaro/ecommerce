@@ -110,3 +110,16 @@ Route::get('/sobre-nosotros', function(){
     return view('front.estaticas.acerca'); 
 });
 
+Route::get('/envios-devoluciones', function(){
+    return view('front.estaticas.enviosydevoluciones'); 
+});
+
+Route::get('/faq', function(){
+    return view('front.estaticas.faq'); 
+});
+
+Route::get('/guia-envios', function(){
+    return view('front.estaticas.guiadeenvios'); 
+});
+
+
