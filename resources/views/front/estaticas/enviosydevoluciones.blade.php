@@ -41,9 +41,9 @@
                     
                   <div class="aside">
                             <h1 class="aside-title">Como funciona el sistema de envío seguro?</h1>
-                             <p style="font-size: 18px">
-                                Nosotros confiamos en vos<br/>
-                             </p>
+                             <blockquote>
+                                Somos nosotros quienes confiamos en vos.
+                             </blockquote>                       
                              <p style="font-size: 15px">
                                  Siempre sucede que cuando comprás algo por internet, tenés que abonar primero, y después te lo llevan, es decir, que el primer paso lo debe dar el cliente.<br/><br/>
 
