@@ -8,7 +8,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>E-SHOP</title>
+	<title>MayoristaCelular.com</title>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Hind:400,700" rel="stylesheet">
@@ -146,15 +146,14 @@
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Ingrese su búsqueda">
-							<select class="input search-categories">
-								<option value="0">Búsqueda</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
-							</select>
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-						</form>
+
+
+					{!! Form::model(Request::all(), ['route' => 'shop.index', 'method' => 'GET']) !!}
+							<div class="input search-categories"><p style="margin: 10px 0px 0px 15px;">Búsqueda</p></div>
+							
+							 {!! Form::text('busqueda', null, ['class' => 'input search-input', 'placeholder' => 'Ejemplo: J1 Ace, J110, etc.'])!!}
+						  <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
+				 {!! Form::close()!!}
 					</div>
 					<!-- /Search -->
 				</div>

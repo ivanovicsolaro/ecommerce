@@ -76,6 +76,12 @@ class Product extends Model implements Buyable
         }
     }
 
+    public function scopePosicion($query, $itemOrden, $posicion){
+        if(isset($itemOrden) && isset($posicion)){
+            $query->orderBy($itemOrden, $posicion)->get();
+        }
+    }    
+
     public static function findBySku($sku){
         return Product::where('sku', $sku)->get();
     }

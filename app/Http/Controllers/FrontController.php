@@ -22,11 +22,12 @@ class FrontController extends Controller
     }
 
    	public function indexShop(Request $request){
+
    	$productos = Product::busqueda($request->get('busqueda'))
    					->categoria($request->get('categoria'))
    					->subcategoria($request->get('marca'))
-            ->whereNull('deleted_at')
-            ->orderBy('destacado', 'desc')
+            ->posicion($request->get('itemOrden'), $request->get('orden'))
+            ->whereNull('deleted_at')  
    					->paginate(12);
 
     $ranking = DB::table('cart_items')

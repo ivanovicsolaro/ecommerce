@@ -36,13 +36,23 @@
                     <div class="store-filter clearfix">
                         <div class="pull-left">
                             <div class="sort-filter">
+                                  {!! Form::model(Request::all(), ['route' => 'shop.index', 'method' => 'GET']) !!}
                                 <span class="text-uppercase">Ordenar por:</span>
-                                <select class="input">
-                                        <option value="0">Posición</option>
-                                        <option value="0">Precio</option>
-                                        <option value="0">Calificaciones</option>
-                                    </select>
-                                <a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-up"></i></a>
+                              
+                                <select name="itemOrden" class="input">
+                                        <option value="name">Nombre</option>
+                                        <option value="price">Precio</option>
+                                </select>
+                                @if(Request::get('orden') == 'asc')
+                                <input type="hidden" name="orden" value="desc">
+                                 <button class="main-btn icon-btn" type="submit"><i class="fa fa-arrow-down"></i></button>
+                                @else
+                               
+                                  <input type="hidden" name="orden" value="asc">
+                                 <button class="main-btn icon-btn" type="submit"><i class="fa fa-arrow-up"></i></button>
+                                @endif
+                               
+                                {!! Form::close()!!}
                             </div>
                         </div>
                         <div class="pull-right">
@@ -110,13 +120,23 @@
                     <div class="store-filter clearfix">
                         <div class="pull-left">
                             <div class="sort-filter">
-                                <span class="text-uppercase">Sort By:</span>
-                                <select class="input">
-                                        <option value="0">Position</option>
-                                        <option value="0">Price</option>
-                                        <option value="0">Rating</option>
-                                    </select>
-                                <a href="#" class="main-btn icon-btn"><i class="fa fa-arrow-down"></i></a>
+                                {!! Form::model(Request::all(), ['route' => 'shop.index', 'method' => 'GET']) !!}
+                                <span class="text-uppercase">Ordenar por:</span>
+                              
+                                <select name="itemOrden" class="input">
+                                        <option value="name">Nombre</option>
+                                        <option value="price">Precio</option>
+                                </select>
+                                @if(Request::get('orden') == 'asc')
+                                <input type="hidden" name="orden" value="desc">
+                                 <button class="main-btn icon-btn" type="submit"><i class="fa fa-arrow-down"></i></button>
+                                @else
+                               
+                                  <input type="hidden" name="orden" value="asc">
+                                 <button class="main-btn icon-btn" type="submit"><i class="fa fa-arrow-up"></i></button>
+                                @endif
+                               
+                                {!! Form::close()!!}
                             </div>
                         </div>
                         <div class="pull-right">
