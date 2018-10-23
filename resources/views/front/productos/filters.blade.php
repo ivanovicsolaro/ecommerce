@@ -95,7 +95,7 @@
                     <button class="primary-btn add-to-cart" type="submit"><i class="fa fa-search"></i> Buscar</button>
                     <a  class="main-btn quick-view" href="{{url('/shop')}}">Limpiar Filtros</a>
 
-                    {!! Form::close()!!}
+ 
 
 
 
