@@ -22,26 +22,39 @@
             <!-- row -->
             <div class="row">
                 <!--  Product Details -->
-                <div class="product product-details clearfix">
-                	    <div class="col-md-6">
+                   <div class="product product-details clearfix">
+                                <div class="col-md-6">
+                                 <h1 class="aside-title">Nuestra filosofía, es hacer de tu compra una experiencia 100% satisfactoria</h1>
+                             <p style="font-size: 18px">
+                                 Nuestra mayor prioridad sos vos, y es encerio.<br/>
+                             </p>
+                             <p style="font-size: 15px">
+                                 Tenemos una filosofía que tiene como objetivo la satisfacción del cliente, por eso vas a notar que tanto el sitio web, como todo el sistema de envíos está destinado a tener un contacto directo con vos, y saber qué necesitás, porque realmente queremos que seas nuestro cliente.<br/><br/>
+
+                                Nosotros nos encargamos de conseguir mejores precios, de que los productos te lleguen en tiempo y forma, de que te capacites, <i>proximamente incorporaremos un blog con cursos para que aprendas a reparar de manera correcta, con experiencias reales mías, y todas las "mañas" que debes aprender</i>, y bueno, esperamos llegar a cubrir tus espectativas y superarlas!.
+
+                                 </p>
+                      
+                                </div>
+                        <div class="col-md-6">
                       
                     
                   <div class="aside">
-                            <h1 class="aside-title">QUIENES SOMOS</h1>
+                            <h1 class="aside-title">Como funciona el sistema de envío seguro?</h1>
                              <p style="font-size: 18px">
-                                 MayoristaCelular.com nace en el año 2017 como una de las primeras tiendas on-line de accesorios y repuestos para celulares. 
+                                Nosotros confiamos en vos<br/>
                              </p>
-                             <p class="paira-margin-top-1 letter-spacing-2 margin-bottom-0">
-                                 Desde sus comienzos, mayoristacelular se diferenció tanto por la variedad y exclusividad de sus productos, como por su búsqueda constante de ofrecer el mejor servicio para cada uno de sus clientes. Con más de 5 años de trayectoria, hoy se ha convertido en líder del segmento, haciendo posible que personas de toda la región puedan acceder a la más alta calidad de productos de la manera más fácil y segura del mercado. Su portfolio cuenta con la mayor variedad de productos, y si no lo tenemos, te lo conseguimos!.
-                             </p>
-                         </div></div>
-                               <div class="col-md-6">
-                      
-                    <div class="col-md-12 col-xs-12 col-sm-12">
-                             
-                             <iframe style="width:100%;height:400px;margin-top:30px" src="{{asset('videos/1.mp4')}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                             <p style="font-size: 15px">
+                                 Siempre sucede que cuando comprás algo por internet, tenés que abonar primero, y después te lo llevan, es decir, que el primer paso lo debe dar el cliente.<br/><br/>
 
-                   </div></div>
+                                 El sistema de envío seguro está pensado para que abones contra-reembolso, es decír, cuando la mercadería te llega. Esto te va a permitir asegurarte de que todo te llega bien, y que en el caso de que algo no sea correcto, lo devuelvas o no lo abones.<br/><br/>
+                             </p>
+                             <p style="font-size: 20px">
+                                <blockquote>Queremos que seas nuestro cliente, no dudes en contactarnos!</blockquote>
+
+                                 </p>
+                         </div></div>
+
                     </div>
                 </div>
                 <!-- /Product Details -->

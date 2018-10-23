@@ -31,7 +31,7 @@
                              <p style="font-size: 15px">
                                  Tenemos una filosofía que tiene como objetivo la satisfacción del cliente, por eso vas a notar que tanto el sitio web, como todo el sistema de envíos está destinado a tener un contacto directo con vos, y saber qué necesitás, porque realmente queremos que seas nuestro cliente.<br/><br/>
 
-                                Nosotros nos encargamos de conseguir mejores precios, de que los productos te lleguen en tiempo y forma, de que te capacites, <i>proximamente incorporaremos un blog con cursos para que aprendas a reparar de manera correcta, con experiencias reales mías, y todas las "mañas" que debes aprender</i>, y bueno, esperamos que nos elijas.
+                                Nosotros nos encargamos de conseguir mejores precios, de que los productos te lleguen en tiempo y forma, de que te capacites, <i>proximamente incorporaremos un blog con cursos para que aprendas a reparar de manera correcta, con experiencias reales mías, y todas las "mañas" que debes aprender</i>, y bueno, esperamos llegar a cubrir tus espectativas y superarlas!.
 
                                  </p>
                       
@@ -42,12 +42,15 @@
                   <div class="aside">
                             <h1 class="aside-title">Como funciona el sistema de envío seguro?</h1>
                              <p style="font-size: 18px">
-                                 Nuestra mayor prioridad sos vos, y es encerio.<br/>
+                                Nosotros confiamos en vos<br/>
                              </p>
                              <p style="font-size: 15px">
-                                 Tenemos una filosofía que tiene como objetivo la satisfacción del cliente, por eso vas a notar que tanto el sitio web, como todo el sistema de envíos está destinado a tener un contacto directo con vos, y saber qué necesitás, porque realmente queremos que seas nuestro cliente.<br/><br/>
+                                 Siempre sucede que cuando comprás algo por internet, tenés que abonar primero, y después te lo llevan, es decir, que el primer paso lo debe dar el cliente.<br/><br/>
 
                                  El sistema de envío seguro está pensado para que abones contra-reembolso, es decír, cuando la mercadería te llega. Esto te va a permitir asegurarte de que todo te llega bien, y que en el caso de que algo no sea correcto, lo devuelvas o no lo abones.<br/><br/>
+                             </p>
+                             <p style="font-size: 20px">
+                                <blockquote>Queremos que seas nuestro cliente, no dudes en contactarnos!</blockquote>
 
                                  </p>
                          </div></div>
