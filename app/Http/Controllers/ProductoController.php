@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Categoria;
-use App\subcategoria;
+use App\Subcategoria;
 use File;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\CreateProduct;
